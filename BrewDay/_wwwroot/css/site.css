@@ -35,12 +35,16 @@ hr {
     margin-top: 30px;
 }
 
+.margin-top-50 {
+    margin-top: 50px;
+}
+
 .margin-right-10 {
     margin-right: 10px;
 }
 
 .margin-right-20 {
-    margin-top: 20px;
+    margin-right: 20px;
 }
 
 .margin-right-30 {
@@ -52,7 +56,7 @@ hr {
 }
 
 .margin-bottom-20 {
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .margin-bottom-30 {
@@ -68,11 +72,11 @@ hr {
 }
 
 .margin-left-20 {
-    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .margin-left-30 {
-    margin-right: 30px;
+    margin-left: 30px;
 }
 
 

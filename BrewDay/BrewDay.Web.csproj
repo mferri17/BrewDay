@@ -126,9 +126,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngredientsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BrewDayContext.cs" />
     <Compile Include="Models\Entities\Ingredient.cs" />
     <Compile Include="Models\Entities\Recipe.cs" />
     <Compile Include="Models\Entities\Stock.cs" />
@@ -267,6 +270,11 @@
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Ingredients\Create.cshtml" />
+    <Content Include="Views\Ingredients\Delete.cshtml" />
+    <Content Include="Views\Ingredients\Details.cshtml" />
+    <Content Include="Views\Ingredients\Edit.cshtml" />
+    <Content Include="Views\Ingredients\Index.cshtml" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
