@@ -1,24 +1,159 @@
-﻿body {
+﻿
+/* ------------------------ General ------------------------ */
+
+body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.fa, .glyphicon {
+    text-decoration: none !important;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.input-inline {
+    display: inline;
+    width: auto;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+hr {
+    width: 100%; /* avoid bootstrap conflicts */
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-right-20 {
+    margin-top: 20px;
+}
+
+.margin-right-30 {
+    margin-right: 30px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+    margin-top: 20px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-bottom-50 {
+    margin-bottom: 50px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-left-20 {
+    margin-top: 20px;
+}
+
+.margin-left-30 {
+    margin-right: 30px;
+}
+
+
+/* ------------------------ Tables ------------------------ */
+
+td > .glyphicon, td > .fa {
+    color: #333;
+    margin: 0 3px 0 3px;
+}
+
+
+/* ------------------------ Create, Edit, Details ------------------------ */
+
 textarea {
-    max-width: 280px;
+    resize: none;
+}
+
+.form-horizontal .checkbox {
+    padding-top: 2px;
+    min-height: 0px;
+}
+
+.glyphicon-asterisk {
+    color: indianred;
+    font-size: 10px;
+}
+
+.ui-datepicker {
+    z-index: 1051 !important;
+}
+
+.ui-autocomplete {
+    max-height: 250px;
+    max-width: 1000px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 13px;
+}
+
+
+/* ------------------------ Dropdowns ------------------------ */
+
+.dropdown-hover:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    min-width: 40px;
+}
+
+.dropdown-header {
+    color: #888;
+}
+
+
+
+/* ------------------------ Printing directives ------------------------ */
+@media print {
+    body {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .btn {
+        display: none !important;
+    }
+
+    table td {
+        padding: 6px !important;
+        font-size: 0.9em;
+    }
+
+    a[href]:after {
+        content: none !important; /* rimuove link in fase di stampa */
+    }
+
+    [data-toggle] {
+        display: none;
+    }
 }

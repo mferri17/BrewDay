@@ -26,5 +26,12 @@ namespace BrewDay.Controllers
 
             return View();
         }
+
+        public ActionResult PageNotFound()
+        {
+            Response.StatusCode = 404;
+            ViewBag.Messages = new string[] { "L'URL richiesto non è corretto." };
+            return View("Error");
+        }
     }
 }
