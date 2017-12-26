@@ -125,6 +125,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -141,6 +142,9 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-purple.css" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-green.css" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-blue.css" />
     <Content Include="_wwwroot\css\site.css" />
     <Content Include="_wwwroot\images\favicon\beer.png" />
     <Content Include="_wwwroot\images\favicon\favicon-16x16.png" />
@@ -309,12 +313,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DTOs\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="_wwwroot\vendor\jquery-ui\external\" />
   </ItemGroup>
   <ItemGroup>

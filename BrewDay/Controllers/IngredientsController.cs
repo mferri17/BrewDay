@@ -15,106 +15,94 @@ namespace BrewDay.Controllers
     {
         private BrewDayContext db = new BrewDayContext();
 
-        // GET: Ingredients
+
         public ActionResult Index()
         {
             return View(db.Ingredients.ToList());
         }
 
-        // GET: Ingredients/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ingredient ingredient = db.Ingredients.Find(id);
-            if (ingredient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ingredient);
+                throw new Exception("Id dell'elemento non specificato.");
+            
+            Ingredient element = db.Ingredients.Find(id);
+
+            // check if exists and element with the specified Id
+            if (element == null)
+                throw new Exception($"L'Id {id} non corrisponde ad alcun elemento.");
+
+            return View(element);
         }
 
-        // GET: Ingredients/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Ingredients/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IngredientId,Name,Description,Price,Type")] Ingredient ingredient)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Ingredients.Add(ingredient);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(ingredient);
-        }
-
-        // GET: Ingredients/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ingredient ingredient = db.Ingredients.Find(id);
-            if (ingredient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ingredient);
-        }
-
-        // POST: Ingredients/Edit/5
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IngredientId,Name,Description,Price,Type")] Ingredient ingredient)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(ingredient).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(ingredient);
-        }
-
-        // GET: Ingredients/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ingredient ingredient = db.Ingredients.Find(id);
-            if (ingredient == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ingredient);
-        }
+                throw new Exception("Id dell'elemento non specificato.");
+            
+            Ingredient element = db.Ingredients.Find(id);
 
-        // POST: Ingredients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Ingredient ingredient = db.Ingredients.Find(id);
-            db.Ingredients.Remove(ingredient);
+            // check if exists and element with the specified Id
+            if (element == null)
+                throw new Exception($"L'Id {id} non corrisponde ad alcun elemento.");
+
+            // deletes element from the context (marks it as "deleted")
+            db.Ingredients.Remove(element);
+
+            // takes changes from context and makes it real on the database
             db.SaveChanges();
+
+            // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
+
+
+
+        public ActionResult CreateOrEdit(int? id)
+        {
+            // find by Id the element to edit, if exists
+            Ingredient model = db.Ingredients.Find(id);
+
+            // model can be valorized or even null
+            return View("CreateOrEdit", model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateOrEdit(Ingredient model)
+        {
+            // check if all properties of the received model are valid
+            if (ModelState.IsValid)
+            {
+                // id null or zero means model is new (not exist yet in db), so it has to be created
+                if (!model.IngredientId.HasValue || model.IngredientId == 0)
+                {
+                    // add model to context and mark it as "added"
+                    db.Ingredients.Add(model);
+                }
+                // valid id means model already exists in db, so it just has to be updated 
+                else
+                {
+                    // mark this model as "modified" on the context
+                    db.Entry(model).State = EntityState.Modified;
+                }
+
+                // takes changes from context and makes it real on the database
+                db.SaveChanges();
+
+                // if everything's ok, redirect to the index
+                return RedirectToAction("Details", new { id = model.IngredientId });
+            }
+            // if model is not valid...
+            else
+            {
+                // ... returns the same view again, with prefilled field (model previously received)
+                return View("CreateOrEdit", model);
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

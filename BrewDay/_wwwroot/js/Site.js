@@ -7,6 +7,15 @@ $(document).ready(function () {
     $(document).on("keypress", ".number-float", replacePointWithComma);
 
 
+    // Sfrutta gli EnumDropDownListFor che hanno classe "render-enum-text" per visualizzare il Display Name dell'Enum
+    // (le select con tale classe sono nascoste da css)
+    $("select.render-enum-text").each(function (index, element) {
+        var x = $(element);
+        var label = x.find("option:selected").text();
+        x.after(label);
+    });
+
+
     // Aggiunge datepicker di jQuery UI a tutti gli input che hanno classe "datepicker"
     $(document).on("focus", ".datepicker:not([readonly])", function () {
         if ($(this).hasClass("hasDatepicker") === false) {

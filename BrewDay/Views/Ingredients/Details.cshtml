@@ -2,49 +2,29 @@
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.Page = "#nav-ingredients";
 }
 
 <h2>Details</h2>
+<hr />
 
-<div>
-    <h4>Ingredient</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="row col-md-12">
+    <dl class="dl-horizontal col-md-8">
+        <dt> @Html.DisplayNameFor(model => model.Name) </dt>
+        <dd> @Model.Name </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <dt> @Html.DisplayNameFor(model => model.Description) </dt>
+        <dd> @Model.Description </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        <dt> @Html.DisplayNameFor(model => model.Price) </dt>
+        <dd> @Model.Price </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <dt> @Html.DisplayNameFor(model => model.Type) </dt>
+        <dd> @Html.EnumDropDownListFor(model => model.Type, new { @class = "render-enum-text" }) </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
+        <dt></dt>
+        <dd><a href="@Url.Action("CreateOrEdit", new { id = Model.IngredientId })" class="btn btn-primary margin-top-20" />Modifica</a></dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IngredientId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<p><a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista ingredienti</a></p>

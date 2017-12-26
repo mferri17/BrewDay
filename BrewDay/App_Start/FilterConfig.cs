@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
 
+
 namespace BrewDay
 {
     public class FilterConfig
@@ -13,7 +14,6 @@ namespace BrewDay
             filters.Add(new HandleExceptionsAttribute());
         }
     }
-
 
     /// <summary>
     /// Custom HandleErrorAttribute to manage Exceptions, redirecting to a specific View with error messages.

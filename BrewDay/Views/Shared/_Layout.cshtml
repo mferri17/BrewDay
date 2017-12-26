@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@(!string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.Title + " - " : "")BrewDay!</title>
     @Styles.Render("~/bundles/vendor/css")
+    <link href="~/_wwwroot/vendor/bootstrap/css/navbar-colors/bootstrap-navbar-purple.css" rel="stylesheet">
     @Styles.Render("~/bundles/css")
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,13 +22,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Ricette", "Index", "Recipes")</li>
-                    <li>@Html.ActionLink("Le tue Produzioni", "Index", "Productions")</li>
-                    <li>@Html.ActionLink("Ingredienti", "Index", "Ingredients")</li>
-                    <li>@Html.ActionLink("Le tue Scorte", "Index", "Stocks")</li>
-                    <li>@Html.ActionLink("I tuoi Strumenti", "Index", "Instruments")</li>
-                    <li>@Html.ActionLink("Chi siamo", "About", "Home")</li>
+                    @*<li id="nav-home">@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li id="nav-recipes">@Html.ActionLink("Ricette", "Index", "Recipes")</li>
+                    <li id="nav-productions">@Html.ActionLink("Le tue Produzioni", "Index", "Productions")</li>
+                    <li id="nav-ingredients">@Html.ActionLink("Ingredienti", "Index", "Ingredients")</li>
+                    <li id="nav-stocks">@Html.ActionLink("Le tue Scorte", "Index", "Stocks")</li>
+                    <li id="nav-instruments">@Html.ActionLink("I tuoi Strumenti", "Index", "Instruments")</li>
+                    <li id="nav-about">@Html.ActionLink("Chi siamo", "About", "Home")</li>
                     @*<li>@Html.ActionLink("Contatti", "Contact", "Home")</li>*@
                 </ul>
             </div>
@@ -47,6 +48,17 @@
 
     @Scripts.Render("~/bundles/vendor/js")
     @Scripts.Render("~/bundles/js")
+
+    <script>
+        $(document).ready(function () {
+
+            //Evidenzia la voce corretta della navbar
+            $(".navbar-collapse").removeClass("active");
+            $("@ViewBag.Page").addClass("active");
+            $("@ViewBag.SubPage").addClass("active");
+
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

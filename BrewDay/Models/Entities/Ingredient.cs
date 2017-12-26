@@ -14,7 +14,11 @@ namespace BrewDay.Models.Entities
     public class Ingredient
     {
         [Key]
-        public int IngredientId { get; set; }
+        /// <summary>
+        /// This is nullable just to allow ModelState validation with null or zero Id value.
+        /// Will be valorized when SaveChanges is called.
+        /// </summary>
+        public int? IngredientId { get; set; }
 
         [Required]
         [StringLength(128)]

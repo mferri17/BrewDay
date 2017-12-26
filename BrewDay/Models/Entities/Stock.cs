@@ -12,7 +12,11 @@ namespace BrewDay.Models.Entities
     public class Stock
     {
         [Key]
-        public int StockId { get; set; }
+        /// <summary>
+        /// This is nullable just to allow ModelState validation with null or zero Id value.
+        /// Will be valorized when SaveChanges is called.
+        /// </summary>
+        public int? StockId { get; set; }
         
         public int IngredientId { get; set; }
 

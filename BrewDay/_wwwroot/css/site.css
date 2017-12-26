@@ -98,7 +98,7 @@ td.action-column{
 td.action-column > a {
     color: black;
     text-decoration: none;
-    margin-right: 4px;
+    margin-right: 6px;
 }
 
 
@@ -130,9 +130,12 @@ textarea {
     font-size: 13px;
 }
 
+select.render-enum-text{
+    display:none;
+}
+
 
 /* ------------------------ Dropdowns ------------------------ */
-
 .dropdown-hover:hover > .dropdown-menu {
     display: block;
 }

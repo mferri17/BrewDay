@@ -12,7 +12,11 @@ namespace BrewDay.Models.Entities
     public class Recipe
     {
         [Key]
-        public int RecipeId { get; set; }
+        /// <summary>
+        /// This is nullable just to allow ModelState validation with null or zero Id value.
+        /// Will be valorized when SaveChanges is called.
+        /// </summary>
+        public int? RecipeId { get; set; }
 
         [Required]
         [StringLength(128)]
