@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@(!string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.Title + " - " : "")BrewDay!</title>
+    @Styles.Render("~/bundles/vendor/css")
     @Styles.Render("~/bundles/css")
 </head>
 <body>
@@ -38,12 +39,13 @@
         <!-- QUI VENGONO INIETTATE LE VIEW -->
         @RenderBody()
 
-        <hr />
+        <hr class="margin-top-50" />
         <footer>
-            <p>&copy; 2018 - Sviluppato da Ferri Marco, Ghezzi Simone e Marconi Paolo per Università degli Studi di Milano-Bicocca, esame di Ingegneria del Software (Informatica, terzo anno)</p>
+            <p>&copy; 2018 | <a href="https://www.linkedin.com/in/marco-ferri-ita/" target="_blank">Ferri Marco</a>, Ghezzi Simone & Marconi Paolo</p>
         </footer>
     </div>
 
+    @Scripts.Render("~/bundles/vendor/js")
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 </body>
