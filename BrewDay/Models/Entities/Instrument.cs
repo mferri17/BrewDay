@@ -29,7 +29,7 @@ namespace BrewDay.Models.Entities
         public double Capacity { get; set; }
 
         [Required]
-        [StringLength(128)]
+        [StringLength(1028)]
         [Display(Name = "Descrizione")]
         public string Description { get; set; }
 
