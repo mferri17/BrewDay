@@ -1,0 +1,64 @@
+﻿@model BrewDay.Models.Entities.Instrument
+
+@{
+    ViewBag.Title = "Rimozione Strumento";
+}
+
+<h2>Delete</h2>
+
+<h3>Sicuro di voler rimouvere l'elemento selezionato?</h3>
+<div>
+    <h4>Strumento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Rimuovi" class="btn btn-default" /> |
+            @Html.ActionLink("Torna indietro", "Index")
+        </div>
+    }
+</div>

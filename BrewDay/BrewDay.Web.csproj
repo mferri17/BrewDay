@@ -128,15 +128,18 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientsController.cs" />
+    <Compile Include="Controllers\InstrumentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BrewDayContext.cs" />
     <Compile Include="Models\Entities\Ingredient.cs" />
+    <Compile Include="Models\Entities\Instrument.cs" />
     <Compile Include="Models\Entities\Recipe.cs" />
     <Compile Include="Models\Entities\Stock.cs" />
     <Compile Include="Models\Enums\IngredientType.cs" />
+    <Compile Include="Models\Enums\InstrumentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +282,11 @@
     <Content Include="Views\Ingredients\Details.cshtml" />
     <Content Include="Views\Ingredients\Index.cshtml" />
     <Content Include="Views\Ingredients\CreateOrEdit.cshtml" />
+    <Content Include="Views\Instruments\Create.cshtml" />
+    <Content Include="Views\Instruments\Delete.cshtml" />
+    <Content Include="Views\Instruments\Details.cshtml" />
+    <Content Include="Views\Instruments\Edit.cshtml" />
+    <Content Include="Views\Instruments\Index.cshtml" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
