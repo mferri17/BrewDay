@@ -1,14 +1,13 @@
 ﻿@model BrewDay.Models.Entities.Recipe
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Rimozione";
 }
 
-<h2>Delete</h2>
+<h2>Rimozione</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Sicuro di rimuovere la ricetta selezionata?</h3>
 <div>
-    <h4>Recipe</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -57,8 +56,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Rimuovi" class="btn btn-default" /> |
+            @Html.ActionLink("Torna indietro", "Index")
         </div>
     }
 </div>

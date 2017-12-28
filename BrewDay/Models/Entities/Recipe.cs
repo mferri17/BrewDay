@@ -33,7 +33,8 @@ namespace BrewDay.Models.Entities
 
         [Display(Name = "Temperatura di fermentazione")]
         public double? FermentationTemperature { get; set; }
-        
+
+        [Display(Name = "Id ricetta padre")]
         public int? ParentRecipeId { get; set; }
 
 
