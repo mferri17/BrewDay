@@ -150,7 +150,6 @@
     <Compile Include="Models\Entities\Stock.cs" />
     <Compile Include="Models\Enums\IngredientType.cs" />
     <Compile Include="Models\Enums\InstrumentType.cs" />
-    <Compile Include="Models\Enums\RecipeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
