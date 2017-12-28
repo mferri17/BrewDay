@@ -28,7 +28,7 @@
             <td class="action-column">
                 <a href="@Url.Action("Details", new { id = item.IngredientId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                 <a href="@Url.Action("CreateOrEdit", new { id = item.IngredientId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                <a href="@Url.Action("Delete", new { id = item.IngredientId })" onclick="return confirm('Sicuro di voler cancellare l\'elemento?');"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                <a href="@Url.Action("Delete", new { id = item.IngredientId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
             </td>
         </tr>
     }

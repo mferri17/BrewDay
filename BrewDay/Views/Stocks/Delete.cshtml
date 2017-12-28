@@ -1,0 +1,54 @@
+﻿@model BrewDay.Models.Entities.Stock
+
+@{
+    ViewBag.Title = "Rimozione";
+}
+
+
+<h3>Sicuro di voler rimouvere l'elemento selezionato?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredient.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Rimuovi" class="btn btn-default" /> |
+            @Html.ActionLink("Torna indietro", "Index")
+        </div>
+    }
+</div>

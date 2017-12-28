@@ -27,7 +27,7 @@
         <td class="action-column">
             <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
             <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-            <a href="@Url.Action("Delete", new { id = item.RecipeId })" onclick="return confirm('Sicuro di voler cancellare la ricetta?');"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+            <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
         </td>
     </tr>
 }

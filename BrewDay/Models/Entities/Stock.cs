@@ -18,6 +18,7 @@ namespace BrewDay.Models.Entities
         /// </summary>
         public int? StockId { get; set; }
         
+        //Represents the element which it belongs to
         public int IngredientId { get; set; }
 
         [Display(Name = "Quantità")]
@@ -25,6 +26,10 @@ namespace BrewDay.Models.Entities
 
         [Display(Name = "Scadenza")]
         public DateTime ExpireDate { get; set; }
+
+        [StringLength(1024)]
+        [Display(Name = "Nota")]
+        public string Note { get; set; }
 
 
         // Navigation Properties
