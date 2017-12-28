@@ -1,4 +1,57 @@
-﻿
+﻿/* ------------------------ Titolo Iniziale ------------------------ */
+
+.bgClip {
+    background: url('http://7xhqfps15y-flywheel.netdna-ssl.com/wp-content/uploads/2017/06/SudsWorthSipping_July2017.jpg');
+    background-repeat: repeat-x;
+    background-position: 0% 20%;
+    font-size: 200px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: Centaur;
+    color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+
+    animation: BackgroundAnimated 15s linear infinite;
+}
+
+@keyframes BackgroundAnimated {
+    from {
+        background-position: 0% 10%
+    }
+
+    to {
+        background-position: 100% 10%
+    }
+}
+
+@-webkit-keyframes BackgroundAnimated {
+    from {
+        background-position: 0% 10%
+    }
+
+    to {
+        background-position: 100% 10%
+    }
+}
+
+
+@-moz-keyframes BackgroundAnimated {
+    from {
+        background-position: 0% 10%
+    }
+
+    to {
+        background-position: 100% 10%
+    }
+}
+
+
+
 /* ------------------------ General ------------------------ */
 
 body {
@@ -12,7 +65,7 @@ body {
 
 .input-inline {
     display: inline;
-    width: auto;
+    /* rimosso width per errore critico con display: inline */
 }
 
 hr {
