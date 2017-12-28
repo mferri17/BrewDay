@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BrewDay.Models.Enums
 {
-    public enum InstrumentType
+    public enum RecipeType
     {
         [Display(Name = "Bollitore")]
         Kettle = 1,

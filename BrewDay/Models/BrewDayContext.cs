@@ -22,5 +22,8 @@ namespace BrewDay.Models
         public System.Data.Entity.DbSet<BrewDay.Models.Entities.Ingredient> Ingredients { get; set; }
 
         public System.Data.Entity.DbSet<BrewDay.Models.Entities.Instrument> Instruments { get; set; }
+
+        public System.Data.Entity.DbSet<BrewDay.Models.Entities.Recipe> Recipe { get; set; }
+
     }
 }

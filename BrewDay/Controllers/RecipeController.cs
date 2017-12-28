@@ -9,107 +9,109 @@ using System.Web.Mvc;
 using BrewDay.Models;
 using BrewDay.Models.Entities;
 
-namespace BrewDay.Controllers
+namespace BrewDay.Models.Enums
 {
-    public class InstrumentsController : Controller
+    public class RecipesController : Controller
     {
         private BrewDayContext db = new BrewDayContext();
 
-        // GET: Instruments
+        // GET: Recipes
         public ActionResult Index()
         {
-            return View(db.Instruments.ToList());
+            return View(db.Recipe.ToList());
         }
 
-        // GET: Instruments/Details/5
+        // GET: Recipes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instrument instrument = db.Instruments.Find(id);
-            if (instrument == null)
+            Recipe recipe = db.Recipe.Find(id);
+            if (recipe == null)
             {
                 return HttpNotFound();
             }
-            return View(instrument);
+            return View(recipe);
         }
 
-        // GET: Instruments/Create
+        // GET: Recipes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Instruments/Create
+        // POST: Recipes/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
+        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InstrumentId,Name,Quantity,Capacity,Description,Type")] Instrument instrument)
+        public ActionResult Create([Bind(Include = "RecipeId,Name,Description,Note,FermentationTemperature,ParentRecipeId")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
-                db.Instruments.Add(instrument);
+                db.Recipe.Add(recipe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(instrument);
+            return View(recipe);
         }
 
-        // GET: Instruments/Edit/5
+        // GET: Recipes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instrument instrument = db.Instruments.Find(id);
-            if (instrument == null)
+            Recipe recipe = db.Recipe.Find(id);
+            if (recipe == null)
             {
                 return HttpNotFound();
             }
-            return View(instrument);
+            return View(recipe);
         }
 
-        // POST: Instruments/Edit/5
+        // POST: Recipes/Edit/5
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
+        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InstrumentId,Name,Quantity,Capacity,Description,Type")] Instrument instrument)
+        public ActionResult Edit([Bind(Include = "RecipeId,Name,Description,Note,FermentationTemperature,ParentRecipeId")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(instrument).State = EntityState.Modified;
+                db.Entry(recipe).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(instrument);
+            return View(recipe);
         }
 
-        // GET: Instruments/Delete/5
+        // GET: Recipes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instrument instrument = db.Instruments.Find(id);
-            if (instrument == null)
+            Recipe recipe = db.Recipe.Find(id);
+            if (recipe == null)
             {
                 return HttpNotFound();
             }
-            return View(instrument);
+            return View(recipe);
         }
 
-        // POST: Instruments/Delete/5
+        // POST: Recipes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Instrument instrument = db.Instruments.Find(id);
-            db.Instruments.Remove(instrument);
+            Recipe recipe = db.Recipe.Find(id);
+            db.Recipe.Remove(recipe);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
