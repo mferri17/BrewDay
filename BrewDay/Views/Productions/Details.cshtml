@@ -1,0 +1,49 @@
+﻿@model BrewDay.Models.Entities.Production
+
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<h2>Dettagli della produzione</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEndEstimated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEndEstimated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductionId }) |
+    @Html.ActionLink("Torna indietro", "Index")
+</p>

@@ -36,7 +36,7 @@ namespace BrewDay.Models.Entities
         [Range(1, 3, ErrorMessage = "Devi selezionare un valore valido per il Tipo."), Display(Name = "Tipo")]
         public InstrumentType Type { get; set; }
 
-        //Reminder: add a navigation properties to Production
+        public virtual ICollection<Production> Production { get; set; }
 
     }
 }

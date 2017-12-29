@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BrewDay.Models.Entities.Production>
+
+@{
+    ViewBag.Title = "Produzioni";
+}
+
+<h2>Tutte le tue Produzioni</h2>
+
+<br></br> <!--brutto-->
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.DateStart)</th>
+        <th>@Html.DisplayNameFor(model => model.DateEnd)</th>
+        <th>@Html.DisplayNameFor(model => model.DateEndEstimated)</th>
+        <th>@Html.DisplayNameFor(model => model.Note)</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
+        <td> @Html.DisplayFor(modelItem => item.DateEnd)</td>
+        <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
+        <td>@Html.DisplayFor(modelItem => item.Note)</td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id=item.ProductionId }) |
+            @Html.ActionLink("Dettagli", "Details", new { id=item.ProductionId }) |
+        </td>
+    </tr>
+}
+
+</table>
