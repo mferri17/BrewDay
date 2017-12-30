@@ -150,6 +150,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="_wwwroot\vendor\jquery-ui\external\datepicker-it.js" />
     <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-purple.css" />
     <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-green.css" />
     <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-blue.css" />
@@ -305,6 +306,7 @@
     <Content Include="Views\Productions\Details.cshtml" />
     <Content Include="Views\Productions\Edit.cshtml" />
     <Content Include="Views\Productions\Index.cshtml" />
+    <Content Include="_wwwroot\vendor\datatables\Italian.json" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
@@ -344,7 +346,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DTOs\" />
-    <Folder Include="_wwwroot\vendor\jquery-ui\external\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

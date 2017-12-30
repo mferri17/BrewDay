@@ -14,7 +14,6 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
-
     animation: BackgroundAnimated 15s linear infinite;
 }
 
@@ -64,6 +63,10 @@ body {
 
 hr {
     width: 100%; /* avoid bootstrap conflicts */
+}
+
+.full-width {
+    width: 100% !important;
 }
 
 .btn.pull-right {
@@ -138,15 +141,16 @@ td > .glyphicon {
     margin: 0 3px 0 3px;
 }
 
-td.action-column{
-    white-space:nowrap;
+td.action-column {
+    white-space: nowrap;
 }
 
-td.action-column > a {
-    color: black;
-    text-decoration: none;
-    margin-right: 6px;
-}
+
+    td.action-column > a, .dtr-details a {
+        color: black;
+        text-decoration: none;
+        margin-right: 6px;
+    }
 
 
 /* ------------------------ Create, Edit, Details ------------------------ */

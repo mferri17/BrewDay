@@ -20,6 +20,8 @@ $(document).ready(function () {
             });
         }
     });
+    // Risolve bug Firefox per jQuery UI Datepicker all'interno di un Bootstrap Modal
+    $.fn.modal.Constructor.prototype.enforceFocus = function () { };
 
 });
 

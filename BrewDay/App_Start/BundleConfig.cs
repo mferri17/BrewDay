@@ -25,6 +25,7 @@ namespace BrewDay
             bundles.Add(new ScriptBundle("~/bundles/vendor/js").Include(
                 "~/_wwwroot/vendor/jquery/jquery-3.2.1.js",
                 "~/_wwwroot/vendor/jquery-ui/jquery-ui.js",
+                "~/_wwwroot/vendor/jquery-ui/external/datepicker-it.js",
                 "~/_wwwroot/vendor/bootstrap/js/bootstrap.js",
                 "~/_wwwroot/vendor/respond/respond.js",
                 "~/_wwwroot/vendor/datatables/datatables.js"));
