@@ -141,6 +141,7 @@
     <Compile Include="Models\Entities\Instrument.cs" />
     <Compile Include="Models\Entities\Production.cs" />
     <Compile Include="Models\Entities\Recipe.cs" />
+    <Compile Include="Models\Entities\RecipeIngredient.cs" />
     <Compile Include="Models\Entities\Stock.cs" />
     <Compile Include="Helpers\HtmlHelperExtension.cs" />
     <Compile Include="Models\Enums\IngredientType.cs" />

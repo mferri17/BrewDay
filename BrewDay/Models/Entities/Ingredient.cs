@@ -39,7 +39,7 @@ namespace BrewDay.Models.Entities
 
         // Navigation Properties
         public virtual ICollection<Stock> Stocks { get; set; }
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<RecipeIngredient> Recipes { get; set; }
 
     }
 }

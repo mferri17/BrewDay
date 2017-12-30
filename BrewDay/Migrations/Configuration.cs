@@ -10,8 +10,6 @@ namespace BrewDay.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            //AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "BrewDay.Models.BrewDayContext";
         }
 
         protected override void Seed(BrewDay.Models.BrewDayContext context)

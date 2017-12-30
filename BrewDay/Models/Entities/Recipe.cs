@@ -35,12 +35,12 @@ namespace BrewDay.Models.Entities
         public double? FermentationTemperature { get; set; }
 
         [Display(Name = "Id ricetta padre")]
-        public int? ParentRecipeId { get; set; }
+        //public int? ParentRecipeId { get; set; }
+        public virtual Recipe ParentRecipe { get; set; }
 
 
         // Navigation Properties
-        public virtual Recipe ParentRecipe { get; set; }
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
 
 
         // Util Properties and Methods

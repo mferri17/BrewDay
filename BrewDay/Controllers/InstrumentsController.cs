@@ -46,7 +46,7 @@ namespace BrewDay.Controllers
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InstrumentId,Name,Quantity,Capacity,Description,Type")] Instrument instrument)
+        public ActionResult Create(Instrument instrument)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace BrewDay.Controllers
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InstrumentId,Name,Quantity,Capacity,Description,Type")] Instrument instrument)
+        public ActionResult Edit(Instrument instrument)
         {
             if (ModelState.IsValid)
             {
@@ -104,9 +104,9 @@ namespace BrewDay.Controllers
         }
 
         // POST: Instruments/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Instrument instrument = db.Instruments.Find(id);
             db.Instruments.Remove(instrument);

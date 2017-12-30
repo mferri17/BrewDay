@@ -57,8 +57,7 @@ namespace BrewDay.Controllers
             // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
-
-
+        
 
         public ActionResult CreateOrEdit(int? id)
         {

@@ -4,7 +4,7 @@
 }
 
 <hgroup>
-    <h1>Errore @(Response.StatusCode != 200 ? Response.StatusCode + " " + @Response.StatusDescription : "")!</h1>
+    <h1>Errore @(Response.StatusCode != 200 ? Response.StatusCode + " " + Response.StatusDescription : "")!</h1>
     <h3 class="margin-bottom-50">
         Si è verificato un errore durante l'elaborazione della richiesta. <br />
         Se il problema persiste, si prega di contattare l'amministratore, fornendogli le informazioni sotto riportate.

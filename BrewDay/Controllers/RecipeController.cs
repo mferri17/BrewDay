@@ -18,7 +18,7 @@ namespace BrewDay.Models.Enums
         // GET: Recipes
         public ActionResult Index()
         {
-            return View(db.Recipe.ToList());
+            return View(db.Recipes.ToList());
         }
 
         // GET: Recipes/Details/5
@@ -28,7 +28,7 @@ namespace BrewDay.Models.Enums
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipe.Find(id);
+            Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace BrewDay.Models.Enums
         {
             if (ModelState.IsValid)
             {
-                db.Recipe.Add(recipe);
+                db.Recipes.Add(recipe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace BrewDay.Models.Enums
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipe.Find(id);
+            Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace BrewDay.Models.Enums
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipe.Find(id);
+            Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace BrewDay.Models.Enums
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Recipe recipe = db.Recipe.Find(id);
-            db.Recipe.Remove(recipe);
+            Recipe recipe = db.Recipes.Find(id);
+            db.Recipes.Remove(recipe);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

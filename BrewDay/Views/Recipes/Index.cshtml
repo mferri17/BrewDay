@@ -14,7 +14,6 @@
         <th>@Html.DisplayNameFor(model => model.Description)</th>
         <th>@Html.DisplayNameFor(model => model.Note)</th>
         <th>@Html.DisplayNameFor(model => model.FermentationTemperature)</th>
-        <th>@Html.DisplayNameFor(model => model.ParentRecipeId)</th> 
     </tr>
 
 @foreach (var item in Model) {
@@ -23,7 +22,6 @@
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
         <td>@Html.DisplayFor(modelItem => item.Note)</td>
         <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
-        <td>@Html.DisplayFor(modelItem => item.ParentRecipeId)</td>
         <td class="action-column">
             <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
             <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>

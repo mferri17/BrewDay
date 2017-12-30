@@ -18,7 +18,7 @@ namespace BrewDay.Controllers
         // GET: Productions
         public ActionResult Index()
         {
-            return View(db.Production.ToList());
+            return View(db.Productions.ToList());
         }
 
         // GET: Productions/Details/5
@@ -28,7 +28,7 @@ namespace BrewDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Production production = db.Production.Find(id);
+            Production production = db.Productions.Find(id);
             if (production == null)
             {
                 return HttpNotFound();
@@ -36,9 +36,27 @@ namespace BrewDay.Controllers
             return View(production);
         }
 
-        // GET: Productions/Create
-        public ActionResult Create()
+        // GET: Productions/PlayProduction?qty=50&recipeId=7
+        public ActionResult PlayProduction(int? recipeId, int qty)
         {
+            if (!recipeId.HasValue)
+                throw new Exception("Id non specificato.");
+
+            Recipe recipe = db.Recipes.Find(recipeId);
+            if(recipe == null)
+                throw new Exception("Non esiste una ricetta con questo Id.");
+
+
+            //var ingredients = recipe.Ingredients;
+            
+            //foreach(var element in ingredients)
+            //{
+            //    var qtyNeeded = 10;
+
+            //    db.Stocks.Where(x => x.IngredientId == element.IngredientId);
+            //}
+            
+
             return View();
         }
 
@@ -51,7 +69,7 @@ namespace BrewDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Production.Add(production);
+                db.Productions.Add(production);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +84,7 @@ namespace BrewDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Production production = db.Production.Find(id);
+            Production production = db.Productions.Find(id);
             if (production == null)
             {
                 return HttpNotFound();
@@ -97,7 +115,7 @@ namespace BrewDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Production production = db.Production.Find(id);
+            Production production = db.Productions.Find(id);
             if (production == null)
             {
                 return HttpNotFound();
@@ -110,8 +128,8 @@ namespace BrewDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Production production = db.Production.Find(id);
-            db.Production.Remove(production);
+            Production production = db.Productions.Find(id);
+            db.Productions.Remove(production);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
