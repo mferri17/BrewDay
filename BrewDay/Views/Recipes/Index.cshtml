@@ -1,31 +1,55 @@
 ﻿@model IEnumerable<BrewDay.Models.Entities.Recipe>
 
 @{
-    ViewBag.Title = "Tutte Le Ricette";
-    ViewBag.Page = "#nav-recipes";
+    ViewBag.Title = "Index";
 }
 
-<h2>Tutte Le Ricette</h2>
+<h2>Index</h2>
 
-<p><a href="@Url.Action("Create")" class="btn btn-default pull-right">Registra nuova Ricetta</a></p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th>@Html.DisplayNameFor(model => model.Note)</th>
-        <th>@Html.DisplayNameFor(model => model.FermentationTemperature)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentRecipe.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FermentationTemperature)
+        </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.DisplayFor(modelItem => item.Note)</td>
-        <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
-        <td class="action-column">
-            <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
-            <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-            <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentRecipe.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FermentationTemperature)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RecipeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RecipeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RecipeId })
         </td>
     </tr>
 }

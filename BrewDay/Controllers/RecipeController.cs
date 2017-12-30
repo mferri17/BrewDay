@@ -39,6 +39,7 @@ namespace BrewDay.Models.Enums
         // GET: Recipes/Create
         public ActionResult Create()
         {
+            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
             return View();
         }
 
@@ -47,7 +48,7 @@ namespace BrewDay.Models.Enums
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RecipeId,Name,Description,Note,FermentationTemperature,ParentRecipeId")] Recipe recipe)
+        public ActionResult Create(Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +57,7 @@ namespace BrewDay.Models.Enums
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
             return View(recipe);
         }
 
@@ -71,6 +73,7 @@ namespace BrewDay.Models.Enums
             {
                 return HttpNotFound();
             }
+            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
             return View(recipe);
         }
 
@@ -87,6 +90,7 @@ namespace BrewDay.Models.Enums
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
             return View(recipe);
         }
 

@@ -40,7 +40,7 @@ namespace BrewDay.Controllers
         // GET: Stocks/Create
         public ActionResult Create()
         {
-            ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "Name");
+            ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "FullName");
             return View();
         }
 

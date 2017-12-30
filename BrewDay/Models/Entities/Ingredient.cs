@@ -41,5 +41,9 @@ namespace BrewDay.Models.Entities
         public virtual ICollection<Stock> Stocks { get; set; }
         public virtual ICollection<RecipeIngredient> Recipes { get; set; }
 
+
+        // Utils
+        public string FullName { get { return Type.ToString() + " - " + Name; } }
+
     }
 }

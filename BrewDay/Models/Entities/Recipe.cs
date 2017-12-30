@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrewDay.Models.Entities
 {
@@ -34,13 +35,15 @@ namespace BrewDay.Models.Entities
         [Display(Name = "Temperatura di fermentazione")]
         public double? FermentationTemperature { get; set; }
 
-        [Display(Name = "Id ricetta padre")]
-        //public int? ParentRecipeId { get; set; }
-        public virtual Recipe ParentRecipe { get; set; }
+        //[Display(Name = "Id ricetta padre")]
+        public int? ParentRecipeId { get; set; }
 
 
         // Navigation Properties
         public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
+
+        [ForeignKey("ParentRecipeId")]
+        public virtual Recipe ParentRecipe { get; set; }
 
 
         // Util Properties and Methods
