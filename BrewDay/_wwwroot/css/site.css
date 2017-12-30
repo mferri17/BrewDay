@@ -3,9 +3,8 @@
 .bgClip {
     background: url('http://7xhqfps15y-flywheel.netdna-ssl.com/wp-content/uploads/2017/06/SudsWorthSipping_July2017.jpg');
     background-repeat: repeat-x;
-    background-position: 0% 20%;
+    background-position: 0 20%;
     font-size: 200px;
-
     text-align: center;
     font-family: Centaur;
     color: transparent;
@@ -21,7 +20,7 @@
 
 @keyframes BackgroundAnimated {
     from {
-        background-position: 0% 10%
+        background-position: 0 10%
     }
 
     to {
@@ -31,7 +30,7 @@
 
 @-webkit-keyframes BackgroundAnimated {
     from {
-        background-position: 0% 10%
+        background-position: 0 10%
     }
 
     to {
@@ -42,7 +41,7 @@
 
 @-moz-keyframes BackgroundAnimated {
     from {
-        background-position: 0% 10%
+        background-position: 0 10%
     }
 
     to {
@@ -61,11 +60,6 @@ body {
 
 .glyphicon {
     text-decoration: none !important;
-}
-
-.input-inline {
-    display: inline;
-    /* rimosso width per errore critico con display: inline */
 }
 
 hr {
@@ -163,7 +157,7 @@ textarea {
 
 .form-horizontal .checkbox {
     padding-top: 2px;
-    min-height: 0px;
+    min-height: 0;
 }
 
 .glyphicon-asterisk {
@@ -181,10 +175,6 @@ textarea {
     overflow-y: auto;
     overflow-x: hidden;
     font-size: 13px;
-}
-
-select.render-enum-text{
-    display:none;
 }
 
 
@@ -206,8 +196,8 @@ select.render-enum-text{
 /* ------------------------ Printing directives ------------------------ */
 @media print {
     body {
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .container {

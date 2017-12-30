@@ -17,14 +17,17 @@ namespace BrewDay.Models.Entities
         /// Will be valorized when SaveChanges is called.
         /// </summary>
         public int? StockId { get; set; }
-        
-        //Represents the element which it belongs to
+
+        /// <summary>
+        /// Represent the ingredient which the stock belongs to.
+        /// </summary>
         public int IngredientId { get; set; }
 
         [Display(Name = "Quantità")]
         public int Quantity { get; set; }
 
         [Display(Name = "Scadenza")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ExpireDate { get; set; }
 
         [StringLength(1024)]
@@ -33,6 +36,7 @@ namespace BrewDay.Models.Entities
 
 
         // Navigation Properties
+        [Display(Name = "Ingrediente")]
         public virtual Ingredient Ingredient { get; set; }
     }
 }

@@ -5,16 +5,7 @@ $(document).ready(function () {
 
     // Sostituisce le virgole con i punti (sul keypress) per tutti gli elementi che hanno classe "number-float"
     $(document).on("keypress", ".number-float", replacePointWithComma);
-
-
-    // Sfrutta gli EnumDropDownListFor che hanno classe "render-enum-text" per visualizzare il Display Name dell'Enum
-    // (le select con tale classe sono nascoste da css)
-    $("select.render-enum-text").each(function (index, element) {
-        var x = $(element);
-        var label = x.find("option:selected").text();
-        x.after(label);
-    });
-
+    
 
     // Aggiunge datepicker di jQuery UI a tutti gli input che hanno classe "datepicker"
     $(document).on("focus", ".datepicker:not([readonly])", function () {

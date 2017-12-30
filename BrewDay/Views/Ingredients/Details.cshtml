@@ -20,7 +20,7 @@
         <dd> @Model.Price </dd>
 
         <dt> @Html.DisplayNameFor(model => model.Type) </dt>
-        <dd> @Html.EnumDropDownListFor(model => model.Type, new { @class = "render-enum-text" }) </dd>
+        <dd> @Html.DisplayEnumLabel(Model.Type) </dd>
 
         <dt></dt>
         <dd><a href="@Url.Action("CreateOrEdit", new { id = Model.IngredientId })" class="btn btn-primary margin-top-20" />Modifica</a></dd>

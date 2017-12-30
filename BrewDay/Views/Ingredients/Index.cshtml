@@ -11,20 +11,20 @@
 
 <table class="table table-hover">
     <tr>
+        <th> @Html.DisplayNameFor(model => model.Type) </th>
         <th> @Html.DisplayNameFor(model => model.Name) </th>
         <th> @Html.DisplayNameFor(model => model.Description) </th>
         <th> @Html.DisplayNameFor(model => model.Price) </th>
-        <th> @Html.DisplayNameFor(model => model.Type) </th>
         <th> </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td> @Html.DisplayEnumLabel(item.Type) </td>
             <td> @Html.DisplayFor(modelItem => item.Name) </td>
             <td> @Html.DisplayFor(modelItem => item.Description) </td>
-            <td> @Html.DisplayFor(modelItem => item.Price) </td>
-            <td> @Html.EnumDropDownListFor(modelItem => item.Type, new { @class = "render-enum-text" }) </td>
+            <td class="text-right"> @Html.DisplayFor(modelItem => item.Price) </td>
             <td class="action-column">
                 <a href="@Url.Action("Details", new { id = item.IngredientId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                 <a href="@Url.Action("CreateOrEdit", new { id = item.IngredientId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>

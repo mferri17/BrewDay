@@ -14,12 +14,15 @@ namespace BrewDay.Models.Entities
         public int? ProductionId { get; set; }
 
         [Display(Name = "Data Inizio")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateStart { get; set; }
 
         [Display(Name = "Data Fine")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEnd { get; set; }
 
         [Display(Name = "Data Fine Stimata")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEndEstimated { get; set; }
 
         [StringLength(1024)]

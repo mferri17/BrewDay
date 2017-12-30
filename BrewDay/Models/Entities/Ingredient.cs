@@ -30,6 +30,7 @@ namespace BrewDay.Models.Entities
         public string Description { get; set; }
 
         [Display(Name = "Prezzo")]
+        [DataType(DataType.Currency)] // Influenza il modo in cui questa viene visualizzata con una DisplayFor
         public double? Price { get; set; }
 
         [Range(1, 4, ErrorMessage = "Devi selezionare un valore valido per il Tipo."), Display(Name = "Tipo")]

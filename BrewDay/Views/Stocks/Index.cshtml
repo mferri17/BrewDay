@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Scorte";
+    ViewBag.Page = "#nav-stocks";
 }
 
 <h2>Tutte le Scorte</h2>
@@ -10,6 +11,7 @@
 
 <table class="table">
     <tr>
+        <th>@Html.DisplayNameFor(model => model.Ingredient.Type)</th>
         <th>@Html.DisplayNameFor(model => model.Ingredient.Name)</th>
         <th> @Html.DisplayNameFor(model => model.Quantity)</th>
         <th> @Html.DisplayNameFor(model => model.ExpireDate)</th>
@@ -19,6 +21,7 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
         <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
         <td>@Html.DisplayFor(modelItem => item.ExpireDate)</td>
