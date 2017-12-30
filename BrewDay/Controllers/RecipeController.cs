@@ -18,7 +18,7 @@ namespace BrewDay.Models.Enums
         // GET: Recipes
         public ActionResult Index()
         {
-            return View(db.Recipes.ToList());
+            return View(db.Recipes.ToList().OrderBy(x => x.FullName));
         }
 
         // GET: Recipes/Details/5
@@ -39,13 +39,13 @@ namespace BrewDay.Models.Enums
         // GET: Recipes/Create
         public ActionResult Create()
         {
-            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
+            var allowedParents = db.Recipes.Where(x => !x.ParentRecipeId.HasValue);
+            ViewBag.ParentRecipeId = new SelectList(allowedParents, "RecipeId", "Name");
+
             return View();
         }
 
         // POST: Recipes/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Recipe recipe)
@@ -57,7 +57,9 @@ namespace BrewDay.Models.Enums
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
+            var allowedParents = db.Recipes.Where(x => !x.ParentRecipeId.HasValue);
+            ViewBag.ParentRecipeId = new SelectList(allowedParents, "RecipeId", "Name");
+
             return View(recipe);
         }
 
@@ -65,24 +67,22 @@ namespace BrewDay.Models.Enums
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-            {
                 return HttpNotFound();
-            }
-            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
+
+            var allowedParents = db.Recipes.Where(x => x.RecipeId != id && !x.ParentRecipeId.HasValue);
+            ViewBag.ParentRecipeId = new SelectList(allowedParents, "RecipeId", "Name", recipe.ParentRecipeId);
+
             return View(recipe);
         }
 
         // POST: Recipes/Edit/5
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeId,Name,Description,Note,FermentationTemperature,ParentRecipeId")] Recipe recipe)
+        public ActionResult Edit(Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,10 @@ namespace BrewDay.Models.Enums
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentRecipeId = new SelectList(db.Recipes, "RecipeId", "Name");
+
+            var allowedParents = db.Recipes.Where(x => x.RecipeId != recipe.RecipeId && !x.ParentRecipeId.HasValue);
+            ViewBag.ParentRecipeId = new SelectList(allowedParents, "RecipeId", "Name", recipe.ParentRecipeId);
+
             return View(recipe);
         }
 
