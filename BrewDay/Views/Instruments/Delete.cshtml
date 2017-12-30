@@ -56,8 +56,11 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Rimuovi" class="btn btn-default" /> |
-            @Html.ActionLink("Torna indietro", "Index")
+            <input type="submit" value="Rimuovi" class="btn btn-primary" /> 
         </div>
     }
+</div>
+
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Strumenti</a>
 </div>

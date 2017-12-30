@@ -57,12 +57,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crea" class="btn btn-default" />
+                <input type="submit" value="Crea" class="btn btn-primary pull-left" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Torna indietro", "Index")
-</div>
+    <div class="row col-md-12">
+        <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Strumenti</a>
+    </div>

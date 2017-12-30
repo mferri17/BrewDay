@@ -6,54 +6,36 @@
 
 
 <h2>Dettagli @Model.Name</h2>
+<hr />
 
-<div>
+<div class="row col-md-12">
+    <dl class="dl-horizontal col-md-8">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Quantity)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Quantity)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Capacity)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Capacity)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Capacity)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Type)</dt>
 
-        <dd>
-            @Html.DisplayEnumLabel(Model.Type)
-        </dd>
+        <dd>@Html.DisplayEnumLabel(Model.Type)</dd>
 
+        <dt></dt>
+        <dd><a href="@Url.Action("Edit", new { id = Model.InstrumentId })" class="btn btn-primary margin-top-20">Modifica</a></dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.InstrumentId }) |
-    @Html.ActionLink("Torna indietro", "Index")
-</p>
+
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Strumenti</a>
+</div>
