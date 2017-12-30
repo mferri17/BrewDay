@@ -9,47 +9,45 @@
 <h3>Sicuro di voler rimouvere l'elemento selezionato?</h3>
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ingredient.Name)
-        </dt>
+    @using (Html.BeginForm())
+    {
+        <div class="row col-md-12">
+            <dl class="dl-horizontal col-md-8">
+                <dt>@Html.DisplayNameFor(model => model.Ingredient.Name)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ingredient.Name)
-        </dd>
+                <dd>@Html.DisplayFor(model => model.Ingredient.Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+                <dt>@Html.DisplayNameFor(model => model.Quantity)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
+                <dd>@Html.DisplayFor(model => model.Quantity)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpireDate)
-        </dt>
+                <dt>@Html.DisplayNameFor(model => model.ExpireDate)</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ExpireDate)
-        </dd>
+                <dd>@Html.DisplayFor(model => model.ExpireDate)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
+                <dt>@Html.DisplayNameFor(model => model.Note) </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
+                <dd>@Html.DisplayFor(model => model.Note)</dd>
 
-    </dl>
+                <dt></dt>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+         
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Rimuovi" class="btn btn-default" /> |
-            @Html.ActionLink("Torna indietro", "Index")
+            </dl>
         </div>
     }
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Rimuovi" class="btn btn-primary" />
+    </div>
+}
+
+
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Stock</a>
 </div>
