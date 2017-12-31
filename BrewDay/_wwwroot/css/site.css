@@ -159,6 +159,11 @@ textarea {
     resize: none;
 }
 
+.form-group.required .control-label:after {
+    content: " *";
+    color: indianred;
+}
+
 .form-horizontal .checkbox {
     padding-top: 2px;
     min-height: 0;

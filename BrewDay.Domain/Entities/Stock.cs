@@ -4,7 +4,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BrewDay.Models.Entities
+namespace BrewDay.Domain.Entities
 {
     /// <summary>
     /// Represent an ingredient stock with relative quantity and expire date.

@@ -1,4 +1,4 @@
-﻿@model BrewDay.Models.Entities.Stock
+﻿@model BrewDay.Domain.Entities.Stock
 
 @{
     ViewBag.Title = "Dettagli";
@@ -24,7 +24,7 @@
         <dd> @Html.DisplayFor(model => model.Note) </dd>
 
         <dt></dt>
-        <dd><a href="@Url.Action("CreateOrEdit", new { id = Model.IngredientId })" class="btn btn-primary margin-top-20">Modifica</a></dd>
+        <dd><a href="@Url.Action("Edit", new { id = Model.IngredientId })" class="btn btn-primary margin-top-20">Modifica</a></dd>
     </dl>
 </div>
 

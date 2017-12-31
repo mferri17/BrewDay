@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BrewDay.Models.Entities
+namespace BrewDay.Domain.Entities
 {
     /// <summary>
     /// 

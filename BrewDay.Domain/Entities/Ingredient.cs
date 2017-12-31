@@ -4,9 +4,9 @@ using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-using BrewDay.Models.Enums;
+using BrewDay.Domain.Enums;
 
-namespace BrewDay.Models.Entities
+namespace BrewDay.Domain.Entities
 {
     /// <summary>
     /// Represent an ingredient commercially available, to make recipes with.
@@ -24,7 +24,7 @@ namespace BrewDay.Models.Entities
         [StringLength(128)]
         [Display(Name = "Nome")]
         public string Name { get; set; }
-
+        
         [StringLength(1024)]
         [Display(Name = "Descrizione")]
         public string Description { get; set; }

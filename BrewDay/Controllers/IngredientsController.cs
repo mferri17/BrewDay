@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
+using System.Data.Entity;
 using System.Web.Mvc;
-using BrewDay.Models;
-using BrewDay.Models.Entities;
+using System.Collections.Generic;
+
+using BrewDay.Domain;
+using BrewDay.Domain.Entities;
 
 namespace BrewDay.Controllers
 {

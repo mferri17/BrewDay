@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BrewDay.Models.Entities
+namespace BrewDay.Domain.Entities
 {
 
     public class Production

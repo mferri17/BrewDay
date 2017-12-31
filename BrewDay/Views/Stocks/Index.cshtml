@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BrewDay.Models.Entities.Stock>
+﻿@model IEnumerable<BrewDay.Domain.Entities.Stock>
 
 @{
     ViewBag.Title = "Scorte";
@@ -8,7 +8,7 @@
 <h2>Tutte le Scorte</h2>
 
 <div class="row col-md-12">
-   <a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuova Scorta</a>
+    <a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuova Scorta</a>
 </div>
 <div class="row col-md-12">
     <table class="table table-hover">
@@ -43,13 +43,13 @@
     </table>
 </div>
 
-    @section scripts{
-        <script>
-            $(".table").DataTable({
-                language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
-                stateSave: true,
-                //responsive: true,
-                colReorder: true
-            });
-        </script>
-    }
+@section scripts{
+    <script>
+        $(".table").DataTable({
+            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
+            stateSave: true,
+            //responsive: true,
+            colReorder: true
+        });
+    </script>
+}

@@ -1,11 +1,11 @@
-﻿using BrewDay.Models.Enums;
+﻿using BrewDay.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BrewDay.Models.Entities
+namespace BrewDay.Domain.Entities
 {
     /// <summary>
     /// Represent an instrument owned by the Brewer

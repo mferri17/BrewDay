@@ -4,7 +4,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BrewDay.Models.Enums
+namespace BrewDay.Domain.Enums
 {
     public enum IngredientType
     {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BrewDay.Models.Enums
+namespace BrewDay.Domain.Enums
 {
     public enum InstrumentType
     {

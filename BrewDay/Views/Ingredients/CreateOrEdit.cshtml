@@ -1,4 +1,4 @@
-﻿@model BrewDay.Models.Entities.Ingredient
+﻿@model BrewDay.Domain.Entities.Ingredient
 
 @{
     ViewBag.Title = Model == null ? "Registra ingrediente" : "Modifica " + Model.Name;
@@ -17,7 +17,7 @@
         <!-- Hidden fields are used to store information that must remain unchanged -->
         @Html.HiddenFor(model => model.IngredientId)
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @autocomplete = "off", @class = "form-control" } })
