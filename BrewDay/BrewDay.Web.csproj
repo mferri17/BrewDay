@@ -162,7 +162,6 @@
     <Content Include="_wwwroot\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="_wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
     <Content Include="_wwwroot\vendor\bootstrap\js\npm.js" />
-    <Content Include="_wwwroot\vendor\bootstrap\version.txt" />
     <Content Include="_wwwroot\vendor\datatables\ColReorder-1.4.1\css\colReorder.bootstrap.css" />
     <Content Include="_wwwroot\vendor\datatables\ColReorder-1.4.1\css\colReorder.bootstrap.min.css" />
     <Content Include="_wwwroot\vendor\datatables\ColReorder-1.4.1\css\colReorder.bootstrap4.css" />
@@ -262,7 +261,6 @@
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\css\select.semanticui.min.css" />
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\js\dataTables.select.js" />
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\js\dataTables.select.min.js" />
-    <Content Include="_wwwroot\vendor\jquery-ui\version.txt" />
     <Content Include="_wwwroot\vendor\respond\respond.js" />
     <Content Include="_wwwroot\vendor\respond\respond.matchmedia.addListener.js" />
     <Content Include="_wwwroot\vendor\respond\respond.matchmedia.addListener.min.js" />

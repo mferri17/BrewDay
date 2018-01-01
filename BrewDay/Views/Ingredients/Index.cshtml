@@ -18,8 +18,8 @@
                 <th> @Html.DisplayNameFor(model => model.Type) </th>
                 <th> @Html.DisplayNameFor(model => model.Name) </th>
                 <th> @Html.DisplayNameFor(model => model.Price) </th>
-                <th class="min-tablet" style="max-width: 500px;"> @Html.DisplayNameFor(model => model.Description) </th>
-                <th> </th>
+                <th> @Html.DisplayNameFor(model => model.Description) </th>
+                <th class="no-sort no-search"> </th>
             </tr>
         </thead>
         <tbody>
@@ -43,11 +43,16 @@
 
 @section scripts{
     <script>
-        $(".table").DataTable({
+        $(".table").dataTable({
             language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
             stateSave: true,
             responsive: true,
-            colReorder: true
+            colReorder: true,
+            columnDefs: [
+                //{ "targets": [5], "orderable": false },
+                { "targets": "no-sort", "orderable": false },
+                { "targets": "no-search", "searchable": false },
+            ]
         });
     </script>
 }

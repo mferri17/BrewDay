@@ -141,16 +141,17 @@ td > .glyphicon {
     margin: 0 3px 0 3px;
 }
 
-td.action-column {
-    white-space: nowrap;
+.action-column {
+    white-space: nowrap; /* fa in modo che il contenuto di queste td non vada a capo */
+    width: 1px !important; /* in cominazione con white-space fa si che la colonna sia larga il minimo possibile */
 }
 
 
-    td.action-column > a, .dtr-details a {
-        color: black;
-        text-decoration: none;
-        margin-right: 6px;
-    }
+td.action-column > a, .dtr-details a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 6px;
+}
 
 
 /* ------------------------ Create, Edit, Details ------------------------ */
