@@ -47,14 +47,14 @@ namespace BrewDay.Controllers
 
 
             //var ingredients = recipe.Ingredients;
-            
+
             //foreach(var element in ingredients)
             //{
             //    var qtyNeeded = 10;
 
             //    db.Stocks.Where(x => x.IngredientId == element.IngredientId);
             //}
-            
+
 
             return View();
         }

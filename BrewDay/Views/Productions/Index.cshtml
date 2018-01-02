@@ -17,7 +17,7 @@
                 <th>@Html.DisplayNameFor(model => model.DateEndEstimated)</th>
                 <th> @Html.DisplayNameFor(model => model.DateEnd)</th>
                 <th> @Html.DisplayNameFor(model => model.Note)</th>
-                <th> </th>
+                <th class="no-sort no-search"> </th>
             </tr>
         </thead>
         <tbody>
@@ -44,7 +44,11 @@
                 language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
                 stateSave: true,
                 responsive: true,
-                colReorder: true
+                colReorder: true,
+                columnDefs: [
+                    { "targets": "no-sort", "orderable": false },
+                    { "targets": "no-search", "searchable": false },
+                ]
             });
     </script>
 }
