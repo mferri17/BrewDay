@@ -36,28 +36,43 @@ namespace BrewDay.Controllers
         }
 
         // GET: Productions/PlayProduction?qty=50&recipeId=7
-        public ActionResult PlayProduction(int? recipeId, int qty)
-        {
-            if (!recipeId.HasValue)
-                throw new Exception("Id non specificato.");
+        //public ActionResult PlayProduction(int? recipeId, int qty)
+        //{
+        //    if (!recipeId.HasValue)
+        //        throw new Exception("Id non specificato.");
 
-            Recipe recipe = db.Recipes.Find(recipeId);
-            if(recipe == null)
-                throw new Exception("Non esiste una ricetta con questo Id.");
-
-
-            //var ingredients = recipe.Ingredients;
-
-            //foreach(var element in ingredients)
-            //{
-            //    var qtyNeeded = 10;
-
-            //    db.Stocks.Where(x => x.IngredientId == element.IngredientId);
-            //}
+        //    Recipe recipe = db.Recipes.Find(recipeId);
+        //    if (recipe == null)
+        //        throw new Exception("Non esiste una ricetta con questo Id.");
 
 
-            return View();
-        }
+        //    var ingredients = recipe.Ingredients;
+
+
+        //    //var result = db.Stocks.Where(x => x.Ingredient.Name.Contains("bello")).ToList();
+
+
+        //    foreach (var element in ingredients)
+        //    {
+        //        var qtyNeeded = 10;
+
+        //        // SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
+        //        var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
+
+        //        if (owned >= qtyNeeded)
+        //        {
+        //            //OK
+        //        }
+        //        else
+        //        {
+        //            //ERRORE
+        //        }
+
+        //    }
+
+
+        //    return View();
+        //}
 
         // POST: Productions/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 

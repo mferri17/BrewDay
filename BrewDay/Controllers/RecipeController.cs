@@ -17,7 +17,37 @@ namespace BrewDay.Models.Enums
         // GET: Recipes
         public ActionResult Index()
         {
-            return View(db.Recipes.ToList().OrderBy(x => x.FullName));
+            var model = db.Recipes.ToList().OrderBy(x => x.FullName).ToList();
+            return View(model);
+        }
+
+
+        public ActionResult AddIngredient(int id)
+        {//Non è per avviare, solo per creare la ricetta
+            ViewBag.RecipeId = id;
+            
+            ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName");
+
+            return View();
+        }
+
+        // POST: Recipes/AddIngredient
+        [HttpPost]
+        public ActionResult AddIngredient(RecipeIngredient model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.RecipeIngredients.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = model.RecipeId });
+            }
+            else
+            {
+                ViewBag.RecipeId = model.RecipeId;
+                ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "FullName");
+
+                return View(model);
+            }
         }
 
         // GET: Recipes/Details/5

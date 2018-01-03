@@ -18,12 +18,15 @@ namespace BrewDay.Domain.Entities
         [Column(Order = 1), Key]
         public int IngredientId { get; set; }
 
+        [Display(Name ="Quantità")]
         public int Quantity { get; set; }
 
 
         // Navigation Properties
 
         public virtual Recipe Recipe { get; set; }
+
+        [Display(Name = "Ingrediente")]
         public virtual Ingredient Ingredient { get; set; }
     }
 }

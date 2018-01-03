@@ -2,55 +2,49 @@
 
 @{
     ViewBag.Title = "Details";
+    ViewBag.IngredientRecipe = Model.RecipeId;
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>Recipe</h4>
+    <h4>Ricette</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentRecipe.Name)
-        </dt>
+        <dt> Padre</dt>
+        <dd> @Html.DisplayFor(model => model.ParentRecipe.Name) </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ParentRecipe.Name)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Name) </dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt> @Html.DisplayNameFor(model => model.Description) </dt>
+        <dd> @Html.DisplayFor(model => model.Description)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <dt> @Html.DisplayNameFor(model => model.Note) </dt>
+        <dd> @Html.DisplayFor(model => model.Note)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FermentationTemperature)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FermentationTemperature)
-        </dd>
-
+        <dt> @Html.DisplayNameFor(model => model.FermentationTemperature) </dt>
+        <dd> @Html.DisplayFor(model => model.FermentationTemperature) </dd>
     </dl>
+    <table class="table table-hover full-width">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Ingredients)</th>
+                <th>Quantità</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Ingredients)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+    <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-right">Aggiungi Ingrediente</a></p>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RecipeId }) |

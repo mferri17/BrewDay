@@ -1,0 +1,31 @@
+﻿@model BrewDay.Domain.Entities.RecipeIngredient
+
+@{
+    ViewBag.Title = "Tutti gli Ingredienti";
+    var prop = new { @class = "form-control" }; // oggetto anonimo C#, utile per creare oggetti senza doverne definire la classe (che si usano solitamente una sola volta, spesso in combinazione con i json)
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<form method="post">
+    <input type="hidden" value="@ViewBag.RecipeId" name="RecipeId" />
+
+    <div class="form-group col-md-2">
+        <label>Ingrediente</label>
+        @Html.DropDownList("IngredientId", (SelectList)ViewBag.Ingredients, string.Empty, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group col-md-2">
+        <label>Quantità</label>
+        @Html.EditorFor(m => m.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group col-md-12">
+        <input type="submit" class="btn btn-primary" value="Aggiungi un nuovo Ingrediente alla Ricetta" />
+    </div>
+
+
+</form>
+

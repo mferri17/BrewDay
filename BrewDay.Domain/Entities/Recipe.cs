@@ -32,7 +32,7 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Nota")]
         public string Note { get; set; }
 
-        [Display(Name = "Temperatura di fermentazione")]
+        [Display(Name = "Temp di fermentazione")]
         public double? FermentationTemperature { get; set; }
 
         //[Display(Name = "Id ricetta padre")]
@@ -40,6 +40,7 @@ namespace BrewDay.Domain.Entities
 
 
         // Navigation Properties
+        [Display(Name = "Ingrediente")]
         public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
 
         [ForeignKey("ParentRecipeId")]
