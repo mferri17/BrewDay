@@ -5,10 +5,9 @@
     ViewBag.IngredientRecipe = Model.RecipeId;
 }
 
-<h2>Details</h2>
+<h2>Dettagli ricetta @Model.Name</h2>
 
 <div>
-    <h4>Ricette</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt> Padre</dt>
@@ -44,9 +43,15 @@
         </tbody>
 
     </table>
-    <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-right">Aggiungi Ingrediente</a></p>
+    <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a></p>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RecipeId }) |
-    @Html.ActionLink("Back to List", "Index")
+    <div class"row col-md-12>
+        @*@Html.ActionLink("Modifica", "Edit", new { id = Model.RecipeId })*@
+          <a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-default pull-left">Modifica</a>
+    </div>
+
+    <div class="row col-md-12">
+        <a href="@Url.Action("Index")" class="btn btn-default pull-left">Torna indietro</a>
+    </div>
 </p>

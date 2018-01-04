@@ -1,10 +1,10 @@
 ﻿@model BrewDay.Domain.Entities.Recipe
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Creazione";
 }
 
-<h2>Create</h2>
+<h2>Crea una Ricetta</h2>
 <hr />
 
 
@@ -56,12 +56,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crea" class="btn btn-default btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
 </div>

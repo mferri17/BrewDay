@@ -1,10 +1,10 @@
 ﻿@model BrewDay.Domain.Entities.Recipe
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifica";
 }
 
-<h2>Edit</h2>
+<h2>Modifica i campi che ritieni opportuni</h2>
 <hr />
 
 
@@ -59,12 +59,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salva" class="btn btn-default btn-primary" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="row col-md-12">
+        <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
+    </div>
