@@ -35,23 +35,28 @@
         <tbody>
             @foreach (var item in Model.Ingredients)
             {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-            </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td><a href="Recipes/RemoveIngredient?recipedId=@Model.RecipeId&ingredientId=@item.IngredientId"><span class="glyphicon glyphicon-trash"></span></a> </td>
+                </tr>
             }
         </tbody>
 
     </table>
-    <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a></p>
-</div>
-<p>
-    <div class"row col-md-12>
-        @*@Html.ActionLink("Modifica", "Edit", new { id = Model.RecipeId })*@
-          <a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-default pull-left">Modifica</a>
+
+    <div class="row col-md-12">
+        <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a></p>
+        <a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-default pull-left">Modifica</a>
     </div>
 
     <div class="row col-md-12">
         <a href="@Url.Action("Index")" class="btn btn-default pull-left">Torna indietro</a>
     </div>
-</p>
+
+    <form action="/Productions/Play" class="pull-right">
+        <label>Quantità</label>
+        <input type="hidden" name="recipeId" value="@Model.RecipeId" />
+        <input type="number" name="qty" class="form-control" />
+        <input type="submit" class="btn btn-default btn-success pull-right" value="Manda in Produzione la Ricetta" />
+    </form>

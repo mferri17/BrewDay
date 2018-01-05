@@ -37,5 +37,8 @@ namespace BrewDay.Domain.Entities
 
         public virtual ICollection<Production> Production { get; set; }
 
+        //Navigation Property
+        public Boolean Used { get; set; } = false; // [DefaultValue(false)]
+
     }
 }

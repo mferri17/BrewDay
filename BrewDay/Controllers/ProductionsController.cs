@@ -35,44 +35,98 @@ namespace BrewDay.Controllers
             return View(production);
         }
 
-        // GET: Productions/PlayProduction?qty=50&recipeId=7
-        //public ActionResult PlayProduction(int? recipeId, int qty)
-        //{
-        //    if (!recipeId.HasValue)
-        //        throw new Exception("Id non specificato.");
+        //GET: Productions/Play? qty = 50 & recipeId = 7
+        public ActionResult Play(int? recipeId, int qty)
+        {
+            /*
+             Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
+             - Gli ingredienti in Stock siano, in numero, >= rispetto a quelli richiesti
+             - Gli ingredienti necessari NON siano scaduti
+             - Controllare che ci siano abbastanza Instrument
+             */
+             
+            if (!recipeId.HasValue)
+                throw new Exception("Id non specificato.");
 
-        //    Recipe recipe = db.Recipes.Find(recipeId);
-        //    if (recipe == null)
-        //        throw new Exception("Non esiste una ricetta con questo Id.");
+            Recipe recipe = db.Recipes.Find(recipeId);
 
+            if (recipe == null)
+                throw new Exception("Non esiste una ricetta con questo Id.");
 
-        //    var ingredients = recipe.Ingredients;
+            var ingredients = recipe.Ingredients;
 
+            //var result = db.Stocks.Where(x => x.Ingredient.Name.Contains("bello")).ToList();
 
-        //    //var result = db.Stocks.Where(x => x.Ingredient.Name.Contains("bello")).ToList();
+            foreach (var element in ingredients)
+            {
+                #region oscura
+                //var qtyNeeded = 10;
 
+                //// SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
+                //var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
 
-        //    foreach (var element in ingredients)
-        //    {
-        //        var qtyNeeded = 10;
+                //if (owned >= qtyNeeded)
+                //{
+                //    //OK
+                //}
+                //else
+                //{
+                //    //ERRORE
+                //}
+                #endregion
+                var QuantityNeeded = element.Quantity * qty; //Quantità richiesta per elemento
 
-        //        // SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
-        //        var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
+                var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now); //Ingrediente che ci serve
+                int? QuantityStock = IngredientInStock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); //Quantità di quell'ingrediente nello Stock
+                if (QuantityStock == null || QuantityNeeded > QuantityStock)
+                {
+                    throw new Exception("Quantità non sufficiente o ingredienti scaduti");
+                }
+                
+                // Prendo la data di scadenza dell'elemento corrente
+                var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
 
-        //        if (owned >= qtyNeeded)
-        //        {
-        //            //OK
-        //        }
-        //        else
-        //        {
-        //            //ERRORE
-        //        }
+                // ATTENTI CHE COSì PRENDETE LA SCADENZA DI UN SOLO STOCK, MA PER LA QUANTITà RICHEISTA POTRESTE AVER BISOGNO DI SFRUTTARE PIù STOCK, QUINDI DOVETE VERIFICARE CHE TUTTI QUELLI RICHIESTI NON SIANO SCADUTI
+                //if (DateTime.Now > ExpDateEl)
+                //{
+                //    throw new Exception("Ingrediente scaduto");
+                //}
 
-        //    }
+                // qui per ogni stock dovete scalare la quantità che utilizzate
+            }
 
+           // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
+            var Kettle = db.Instruments.Where(x => x.Name == "Kettle" && x.Used == false).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
+            var Fermenter = db.Instruments.Where(x => x.Name == "Fermenter" && x.Used == false).FirstOrDefault();
+            var Pipe = db.Instruments.Where(x => x.Name == "Pipe" && x.Used == false).FirstOrDefault();
 
-        //    return View();
-        //}
+            if (Kettle == null || Fermenter == null || Pipe == null)
+            {
+                throw new Exception("Uno o più strumenti richiesti non disponibili");
+            }
+
+            //Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa, andrà scalato da quella attuale in magazzino
+            foreach (var element in ingredients)
+            {
+                var QuantityNeeded = element.Quantity; //Quantità richiesta per elemento
+                var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId).FirstOrDefault(); //Ingrediente effettivo in Stock
+                IngredientInStock.Quantity = IngredientInStock.Quantity - QuantityNeeded;
+                db.Entry(IngredientInStock).State = EntityState.Modified;
+            }
+
+            //Gli Strumenti necessari per la produzione andranno resi "Impegnati"
+            Kettle.Used = true;
+            Fermenter.Used = true;
+            Pipe.Used = true;
+
+            // Rendiamo effettive le Modifiche
+            db.Entry(Kettle).State = EntityState.Modified;
+            db.Entry(Fermenter).State = EntityState.Modified;
+            db.Entry(Pipe).State = EntityState.Modified;
+            db.SaveChanges();
+            
+            return View(recipeId);
+        }
 
         // POST: Productions/Create
         // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 

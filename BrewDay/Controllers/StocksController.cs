@@ -52,11 +52,18 @@ namespace BrewDay.Controllers
         {
             if (ModelState.IsValid)
             {
+                var duplicate = db.Stocks.Where(x => x.ExpireDate == stock.ExpireDate && x.IngredientId == stock.IngredientId).FirstOrDefault();
+                if (duplicate != null)
+                {
+                    duplicate.Quantity = duplicate.Quantity + stock.Quantity;
+                    db.Entry(duplicate).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
                 db.Stocks.Add(stock);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "Name", stock.IngredientId);
             return View(stock);
         }
@@ -82,7 +89,7 @@ namespace BrewDay.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StockId,IngredientId,Quantity,ExpireDate,Note")] Stock stock)
+        public ActionResult Edit(Stock stock)
         {
             if (ModelState.IsValid)
             {
