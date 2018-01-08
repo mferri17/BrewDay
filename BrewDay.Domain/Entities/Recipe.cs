@@ -38,6 +38,9 @@ namespace BrewDay.Domain.Entities
         //[Display(Name = "Id ricetta padre")]
         public int? ParentRecipeId { get; set; }
 
+        [Required]
+        [Display(Name="Giorni di fermentazione")]
+        public int FermentationTime { get; set; }
 
         // Navigation Properties
         [Display(Name = "Ingrediente")]

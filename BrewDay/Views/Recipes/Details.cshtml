@@ -7,7 +7,7 @@
 
 <h2>Dettagli ricetta @Model.Name</h2>
 
-<div>
+@*<div>*@
     <hr />
     <dl class="dl-horizontal">
         <dt> Padre</dt>
@@ -35,11 +35,11 @@
         <tbody>
             @foreach (var item in Model.Ingredients)
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                    <td><a href="Recipes/RemoveIngredient?recipedId=@Model.RecipeId&ingredientId=@item.IngredientId"><span class="glyphicon glyphicon-trash"></span></a> </td>
-                </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td><a href="Recipes/RemoveIngredient?recipedId=@Model.RecipeId&ingredientId=@item.IngredientId"><span class="glyphicon glyphicon-trash"></span></a> </td>
+            </tr>
             }
         </tbody>
 
@@ -60,3 +60,4 @@
         <input type="number" name="qty" class="form-control" />
         <input type="submit" class="btn btn-default btn-success pull-right" value="Manda in Produzione la Ricetta" />
     </form>
+

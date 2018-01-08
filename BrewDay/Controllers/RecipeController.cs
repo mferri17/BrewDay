@@ -21,6 +21,7 @@ namespace BrewDay.Models.Enums
             return View(model);
         }
 
+  
 
         public ActionResult AddIngredient(int id)
         {//Non è per avviare, solo per creare la ricetta

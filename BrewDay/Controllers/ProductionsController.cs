@@ -38,6 +38,8 @@ namespace BrewDay.Controllers
         //GET: Productions/Play? qty = 50 & recipeId = 7
         public ActionResult Play(int? recipeId, int qty)
         {
+            ViewBag.RecipeToPlay = recipeId;
+
             /*
              Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
              - Gli ingredienti in Stock siano, in numero, >= rispetto a quelli richiesti
@@ -59,7 +61,7 @@ namespace BrewDay.Controllers
 
             foreach (var element in ingredients)
             {
-                #region oscura
+                #region appunti
                 //var qtyNeeded = 10;
 
                 //// SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
@@ -86,6 +88,7 @@ namespace BrewDay.Controllers
                 // Prendo la data di scadenza dell'elemento corrente
                 var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
 
+                #region appunti
                 // ATTENTI CHE COSì PRENDETE LA SCADENZA DI UN SOLO STOCK, MA PER LA QUANTITà RICHEISTA POTRESTE AVER BISOGNO DI SFRUTTARE PIù STOCK, QUINDI DOVETE VERIFICARE CHE TUTTI QUELLI RICHIESTI NON SIANO SCADUTI
                 //if (DateTime.Now > ExpDateEl)
                 //{
@@ -93,12 +96,13 @@ namespace BrewDay.Controllers
                 //}
 
                 // qui per ogni stock dovete scalare la quantità che utilizzate
+                #endregion
             }
 
-           // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
-            var Kettle = db.Instruments.Where(x => x.Name == "Kettle" && x.Used == false).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
-            var Fermenter = db.Instruments.Where(x => x.Name == "Fermenter" && x.Used == false).FirstOrDefault();
-            var Pipe = db.Instruments.Where(x => x.Name == "Pipe" && x.Used == false).FirstOrDefault();
+            // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
+            var Kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
+            var Fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault();
+            var Pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault();
 
             if (Kettle == null || Fermenter == null || Pipe == null)
             {
@@ -115,17 +119,32 @@ namespace BrewDay.Controllers
             }
 
             //Gli Strumenti necessari per la produzione andranno resi "Impegnati"
-            Kettle.Used = true;
-            Fermenter.Used = true;
-            Pipe.Used = true;
+            Kettle.Used++;
+            Fermenter.Used++;
+            Pipe.Used++;  //true è usato
 
             // Rendiamo effettive le Modifiche
             db.Entry(Kettle).State = EntityState.Modified;
             db.Entry(Fermenter).State = EntityState.Modified;
             db.Entry(Pipe).State = EntityState.Modified;
             db.SaveChanges();
+
+            var RecipeToPush = db.Recipes.Find(recipeId);
+
+            Production Production = new Production();
+
+            Production.DateStart = DateTime.Now;
+            Production.DateEnd = null;
+            Production.DateEndEstimated = DateTime.Now.AddDays(RecipeToPush.FermentationTime);
+            Production.Note = RecipeToPush.Note;
+
+            db.Productions.Add(Production);
+            db.SaveChanges();
+
+
             
-            return View(recipeId);
+            
+            return RedirectToAction("Index");
         }
 
         // POST: Productions/Create

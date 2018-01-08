@@ -20,24 +20,26 @@
                     <th> @Html.DisplayNameFor(model => model.Description) </th>
                     <th> @Html.DisplayNameFor(model => model.Note)</th>
                     <th> @Html.DisplayNameFor(model => model.FermentationTemperature)</th>
+                    <th> @Html.DisplayNameFor(model => model.FermentationTime)</th>
                     <th class="no-sort no-search"> </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.ParentRecipe.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                        <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
-                        <td class="action-column">
-                            <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
-                            <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                            <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ParentRecipe.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FermentationTime)</td>
+                    <td class="action-column">
+                        <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                        <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
+                        <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

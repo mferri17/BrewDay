@@ -19,7 +19,7 @@ namespace BrewDay.Domain.Entities
 
         [Display(Name = "Data Fine")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
 
         [Display(Name = "Data Fine Stimata")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

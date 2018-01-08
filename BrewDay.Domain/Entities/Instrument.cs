@@ -27,7 +27,7 @@ namespace BrewDay.Domain.Entities
         public string Description { get; set; }
 
         [Display(Name = "Quantità")] // There is no bound to the quantity of the element
-        public double Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [Display(Name = "Capacità")]
         public double Capacity { get; set; }
@@ -35,10 +35,11 @@ namespace BrewDay.Domain.Entities
         [Range(1, 3, ErrorMessage = "Devi selezionare un valore valido per il Tipo."), Display(Name = "Tipo")]
         public InstrumentType Type { get; set; }
 
+        //Navigation Property
         public virtual ICollection<Production> Production { get; set; }
 
-        //Navigation Property
-        public Boolean Used { get; set; } = false; // [DefaultValue(false)]
+        public int Used { get; set; } = 0;
 
+        //public int Available { get { return Quantity - Used; } }
     }
 }
