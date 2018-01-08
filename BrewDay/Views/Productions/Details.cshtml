@@ -41,10 +41,18 @@
         <dd>
             @Html.DisplayFor(model => model.Note)
         </dd>
+        <dt></dt>
+        <br />
+        <dd><a href="@Url.Action("Edit", new { id = Model.ProductionId })" class="btn btn-default pull-left btn-primary">Modifica</a> </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductionId }) |
-    @Html.ActionLink("Torna indietro", "Index")
+    @*@Html.ActionLink("Modifica", "Edit", new { id = Model.ProductionId })*@
+    <div class="row col-md-12">
+      
+    </div>
+        <div class="row col-md-12">
+            <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
+        </div>
 </p>
