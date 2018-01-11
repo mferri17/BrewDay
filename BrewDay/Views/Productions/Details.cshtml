@@ -44,15 +44,17 @@
         <dt></dt>
         <br />
         <dd><a href="@Url.Action("Edit", new { id = Model.ProductionId })" class="btn btn-default pull-left btn-primary">Modifica</a> </dd>
-
+        <br />
+        <dd>
+            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )"class="btn btn-default pull-left btn-danger">Termina la produzione</a>
+        </dd>
+      
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Modifica", "Edit", new { id = Model.ProductionId })*@
     <div class="row col-md-12">
-      
+        <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
     </div>
-        <div class="row col-md-12">
-            <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
-        </div>
+
+    
 </p>

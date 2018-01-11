@@ -39,14 +39,15 @@ namespace BrewDay.Controllers
         public ActionResult Play(int? recipeId, int qty)
         {
             ViewBag.RecipeToPlay = recipeId;
-
+            #region appunti
             /*
              Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
              - Gli ingredienti in Stock siano, in numero, >= rispetto a quelli richiesti
              - Gli ingredienti necessari NON siano scaduti
              - Controllare che ci siano abbastanza Instrument
              */
-             
+            #endregion
+
             if (!recipeId.HasValue)
                 throw new Exception("Id non specificato.");
 
@@ -56,8 +57,6 @@ namespace BrewDay.Controllers
                 throw new Exception("Non esiste una ricetta con questo Id.");
 
             var ingredients = recipe.Ingredients;
-
-            //var result = db.Stocks.Where(x => x.Ingredient.Name.Contains("bello")).ToList();
 
             foreach (var element in ingredients)
             {
@@ -84,7 +83,7 @@ namespace BrewDay.Controllers
                 {
                     throw new Exception("Quantità non sufficiente o ingredienti scaduti");
                 }
-                
+
                 // Prendo la data di scadenza dell'elemento corrente
                 var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
 
@@ -133,7 +132,7 @@ namespace BrewDay.Controllers
 
             Production Production = new Production();
 
-            Production.DateStart = DateTime.Now;
+            Production.DateStart = DateTime.Now; //Inserimento della ricetta scelta nel db Production
             Production.DateEnd = null;
             Production.DateEndEstimated = DateTime.Now.AddDays(RecipeToPush.FermentationTime);
             Production.Note = RecipeToPush.Note;
@@ -141,10 +140,41 @@ namespace BrewDay.Controllers
             db.Productions.Add(Production);
             db.SaveChanges();
 
+            #region appunto metodo terminazione della produzione automatico
+            ////A Ricetta pronta, devo visualizzare la data di fine nella tabella
 
-            
-            
+            //foreach (Production production in db.Productions)
+            //{
+            //    if (production.ProductionId != null && production.DateEndEstimated <= DateTime.Now)
+            //    {
+            //        production.DateEnd = DateTime.Now;
+            //        db.Entry(production).State = EntityState.Modified;
+            //    }
+            //}
+
+            //db.SaveChanges();
+            #endregion
+
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Stop(int? id)
+        {
+            if (!id.HasValue)
+                throw new Exception("Id non specificato.");
+
+            var ProductionToTerminate = db.Productions.Find(id);
+
+            if (ProductionToTerminate == null)
+                throw new Exception("Non esiste una produzione con questo Id.");
+
+            ProductionToTerminate.DateEnd = DateTime.Now;
+            db.Entry(ProductionToTerminate).State = EntityState.Modified;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+
         }
 
         // POST: Productions/Create
