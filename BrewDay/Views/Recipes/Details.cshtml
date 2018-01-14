@@ -37,7 +37,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                <td><a href="Recipes/RemoveIngredient?recipedId=@Model.RecipeId&ingredientId=@item.IngredientId"><span class="glyphicon glyphicon-trash"></span></a> </td>
+                <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
             </tr>
         }
     </tbody>
@@ -45,7 +45,7 @@
 </table>
 
 <div class="row col-md-12">
-    <p><a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a></p>
+    <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a>
     <a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-default pull-left">Modifica</a>
 </div>
 

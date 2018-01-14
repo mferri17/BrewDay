@@ -120,7 +120,7 @@ namespace BrewDay.Controllers
             //Gli Strumenti necessari per la produzione andranno resi "Impegnati"
             Kettle.Used++;
             Fermenter.Used++;
-            Pipe.Used++;  //true è usato
+            Pipe.Used++;
 
             // Rendiamo effettive le Modifiche
             db.Entry(Kettle).State = EntityState.Modified;

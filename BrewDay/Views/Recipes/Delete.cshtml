@@ -5,48 +5,22 @@
 }
 
 <h3>Sicuro di voler rimuovere l'elemento selezionato?</h3>
-<div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentRecipe.Name)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.ParentRecipe.Name)</dt>
+       <dd>@Html.DisplayFor(model => model.ParentRecipe.Name)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ParentRecipe.Name)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Note)</dt>
+        <dd>@Html.DisplayFor(model => model.Note)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FermentationTemperature)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FermentationTemperature)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.FermentationTemperature)</dt>
+        <dd>@Html.DisplayFor(model => model.FermentationTemperature)</dd>
 
     @using (Html.BeginForm())
     {
@@ -54,8 +28,6 @@
         <dd><input type="submit" value="Rimuovi" class="btn btn-primary margin-top-20" /></dd>
     }
     </dl>
-
-
 
     <div class="row col-md-12">
         <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Strumenti</a>

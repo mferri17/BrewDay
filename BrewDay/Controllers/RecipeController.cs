@@ -24,7 +24,7 @@ namespace BrewDay.Models.Enums
   
 
         public ActionResult AddIngredient(int id)
-        {//Non è per avviare, solo per creare la ricetta
+        {
             ViewBag.RecipeId = id;
             
             ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName");
@@ -152,6 +152,19 @@ namespace BrewDay.Models.Enums
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // POST : Recipes/RemoveIngredient?recipedId & ingredientId
+        public ActionResult RemoveIngredient(int recipeId, int ingredientId)
+        {
+            Recipe recipe = db.Recipes.Find(recipeId);
+            RecipeIngredient recipeIngredient = db.RecipeIngredients.Find(recipeId, ingredientId);
+            recipe.Ingredients.Remove(recipeIngredient);
+            db.Entry(recipe).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details\\" + recipeId);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
