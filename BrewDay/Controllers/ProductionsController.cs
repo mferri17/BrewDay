@@ -170,6 +170,7 @@ namespace BrewDay.Controllers
             if (!id.HasValue)
                 throw new Exception("Id non specificato.");
 
+            //Cerco la produzione
             var Production = db.Productions.Find(id);
 
             if (Production == null)
@@ -182,7 +183,11 @@ namespace BrewDay.Controllers
                 db.SaveChanges();
             }
 
-            db.Productions.Remove(Production);
+            //Imposto la data di fine fermentazione
+            Production.DateEnd = DateTime.Now;
+            db.Entry(Production).State = EntityState.Modified;
+
+            //db.Productions.Remove(Production);
             db.SaveChanges();
 
             return RedirectToAction("Index");
