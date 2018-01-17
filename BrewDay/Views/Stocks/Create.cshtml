@@ -19,8 +19,16 @@
         <div class="form-group required">
             @Html.LabelFor(model => model.Ingredient, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IngredientId", null, string.Empty, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IngredientId, "", new { @class = "text-danger" })
+                @if (ViewBag.IngReadonly != null && ViewBag.IngReadonly) // If we try to create a new Stock starting from an existing Ingredient
+                {
+                    @Html.DropDownList("IngredientId", (SelectList)ViewBag.Ingredients, new { @class = "form-control", @disabled = "" })
+                }
+                else
+                {
+                    @Html.DropDownList("IngredientId", (SelectList)ViewBag.Ingredients, string.Empty, htmlAttributes: new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.IngredientId, "", new { @class = "text-danger" })
+                }
             </div>
         </div>
 
@@ -56,6 +64,13 @@
                 <input type="submit" value="Crea" class="btn btn-primary" />
             </div>
         </div>
-        <p><a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista scorte</a></p>
+        @if (ViewBag.IngReadonly)
+        {
+            <p><a href="@Url.Action("Index", "Ingredients")" class="btn btn-default pull-right">Torna alla lista Ingredienti</a></p>
+        }
+        else
+        {
+            <p><a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Scorte</a></p>
+        }
     </div>
 }

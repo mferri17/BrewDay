@@ -18,23 +18,7 @@ namespace BrewDay.Controllers
         {
             return View(db.Ingredients.ToList());
         }
-
-        public ActionResult AddToStock(int? id)
-        {
-            if (id == null)
-                throw new Exception("Id dell'elemento non specificato.");
-
-            Ingredient element = db.Ingredients.Find(id);
-
-            // check if exists and element with the specified Id
-            if (element == null)
-                throw new Exception($"L'Id {id} non corrisponde ad alcun elemento.");
-            Stock fittizio = db.Stocks.Create();
-            fittizio.Ingredient = element;
-            return View("AddToStock", fittizio);
-        }
-
-
+        
 
         public ActionResult Details(int? id)
         {

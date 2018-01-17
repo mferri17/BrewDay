@@ -29,6 +29,9 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Nota")]
         public string Note { get; set; }
 
+        [Display(Name = "Ricetta")]
+        public string ProductionRecipe { get; set; }
+
         //Navigation Properties
         public virtual ICollection<Instrument> Instrument { get; set; }
 

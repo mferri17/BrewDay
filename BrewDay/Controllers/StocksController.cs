@@ -37,9 +37,10 @@ namespace BrewDay.Controllers
         }
 
         // GET: Stocks/Create
-        public ActionResult Create()
+        public ActionResult Create(int? ingredientId)
         {
-            ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "FullName");
+            ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName", ingredientId);
+            ViewBag.IngReadonly = ingredientId.HasValue ;
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace BrewDay.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StockId,IngredientId,Quantity,ExpireDate,Note")] Stock stock)
+        public ActionResult Create(Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +65,7 @@ namespace BrewDay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "Name", stock.IngredientId);
+            ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName", stock.IngredientId);
             return View(stock);
         }
 
@@ -75,6 +76,8 @@ namespace BrewDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //var prova = db.Stocks.Include(x => x.Ingredient).Where(x => x.ExpireDate > DateTime.Now);
+            
             Stock stock = db.Stocks.Find(id);
             if (stock == null)
             {

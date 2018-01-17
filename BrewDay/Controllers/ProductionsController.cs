@@ -35,7 +35,7 @@ namespace BrewDay.Controllers
             return View(production);
         }
 
-        //GET: Productions/Play? qty = 50 & recipeId = 7
+        // Productions/Play? qty = 50 & recipeId = 7
         public ActionResult Play(int? recipeId, int qty)
         {
             ViewBag.RecipeToPlay = recipeId;
@@ -58,104 +58,112 @@ namespace BrewDay.Controllers
 
             var ingredients = recipe.Ingredients;
 
-            foreach (var element in ingredients)
+
+            try
             {
-                #region appunti
-                //var qtyNeeded = 10;
-
-                //// SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
-                //var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
-
-                //if (owned >= qtyNeeded)
-                //{
-                //    //OK
-                //}
-                //else
-                //{
-                //    //ERRORE
-                //}
-                #endregion
-                var QuantityNeeded = element.Quantity * qty; //Quantità richiesta per elemento
-
-                var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now); //Ingrediente che ci serve
-                int? QuantityStock = IngredientInStock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); //Quantità di quell'ingrediente nello Stock
-                if (QuantityStock == null || QuantityNeeded > QuantityStock)
+                foreach (var element in ingredients)
                 {
-                    throw new Exception("Quantità non sufficiente o ingredienti scaduti");
+                    #region appunti
+                    //var qtyNeeded = 10;
+
+                    //// SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
+                    //var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
+
+                    //if (owned >= qtyNeeded)
+                    //{
+                    //    //OK
+                    //}
+                    //else
+                    //{
+                    //    //ERRORE
+                    //}
+                    #endregion
+
+                    var QuantityNeeded = element.Quantity * qty; //Quantità richiesta per elemento
+
+                    var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now); //Ingrediente che ci serve
+                    int? QuantityStock = IngredientInStock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); //Quantità di quell'ingrediente nello Stock
+                    if (QuantityStock == null || QuantityNeeded > QuantityStock)
+                    {
+                        throw new Exception("Quantità non sufficiente o ingredienti scaduti.");
+                    }
+
+                    // Prendo la data di scadenza dell'elemento corrente
+                    var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
+
+                    #region appunti
+                    // ATTENTI CHE COSì PRENDETE LA SCADENZA DI UN SOLO STOCK, MA PER LA QUANTITà RICHEISTA POTRESTE AVER BISOGNO DI SFRUTTARE PIù STOCK, QUINDI DOVETE VERIFICARE CHE TUTTI QUELLI RICHIESTI NON SIANO SCADUTI
+                    //if (DateTime.Now > ExpDateEl)
+                    //{
+                    //    throw new Exception("Ingrediente scaduto");
+                    //}
+
+                    // qui per ogni stock dovete scalare la quantità che utilizzate
+                    #endregion
                 }
 
-                // Prendo la data di scadenza dell'elemento corrente
-                var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
+                // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
+                var Kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) > 0).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
+                var Fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) > 0).FirstOrDefault();
+                var Pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0).FirstOrDefault();
 
-                #region appunti
-                // ATTENTI CHE COSì PRENDETE LA SCADENZA DI UN SOLO STOCK, MA PER LA QUANTITà RICHEISTA POTRESTE AVER BISOGNO DI SFRUTTARE PIù STOCK, QUINDI DOVETE VERIFICARE CHE TUTTI QUELLI RICHIESTI NON SIANO SCADUTI
-                //if (DateTime.Now > ExpDateEl)
+                if (Kettle == null || Fermenter == null || Pipe == null)
+                {
+                    throw new Exception("Uno o più strumenti richiesti non disponibili.");
+                }
+
+                //Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa, andrà scalato da quella attuale in magazzino
+                foreach (var element in ingredients)
+                {
+                    var QuantityNeeded = element.Quantity; //Quantità richiesta per elemento
+                    var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId).FirstOrDefault(); //Ingrediente effettivo in Stock
+                    IngredientInStock.Quantity = IngredientInStock.Quantity - QuantityNeeded;
+                    db.Entry(IngredientInStock).State = EntityState.Modified;
+                }
+
+                List<Instrument> ActualInstruments = new List<Instrument>();
+                ActualInstruments.Add(Kettle);
+                ActualInstruments.Add(Pipe);
+                ActualInstruments.Add(Fermenter);
+
+                Production Production = new Production();
+
+                Production.DateStart = DateTime.Now; //Inserimento della ricetta scelta nel db Production
+                Production.DateEnd = null;
+                Production.DateEndEstimated = DateTime.Now.AddDays(recipe.FermentationTime);
+                Production.Note = recipe.Note;
+                Production.ProductionRecipe = recipe.Name;
+                Production.Instrument = ActualInstruments;
+
+                foreach (Instrument Inst in ActualInstruments)
+                 {
+                     Inst.Used++;
+                     db.Entry(Inst).State = EntityState.Modified;
+                 }
+                db.Productions.Add(Production);
+                db.SaveChanges();
+
+                #region appunto metodo terminazione della produzione automatico
+                ////A Ricetta pronta, devo visualizzare la data di fine nella tabella
+
+                //foreach (Production production in db.Productions)
                 //{
-                //    throw new Exception("Ingrediente scaduto");
+                //    if (production.ProductionId != null && production.DateEndEstimated <= DateTime.Now)
+                //    {
+                //        production.DateEnd = DateTime.Now;
+                //        db.Entry(production).State = EntityState.Modified;
+                //    }
                 //}
 
-                // qui per ogni stock dovete scalare la quantità che utilizzate
+                //db.SaveChanges();
                 #endregion
+
             }
-
-            // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
-            var Kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
-            var Fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault();
-            var Pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) < x.Quantity).FirstOrDefault();
-
-            if (Kettle == null || Fermenter == null || Pipe == null)
-            {
-                throw new Exception("Uno o più strumenti richiesti non disponibili");
+            catch (Exception e) {
+                TempData["Message"] = "Errore! " + e.Message;
             }
-
-            //Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa, andrà scalato da quella attuale in magazzino
-            foreach (var element in ingredients)
-            {
-                var QuantityNeeded = element.Quantity; //Quantità richiesta per elemento
-                var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId).FirstOrDefault(); //Ingrediente effettivo in Stock
-                IngredientInStock.Quantity = IngredientInStock.Quantity - QuantityNeeded;
-                db.Entry(IngredientInStock).State = EntityState.Modified;
-            }
-
-            //Gli Strumenti necessari per la produzione andranno resi "Impegnati"
-            Kettle.Used++;
-            Fermenter.Used++;
-            Pipe.Used++;
-
-            // Rendiamo effettive le Modifiche
-            db.Entry(Kettle).State = EntityState.Modified;
-            db.Entry(Fermenter).State = EntityState.Modified;
-            db.Entry(Pipe).State = EntityState.Modified;
-            db.SaveChanges();
-
-            var RecipeToPush = db.Recipes.Find(recipeId);
-
-            Production Production = new Production();
-
-            Production.DateStart = DateTime.Now; //Inserimento della ricetta scelta nel db Production
-            Production.DateEnd = null;
-            Production.DateEndEstimated = DateTime.Now.AddDays(RecipeToPush.FermentationTime);
-            Production.Note = RecipeToPush.Note;
-
-            db.Productions.Add(Production);
-            db.SaveChanges();
-
-            #region appunto metodo terminazione della produzione automatico
-            ////A Ricetta pronta, devo visualizzare la data di fine nella tabella
-
-            //foreach (Production production in db.Productions)
-            //{
-            //    if (production.ProductionId != null && production.DateEndEstimated <= DateTime.Now)
-            //    {
-            //        production.DateEnd = DateTime.Now;
-            //        db.Entry(production).State = EntityState.Modified;
-            //    }
-            //}
-
-            //db.SaveChanges();
-            #endregion
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Index", "Productions");
         }
 
         public ActionResult Stop(int? id)
@@ -163,14 +171,19 @@ namespace BrewDay.Controllers
             if (!id.HasValue)
                 throw new Exception("Id non specificato.");
 
-            var ProductionToTerminate = db.Productions.Find(id);
+            var Production = db.Productions.Find(id);
 
-            if (ProductionToTerminate == null)
+            if (Production == null)
                 throw new Exception("Non esiste una produzione con questo Id.");
 
-            ProductionToTerminate.DateEnd = DateTime.Now;
-            db.Entry(ProductionToTerminate).State = EntityState.Modified;
+            foreach(Instrument instrument in Production.Instrument)
+            {
+                instrument.Used--;
+                db.Entry(instrument).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
+            db.Productions.Remove(Production);
             db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -182,7 +195,7 @@ namespace BrewDay.Controllers
         // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductionId,DateStart,DateEnd,DateEndEstimated,Note")] Production production)
+        public ActionResult Create(Production production)
         {
             if (ModelState.IsValid)
             {

@@ -35,10 +35,11 @@ namespace BrewDay.Domain.Entities
         [Range(1, 3, ErrorMessage = "Devi selezionare un valore valido per il Tipo."), Display(Name = "Tipo")]
         public InstrumentType Type { get; set; }
 
+        [Display(Name = "Utilizzati")]
+        public int Used { get; set; } = 0;
+
         //Navigation Property
         public virtual ICollection<Production> Production { get; set; }
-
-        public int Used { get; set; } = 0;
 
         //public int Available { get { return Quantity - Used; } }
     }

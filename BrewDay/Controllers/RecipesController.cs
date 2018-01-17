@@ -147,10 +147,20 @@ namespace BrewDay.Models.Enums
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Recipe recipe = db.Recipes.Find(id);
-            db.Recipes.Remove(recipe);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Recipe recipe = db.Recipes.Find(id);
+                db.Recipes.Remove(recipe);
+                // OCIO! Bisogna modificare il database : se si tenta di eliminare una ricetta padre senza aver cancellato le figlie si solleva un'eccezione!
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                RedirectToAction("Error");
+            }
+            return RedirectToAction("Index")
         }
 
 

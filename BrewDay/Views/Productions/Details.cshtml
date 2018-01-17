@@ -10,45 +10,31 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DateStart)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateStart)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.ProductionRecipe)</dt>
+        <dd>@Html.DisplayFor(model => model.ProductionRecipe)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateEnd)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.DateStart)</dt>
+        <dd>@Html.DisplayFor(model => model.DateStart)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateEnd)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.DateEnd)</dt>
+        <dd>@Html.DisplayFor(model => model.DateEnd)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateEndEstimated)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.DateEndEstimated)</dt>
+        <dd>@Html.DisplayFor(model => model.DateEndEstimated)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateEndEstimated)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Note)</dt>
+        <dd>@Html.DisplayFor(model => model.Note)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
         <dt></dt>
+
         <br />
         <dd><a href="@Url.Action("Edit", new { id = Model.ProductionId })" class="btn btn-default pull-left btn-primary">Modifica</a> </dd>
         <br />
         <dd>
-            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )"class="btn btn-default pull-left btn-danger">Termina la produzione</a>
+            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )" class="btn btn-default pull-left btn-danger">Termina la produzione</a>
         </dd>
-      
+
     </dl>
 </div>
 <p>

@@ -2,10 +2,16 @@
 
 @{
     ViewBag.Title = "Details";
+    string a = null;
     ViewBag.IngredientRecipe = Model.RecipeId;
 }
 
 <h2>Dettagli ricetta @Model.Name</h2>
+
+@if (TempData.ContainsKey("Message"))
+{
+    <div id="message" class="alert alert-danger">@TempData["Message"]</div>
+}
 
 <hr />
 <dl class="dl-horizontal">
@@ -24,6 +30,9 @@
     <dt> @Html.DisplayNameFor(model => model.FermentationTemperature) </dt>
     <dd> @Html.DisplayFor(model => model.FermentationTemperature) </dd>
 </dl>
+
+<a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-primary pull-right">Aggiungi Ingrediente</a>
+
 <table class="table table-hover full-width">
     <thead>
         <tr>
@@ -34,30 +43,37 @@
     <tbody>
         @foreach (var item in Model.Ingredients)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
+            <td><a href=@Url.Action("Details", "Ingredients", new {Id = item.IngredientId })><span class="glyphicon glyphicon-info-sign"></span></a> </td>
+        </tr>
         }
     </tbody>
 
 </table>
 
 <div class="row col-md-12">
-    <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-default pull-rightb btn-primary pull-right">Aggiungi Ingrediente</a>
     <a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-default pull-left">Modifica</a>
+    <form action="/Productions/Play" class="pull-right">
+        <label>Quantità</label>
+        <input type="hidden" name="recipeId" value="@Model.RecipeId" />
+        <input type="number" name="qty" class="form-control" />
+        <p></p>
+        <input type="submit" class="btn btn-default btn-success" value="Manda in Produzione la Ricetta" />
+    </form>
 </div>
 
 <div class="row col-md-12">
     <a href="@Url.Action("Index")" class="btn btn-default pull-left">Torna indietro</a>
 </div>
 
-<form action="/Productions/Play" class="pull-right">
-    <label>Quantità</label>
-    <input type="hidden" name="recipeId" value="@Model.RecipeId" />
-    <input type="number" name="qty" class="form-control" />
-    <input type="submit" class="btn btn-default btn-success pull-right" value="Manda in Produzione la Ricetta" />
-</form>
 
-
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#message").delay(3000).hide(200);
+        });
+    </script>
+}
