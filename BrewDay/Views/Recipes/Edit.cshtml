@@ -20,8 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ParentRecipeId, "Ricetta Padre", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ParentRecipeId", null, string.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ParentRecipeId, "", new { @class = "text-danger" })
+                @Html.DropDownList("ParentRecipeId", (SelectList)ViewBag.Recipes, new { @class = "form-control", @disabled = "" })
             </div>
         </div>
 

@@ -43,12 +43,15 @@
     <tbody>
         @foreach (var item in Model.Ingredients)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
-            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-            <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
-            <td><a href=@Url.Action("Details", "Ingredients", new {Id = item.IngredientId })><span class="glyphicon glyphicon-info-sign"></span></a> </td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                    <a href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })"><span class="glyphicon glyphicon-plus"></span></a>
+                </td>
+                <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
+                <td><a href=@Url.Action("Details", "Ingredients", new {Id = item.IngredientId })><span class="glyphicon glyphicon-info-sign"></span></a> </td>
+            </tr>
         }
     </tbody>
 

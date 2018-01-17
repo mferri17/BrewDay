@@ -160,7 +160,7 @@ namespace BrewDay.Models.Enums
             {
                 RedirectToAction("Error");
             }
-            return RedirectToAction("Index")
+            return RedirectToAction("Index");
         }
 
 

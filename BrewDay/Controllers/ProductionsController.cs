@@ -58,7 +58,6 @@ namespace BrewDay.Controllers
 
             var ingredients = recipe.Ingredients;
 
-
             try
             {
                 foreach (var element in ingredients)
