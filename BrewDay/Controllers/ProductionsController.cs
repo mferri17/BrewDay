@@ -38,131 +38,108 @@ namespace BrewDay.Controllers
         // Productions/Play? qty = 50 & recipeId = 7
         public ActionResult Play(int? recipeId, int qty)
         {
-            ViewBag.RecipeToPlay = recipeId;
-            #region appunti
             /*
-             Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
-             - Gli ingredienti in Stock siano, in numero, >= rispetto a quelli richiesti
-             - Gli ingredienti necessari NON siano scaduti
-             - Controllare che ci siano abbastanza Instrument
-             */
-            #endregion
+                Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
+                - Gli ingredienti in Stock siano, in numero, >= rispetto a quelli richiesti
+                - Gli ingredienti necessari NON siano scaduti
+                - Controllare che ci siano abbastanza Instrument
+            */
 
             if (!recipeId.HasValue)
                 throw new Exception("Id non specificato.");
 
             Recipe recipe = db.Recipes.Find(recipeId);
-
             if (recipe == null)
                 throw new Exception("Non esiste una ricetta con questo Id.");
 
             var ingredients = recipe.Ingredients;
-
             try
             {
+                // Prima di selezionare i seguenti strumenti si ordina per capacità in modo da selezionare quello che spreca meno capacità (best fit)
+                var kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
+                var fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
+                var pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
+
+                if (kettle == null || fermenter == null || pipe == null)
+                    throw new Exception("Uno o più strumenti richiesti non sono disponibili. É necessario possedere un bollitore, un fermentatore e un tubo della capacità adatta.");
+
+
+                // Controllo che vi siano a disposizione tutti gli Ingredienti necessari e in caso positivo scalo la quantità dai rispettivi Stock
                 foreach (var element in ingredients)
                 {
-                    #region appunti
-                    //var qtyNeeded = 10;
+                    var requestedQuantity = element.Quantity * qty; // quantità richiesta per questo ingrediente
 
-                    //// SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId
-                    //var owned = db.Stocks.Where(x => x.IngredientId == element.IngredientId).Select(x => x.Quantity).Sum();
+                    // le due istruzioni sotto sono equivalenti alla query: SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId AND ExpireDate >= DateTime.Now AND Quantity > 0
+                    var ingredientStocks = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now && x.Quantity > 0); // lista scorte (disponibili) per questo ingrediente
+                    int? ownedQuantity = ingredientStocks.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); // quantità di questo ingrediente presente in magazzino
 
-                    //if (owned >= qtyNeeded)
-                    //{
-                    //    //OK
-                    //}
-                    //else
-                    //{
-                    //    //ERRORE
-                    //}
-                    #endregion
+                    if (ownedQuantity == null || requestedQuantity > ownedQuantity)
+                        throw new Exception($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti."); // notare il $ prima della stringa ("c# string interpolation" su google)
 
-                    var QuantityNeeded = element.Quantity * qty; //Quantità richiesta per elemento
 
-                    var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now); //Ingrediente che ci serve
-                    int? QuantityStock = IngredientInStock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); //Quantità di quell'ingrediente nello Stock
-                    if (QuantityStock == null || QuantityNeeded > QuantityStock)
+                    // Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa andrà scalata da quella attuale in magazzino
+                    // Potrebbero verificarsi dei casi in cui un singolo Stock non è sufficiente a coprire la quantità necessaria, quindi si attinge a più Stock diversi dello stesso Ingrediente
+
+                    int demand = qty; // domanda, scalata di volta in volta
+                    foreach(var stock in ingredientStocks.OrderBy(x => x.ExpireDate)) // ordinati per data di scadenza (best fit)
                     {
-                        throw new Exception("Quantità non sufficiente o ingredienti scaduti.");
+                        if(stock.Quantity > demand) { // lo stock soddisfa il fabbisogno dell'ingrediente
+                            stock.Quantity -= demand; // scalo quantità usata dallo stock
+                            db.Entry(stock).State = EntityState.Modified;
+                            demand = 0;
+                            break; // ciclo terminato
+                        }
+
+                        else if(stock.Quantity <= demand) // lo stock non è da solo sufficiente a soddisfare il fabbisogno dell'ingrediente
+                        {
+                            demand -= stock.Quantity; // sfrutto tutta la quantità di questo stock e passo al prossimo ciclo
+                            db.Entry(stock).State = EntityState.Deleted; // la quantità di questo stock passerebbe a zero, tanto vale cancellarlo
+
+                            // Questa "cancellazione" non dà problemi nel caso si verifichino eccezioni sul cicli successivi del foreach più esterno
+                            // perché in realtà settando un Entry come Deleted, essa non è ancora stata cancellata effettivamente dal db;
+                            // verrà cancellata solo al prossimo SaveChanges(), che avviene alla fine del metodo, se tutto è andato bene.
+                        }
                     }
 
-                    // Prendo la data di scadenza dell'elemento corrente
-                    var ExpDateEl = IngredientInStock.Select(x => x.ExpireDate).FirstOrDefault();//First() perchè, se no,sarebbe una collection
-
-                    #region appunti
-                    // ATTENTI CHE COSì PRENDETE LA SCADENZA DI UN SOLO STOCK, MA PER LA QUANTITà RICHEISTA POTRESTE AVER BISOGNO DI SFRUTTARE PIù STOCK, QUINDI DOVETE VERIFICARE CHE TUTTI QUELLI RICHIESTI NON SIANO SCADUTI
-                    //if (DateTime.Now > ExpDateEl)
-                    //{
-                    //    throw new Exception("Ingrediente scaduto");
-                    //}
-
-                    // qui per ogni stock dovete scalare la quantità che utilizzate
-                    #endregion
+                    if(demand != 0) // questo controllo è in realtà ridondante (viene controllato già prima del foreach che gli stock siano sufficienti), ma non si sa mai
+                        throw new Exception($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti.");
                 }
 
-                // var prova = db.Instruments.Where(x => x.Name == "Kettle" & x.Production.Contains(db.Instruments.Where(y => y.InstrumentId == x.InstrumentId));
-                var Kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) > 0).FirstOrDefault(); //Select(x => x.InstrumentId) non necessario
-                var Fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) > 0).FirstOrDefault();
-                var Pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0).FirstOrDefault();
-
-                if (Kettle == null || Fermenter == null || Pipe == null)
+                // Aggiornamento nel db degli Strumenti utilizzati
+                var usedIntruments = new Instrument[] { kettle, pipe, fermenter };
+                foreach (var instrument in usedIntruments)
                 {
-                    throw new Exception("Uno o più strumenti richiesti non disponibili.");
+                    instrument.Used++;
+                    db.Entry(instrument).State = EntityState.Modified;
                 }
 
-                //Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa, andrà scalato da quella attuale in magazzino
-                foreach (var element in ingredients)
+                // Creazione della Produzione
+                Production production = new Production()
                 {
-                    var QuantityNeeded = element.Quantity; //Quantità richiesta per elemento
-                    var IngredientInStock = db.Stocks.Where(x => x.IngredientId == element.IngredientId).FirstOrDefault(); //Ingrediente effettivo in Stock
-                    IngredientInStock.Quantity = IngredientInStock.Quantity - QuantityNeeded;
-                    db.Entry(IngredientInStock).State = EntityState.Modified;
-                }
+                    RecipeId = recipe.RecipeId.Value,
+                    DateStart = DateTime.Now,
+                    DateEnd = null,
+                    DateEndEstimated = DateTime.Now.AddDays(recipe.FermentationTime),
+                    Note = recipe.Note,
+                    Instruments = usedIntruments,
+                };
+                db.Productions.Add(production);
 
-                List<Instrument> ActualInstruments = new List<Instrument>();
-                ActualInstruments.Add(Kettle);
-                ActualInstruments.Add(Pipe);
-                ActualInstruments.Add(Fermenter);
-
-                Production Production = new Production();
-
-                Production.DateStart = DateTime.Now; //Inserimento della ricetta scelta nel db Production
-                Production.DateEnd = null;
-                Production.DateEndEstimated = DateTime.Now.AddDays(recipe.FermentationTime);
-                Production.Note = recipe.Note;
-                Production.ProductionRecipe = recipe.Name;
-                Production.Instrument = ActualInstruments;
-
-                foreach (Instrument Inst in ActualInstruments)
-                 {
-                     Inst.Used++;
-                     db.Entry(Inst).State = EntityState.Modified;
-                 }
-                db.Productions.Add(Production);
+                // Solo qui rendo effettivi i cambiamenti sul database, se non vi sono state precedenti eccezioni
                 db.SaveChanges();
-
-                #region appunto metodo terminazione della produzione automatico
-                ////A Ricetta pronta, devo visualizzare la data di fine nella tabella
-
-                //foreach (Production production in db.Productions)
-                //{
-                //    if (production.ProductionId != null && production.DateEndEstimated <= DateTime.Now)
-                //    {
-                //        production.DateEnd = DateTime.Now;
-                //        db.Entry(production).State = EntityState.Modified;
-                //    }
-                //}
-
-                //db.SaveChanges();
-                #endregion
-
+                return RedirectToAction("Details", "Productions", new { id = production.ProductionId });
             }
-            catch (Exception e) {
+
+            catch (Exception e)
+            {
+                /*  Scenari di fallimento del PlayProduction:
+                        uno o più strumenti richiesti non sono disponibili
+                        quantità di uno o più ingredienti non sufficiente in magazzino
+                        (errori di programmazione)
+                */
                 TempData["Message"] = "Errore! " + e.Message;
+                return RedirectToAction("Details", "Recipes", new { id = recipeId });
             }
-            
-            return RedirectToAction("Index", "Productions");
         }
 
         public ActionResult Stop(int? id)
@@ -176,7 +153,7 @@ namespace BrewDay.Controllers
             if (Production == null)
                 throw new Exception("Non esiste una produzione con questo Id.");
 
-            foreach(Instrument instrument in Production.Instrument)
+            foreach (Instrument instrument in Production.Instruments)
             {
                 instrument.Used--;
                 db.Entry(instrument).State = EntityState.Modified;

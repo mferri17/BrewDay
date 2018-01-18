@@ -13,6 +13,8 @@ namespace BrewDay.Domain.Entities
         [Key]
         public int? ProductionId { get; set; }
 
+        public int RecipeId { get; set; }
+
         [Display(Name = "Data Inizio")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateStart { get; set; }
@@ -29,13 +31,10 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Nota")]
         public string Note { get; set; }
 
-        [Display(Name = "Ricetta")]
-        public string ProductionRecipe { get; set; }
 
-        //Navigation Properties
-        public virtual ICollection<Instrument> Instrument { get; set; }
-
-
+        // Navigation Properties
+        public virtual ICollection<Instrument> Instruments { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
     }
 }

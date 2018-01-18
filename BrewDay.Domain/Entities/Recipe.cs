@@ -39,11 +39,11 @@ namespace BrewDay.Domain.Entities
         public int? ParentRecipeId { get; set; }
 
         [Required]
-        [Display(Name="Giorni di fermentazione")]
+        [Display(Name="Giorni fermentazione")]
         public int FermentationTime { get; set; }
 
         // Navigation Properties
-        [Display(Name = "Ingrediente")]
+        [Display(Name = "Ingredienti")]
         public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
 
         [ForeignKey("ParentRecipeId")]
