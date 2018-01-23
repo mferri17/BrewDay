@@ -13,7 +13,7 @@
     <table class="table table-hover full-width">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.ProductionRecipe)</th>
+                <th>@Html.DisplayNameFor(model => model.Recipe.FullName)</th>
                 <th>@Html.DisplayNameFor(model => model.DateStart)</th>
                 <th>@Html.DisplayNameFor(model => model.DateEndEstimated)</th>
                 <th> @Html.DisplayNameFor(model => model.DateEnd)</th>
@@ -25,7 +25,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.ProductionRecipe)</td>
+                <td>@Html.DisplayFor(modelItem => item.Recipe.FullName)</td>
                 <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
                 <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
                 <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
