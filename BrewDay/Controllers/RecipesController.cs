@@ -156,7 +156,7 @@ namespace BrewDay.Models.Enums
                 return RedirectToAction("Index");
 
             }
-            catch (Exception e)
+            catch
             {
                 RedirectToAction("Error");
             }

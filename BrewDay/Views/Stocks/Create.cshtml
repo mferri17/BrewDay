@@ -64,7 +64,7 @@
                 <input type="submit" value="Crea" class="btn btn-primary" />
             </div>
         </div>
-        @if (ViewBag.IngReadonly)
+        @if (ViewBag.IngReadonly != null && (bool)ViewBag.IngReadonly)
         {
             <p><a href="@Url.Action("Index", "Ingredients")" class="btn btn-default pull-right">Torna alla lista Ingredienti</a></p>
         }
