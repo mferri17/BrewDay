@@ -6,6 +6,34 @@
     ViewBag.IngredientRecipe = Model.RecipeId;
 }
 
+<div class="container">
+    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
+
+    <!-- Modale -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Contenuto del modale-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Gestione Ingredienti per Ricetta</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        È possibile aggiungere elementi alle Ricette specificando quanti litri di Birri si vogliono produrre.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
 <h2>Dettagli ricetta @Model.Name</h2>
 
 @if (TempData.ContainsKey("Message"))
@@ -47,7 +75,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
-                    <a href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })"><span class="glyphicon glyphicon-plus" data-toggle="tooltip" title="Aggiungimi alle Scorte"></span></a>
                 </td>
                 <td><a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash"></span></a> </td>
                 <td><a href=@Url.Action("Details", "Ingredients", new {Id = item.IngredientId })><span class="glyphicon glyphicon-info-sign"></span></a> </td>
@@ -77,6 +105,12 @@
     <script>
         $(document).ready(function () {
             $("#message").delay(3000).hide(200);
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 }
