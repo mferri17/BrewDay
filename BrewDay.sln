@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewDay.Web", "BrewDay\Brew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewDay.Domain", "BrewDay.Domain\BrewDay.Domain.csproj", "{E0C283D2-89B9-43EF-A56C-B8C6A937BD99}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C84067D2-B64C-488C-9315-9362E3A5A58E}"
+	ProjectSection(SolutionItems) = preProject
+		sonar.bat = sonar.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
