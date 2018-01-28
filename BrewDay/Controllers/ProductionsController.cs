@@ -44,7 +44,7 @@ namespace BrewDay.Controllers
                 - Gli ingredienti necessari NON siano scaduti
                 - Controllare che ci siano abbastanza Instrument
             */
-
+            
             if (!recipeId.HasValue)
                 throw new Exception("Id non specificato.");
 
