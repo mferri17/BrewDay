@@ -1,5 +1,6 @@
 # Sommario
 
+* [Benvenuto](README.md)
 * [Introduzione](01-Introduzione/1.0-Introduzione.md)
   * [Chi siamo](01-Introduzione/1.1-Team.md)
   * [SCORE Project](01-Introduzione/1.2-Progetto.md)
@@ -14,7 +15,7 @@
     * [Diagramma](03-Progettazione/3.1.1-UseCaseDiagram.md)
     * [Descrizione](03-Progettazione/3.1.2-UseCaseDescription.md)
   * [Diagramma di Dominio](03-Progettazione/3.2-DomainDiagram.md)
-  * [Diagrammi di Attività](03-Progettazione/3.3-ActivityDiagram.md)
+  * [Diagrammi di Attivit&agrave;](03-Progettazione/3.3-ActivityDiagram.md)
   * [Diagrammi di Stato](03-Progettazione/3.4-StateDiagram.md)
 
 * [Implementazione](04-Implementazione/4.0-Implementazione.md)
