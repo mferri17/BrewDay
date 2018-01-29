@@ -28,8 +28,8 @@ $(document).ready(function () {
         var header = $(this).attr("data-header");
         var body = $(this).attr("data-body");
         var modal = $(this).attr("data-target");
-        $(".modal-header").html(header);
-        $(".modal-body").html(body);
+        $(modal).find(".modal-header").html(header);
+        $(modal).find(".modal-body").html(body);
     });
     
 });
