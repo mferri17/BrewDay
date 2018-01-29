@@ -24,14 +24,12 @@ namespace BrewDay.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Instrument instrument = db.Instruments.Find(id);
             if (instrument == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(instrument);
         }
 
@@ -42,7 +40,6 @@ namespace BrewDay.Controllers
         }
 
         // POST: Instruments/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Instrument instrument)
@@ -61,19 +58,16 @@ namespace BrewDay.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Instrument instrument = db.Instruments.Find(id);
             if (instrument == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(instrument);
         }
 
         // POST: Instruments/Edit/5
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Instrument instrument)
@@ -91,14 +85,12 @@ namespace BrewDay.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Instrument instrument = db.Instruments.Find(id);
             if (instrument == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(instrument);
         }
 
@@ -116,9 +108,8 @@ namespace BrewDay.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
+
             base.Dispose(disposing);
         }
     }

@@ -25,14 +25,12 @@ namespace BrewDay.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Stock stock = db.Stocks.Find(id);
             if (stock == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(stock);
         }
 
@@ -45,8 +43,6 @@ namespace BrewDay.Controllers
         }
 
         // POST: Stocks/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Stock stock)
@@ -73,23 +69,17 @@ namespace BrewDay.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //var prova = db.Stocks.Include(x => x.Ingredient).Where(x => x.ExpireDate > DateTime.Now);
-            
+                throw new MissingIdBrewDayException();
+
             Stock stock = db.Stocks.Find(id);
             if (stock == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "Name", stock.IngredientId);
             return View(stock);
         }
 
         // POST: Stocks/Edit/5
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Stock stock)
@@ -108,14 +98,12 @@ namespace BrewDay.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Stock stock = db.Stocks.Find(id);
             if (stock == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(stock);
         }
 
