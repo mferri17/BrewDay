@@ -13,13 +13,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C84067D2-B64C-488C-9315-9362E3A5A58E}"
 	ProjectSection(SolutionItems) = preProject
 		book.json = book.json
+		README.md = README.md
 		sonar.bat = sonar.bat
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{81B66D18-1970-47C6-8D6D-8F028C2170E8}"
-	ProjectSection(SolutionItems) = preProject
-		Documentation\README.md = Documentation\README.md
-		Documentation\SUMMARY.md = Documentation\SUMMARY.md
 	EndProjectSection
 EndProject
 Global

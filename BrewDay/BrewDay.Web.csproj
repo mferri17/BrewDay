@@ -301,6 +301,10 @@
     <Content Include="Views\Recipes\Edit.cshtml" />
     <Content Include="Views\Recipes\Index.cshtml" />
     <Content Include="Views\Recipes\AddIngredient.cshtml" />
+    <Content Include="Documentation\01_Introduzione\01_Team.md" />
+    <Content Include="Documentation\SUMMARY.md" />
+    <Content Include="Documentation\README.md" />
+    <Content Include="Documentation\01_Introduzione\02_Progetto.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
@@ -341,6 +345,12 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Documentation\02_Il software\" />
+    <Folder Include="Documentation\03_Analisi\" />
+    <Folder Include="Documentation\04_Progettazione\" />
+    <Folder Include="Documentation\05_Implementazione\" />
+    <Folder Include="Documentation\06_SonarQube\" />
+    <Folder Include="Documentation\07_Conclusioni\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -366,10 +376,10 @@
   <!-- SonarQube settings -->
   <Target Name="BeforeBuild">
     <ItemGroup>
-          <SonarQubeSetting Include="sonar.exclusions">
-              <Value>**/vendor/**/*</Value>
-          </SonarQubeSetting>
-      </ItemGroup>
+      <SonarQubeSetting Include="sonar.exclusions">
+        <Value>**/vendor/**/*</Value>
+      </SonarQubeSetting>
+    </ItemGroup>
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
