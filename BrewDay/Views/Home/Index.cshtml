@@ -1,4 +1,34 @@
-﻿
+﻿@model BrewDay.DTO.ProductsAudit
 
 <h1 class="bgClip">BrewDay!</h1>
+
+<div class="row col-md-12">
+    <table class="table table-hover full-width">
+        <thead>
+
+        </thead>
+        <tbody>
+            <tr>
+                @*<td style="color:@(x.DateEndEstimated > DateTime.Now ? "red" : "black")">quantità</td>*@
+                <td>data fine stimata</td>
+            </tr>
+            @*@foreach(var x in Model.FinishingProduction)*@
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(".table").DataTable({
+            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
+            stateSave: true,
+            responsive: true,
+            colReorder: true,
+            columnDefs: [
+                { "targets": "no-sort", "orderable": false },
+                { "targets": "no-search", "searchable": false },
+            ]
+        });
+    </script>
+}
 

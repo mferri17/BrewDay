@@ -40,6 +40,7 @@ namespace BrewDay.Domain.Entities
 
         [Required]
         [Display(Name="Giorni fermentazione")]
+        [Range(0, Int32.MaxValue)] // valore minimo e max
         public int FermentationTime { get; set; }
 
         // Navigation Properties

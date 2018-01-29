@@ -5,56 +5,57 @@
     ViewBag.Page = "#nav-recipes";
 }
 
-<div class="container">
-    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
 
-    <!-- Modale -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Contenuto del modale-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Gestione Ricette</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        In questa pagina è possibile creare e gestire le Ricette. Premere su 'Dettagli' per creare la propria Ricetta personalizzata.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
-                </div>
+<!-- Modale -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Contenuto del modale-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Gestione Ricette</h4>
             </div>
-
+            <div class="modal-body">
+                <p>
+                    In questa pagina è possibile creare e gestire le Ricette. Premere su 'Dettagli' per creare la propria Ricetta personalizzata.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
 
 
-<h2>@ViewBag.Title</h2>
+<h2>
+    @ViewBag.Title
+
+    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
+</h2>
 
 <div class="row col-md-12">
     <p><a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuova Ricetta</a></p>
 </div>
-    <div class="row col-md-12">
-        <table class="table table-hover full-width">
-            <thead>
-                <tr>
-                    <th>Ricetta Padre</th>
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th> @Html.DisplayNameFor(model => model.Description) </th>
-                    <th> @Html.DisplayNameFor(model => model.Note)</th>
-                    <th> @Html.DisplayNameFor(model => model.FermentationTemperature)</th>
-                    <th> @Html.DisplayNameFor(model => model.FermentationTime)</th>
-                    <th class="no-sort no-search"> </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+<div class="row col-md-12">
+    <table class="table table-hover full-width">
+        <thead>
+            <tr>
+                <th>Ricetta Padre</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th> @Html.DisplayNameFor(model => model.Description) </th>
+                <th> @Html.DisplayNameFor(model => model.Note)</th>
+                <th> @Html.DisplayNameFor(model => model.FermentationTemperature)</th>
+                <th> @Html.DisplayNameFor(model => model.FermentationTime)</th>
+                <th class="no-sort no-search"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.ParentRecipe.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
@@ -68,22 +69,22 @@
                         <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
                     </td>
                 </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
 
-    @section scripts{
-        <script>
-            $(".table").DataTable({
-                language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
-                stateSave: true,
-                responsive: true,
-                colReorder: true,
-                columnDefs: [
-                    { "targets": "no-sort", "orderable": false },
-                    { "targets": "no-search", "searchable": false },
-                ]
-            });
-        </script>
-    }
+@section scripts{
+    <script>
+        $(".table").DataTable({
+            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
+            stateSave: true,
+            responsive: true,
+            colReorder: true,
+            columnDefs: [
+                { "targets": "no-sort", "orderable": false },
+                { "targets": "no-search", "searchable": false },
+            ]
+        });
+    </script>
+}
