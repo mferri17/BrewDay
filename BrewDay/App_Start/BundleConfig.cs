@@ -11,11 +11,12 @@ namespace BrewDay
 
             // CSS Bundle (rendered at top of the page)
 
-            bundles.Add(new StyleBundle("~/bundles/vendor/css").Include(
-                "~/_wwwroot/vendor/jquery-ui/jquery-ui.css",
-                "~/_wwwroot/vendor/bootstrap/css/bootstrap.css",
-                "~/_wwwroot/vendor/datatables/datatables.css"));
-
+            bundles.Add(new StyleBundle("~/bundles/vendor/css")
+                // includo min altrimenti CssRewriteUrlTransform non funziona, buggato (avrei potuto includere i non minified a patto di cancellare i min dalle rispettive cartelle)
+                .Include("~/_wwwroot/vendor/bootstrap/css/bootstrap.min.css", new CssRewriteUrlTransform())
+                .Include( "~/_wwwroot/vendor/jquery-ui/jquery-ui.min.css", new CssRewriteUrlTransform())
+                .Include("~/_wwwroot/vendor/datatables/datatables.css"));
+            
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/_wwwroot/css/site.css"));
 

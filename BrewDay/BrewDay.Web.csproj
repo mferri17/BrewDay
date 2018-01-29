@@ -145,6 +145,8 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="_wwwroot\vendor\datatables\datatables.min.css" />
+    <Content Include="_wwwroot\vendor\datatables\datatables.min.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\external\datepicker-it.js" />
     <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-purple.css" />
     <Content Include="_wwwroot\vendor\bootstrap\css\navbar-colors\bootstrap-navbar-green.css" />
@@ -159,9 +161,7 @@
     <Content Include="_wwwroot\js\string-util.js" />
     <Content Include="_wwwroot\js\submit-helper.js" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.css" />
-    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="_wwwroot\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="_wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
@@ -211,8 +211,6 @@
     <Content Include="_wwwroot\vendor\datatables\DataTables-1.10.16\js\jquery.dataTables.min.js" />
     <Content Include="_wwwroot\vendor\datatables\datatables.css" />
     <Content Include="_wwwroot\vendor\datatables\datatables.js" />
-    <Content Include="_wwwroot\vendor\datatables\datatables.min.css" />
-    <Content Include="_wwwroot\vendor\datatables\datatables.min.js" />
     <Content Include="_wwwroot\vendor\datatables\Responsive-2.2.1\css\responsive.bootstrap.css" />
     <Content Include="_wwwroot\vendor\datatables\Responsive-2.2.1\css\responsive.bootstrap.min.css" />
     <Content Include="_wwwroot\vendor\datatables\Responsive-2.2.1\css\responsive.bootstrap4.css" />
@@ -265,15 +263,14 @@
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\css\select.semanticui.min.css" />
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\js\dataTables.select.js" />
     <Content Include="_wwwroot\vendor\datatables\Select-1.2.4\js\dataTables.select.min.js" />
+    <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.min.css" />
     <Content Include="_wwwroot\vendor\respond\respond.js" />
     <Content Include="_wwwroot\vendor\respond\respond.matchmedia.addListener.js" />
     <Content Include="_wwwroot\vendor\respond\respond.matchmedia.addListener.min.js" />
     <Content Include="_wwwroot\vendor\respond\respond.min.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\package.json" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.css.map" />
-    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
-    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="_wwwroot\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -343,7 +340,6 @@
     <Content Include="_wwwroot\vendor\jquery-ui\index.html" />
     <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.css" />
     <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.js" />
-    <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.min.css" />
     <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.min.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.structure.css" />
     <Content Include="_wwwroot\vendor\jquery-ui\jquery-ui.structure.min.css" />
@@ -395,11 +391,11 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <!-- SonarQube settings -->
   <Target Name="BeforeBuild">
-    <ItemGroup>
+    <!--ItemGroup>
       <SonarQubeSetting Include="sonar.exclusions">
         <Value>**/vendor/**/*</Value>
       </SonarQubeSetting>
-    </ItemGroup>
+    </ItemGroup-->
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
