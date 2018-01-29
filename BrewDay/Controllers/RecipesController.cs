@@ -26,7 +26,6 @@ namespace BrewDay.Models.Enums
         public ActionResult AddIngredient(int id)
         {
             ViewBag.RecipeId = id;
-            
             ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName");
 
             return View();
@@ -55,14 +54,12 @@ namespace BrewDay.Models.Enums
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(recipe);
         }
 
@@ -97,11 +94,11 @@ namespace BrewDay.Models.Enums
         public ActionResult Edit(int? id)
         {
             if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new MissingIdBrewDayException();
 
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-                return HttpNotFound();
+                throw new InvalidIdBrewDayException(id.Value);
 
             var allowedParents = db.Recipes.Where(x => x.RecipeId != id && !x.ParentRecipeId.HasValue);
             ViewBag.ParentRecipeId = new SelectList(allowedParents, "RecipeId", "Name", recipe.ParentRecipeId);
@@ -131,14 +128,12 @@ namespace BrewDay.Models.Enums
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(recipe);
         }
 
@@ -154,13 +149,11 @@ namespace BrewDay.Models.Enums
                 // OCIO! Bisogna modificare il database : se si tenta di eliminare una ricetta padre senza aver cancellato le figlie si solleva un'eccezione!
                 db.SaveChanges();
                 return RedirectToAction("Index");
-
             }
             catch
             {
-                RedirectToAction("Error");
+                throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede versioni alternative della stessa. Cancellare prima le versioni.");
             }
-            return RedirectToAction("Index");
         }
 
 
@@ -172,7 +165,7 @@ namespace BrewDay.Models.Enums
             recipe.Ingredients.Remove(recipeIngredient);
             db.Entry(recipe).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Details\\" + recipeId);
+            return RedirectToAction("Details", new { id = recipeId });
         }
 
 

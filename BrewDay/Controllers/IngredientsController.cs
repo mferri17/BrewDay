@@ -23,13 +23,13 @@ namespace BrewDay.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-                throw new Exception("Id dell'elemento non specificato.");
+                throw new MissingIdBrewDayException();
             
             Ingredient element = db.Ingredients.Find(id);
 
             // check if exists and element with the specified Id
             if (element == null)
-                throw new Exception($"L'Id {id} non corrisponde ad alcun elemento.");
+                throw new InvalidIdBrewDayException(id.Value);
 
             return View(element);
         }
@@ -38,13 +38,13 @@ namespace BrewDay.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-                throw new Exception("Id dell'elemento non specificato.");
-            
+                throw new MissingIdBrewDayException();
+
             Ingredient element = db.Ingredients.Find(id);
 
             // check if exists and element with the specified Id
             if (element == null)
-                throw new Exception($"L'Id {id} non corrisponde ad alcun elemento.");
+                throw new InvalidIdBrewDayException(id.Value);
 
             // deletes element from the context (marks it as "deleted")
             db.Ingredients.Remove(element);

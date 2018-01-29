@@ -2,7 +2,8 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
-
+using System.Net;
+using System.Linq;
 
 namespace BrewDay
 {
@@ -22,14 +23,18 @@ namespace BrewDay
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            Exception ex = filterContext.Exception;
+            Exception exception = filterContext.Exception;
+            List<string> messages = new List<string>();
+            
+            if (exception is BrewDayException == false)
+                messages.Add("Si è verificato un errore interno del server. Contattare l'amministratore per segnalare il bug.");
 
             filterContext.Result = new ViewResult()
             {
                 ViewName = "Error",
                 ViewData = new ViewDataDictionary {
-                    { "Messages", GetAllMessages(ex) },
-                    { "StackTrace", ex.StackTrace }
+                    { "Messages", messages.Concat(GetAllMessages(exception)) },
+                    { "StackTrace", exception.StackTrace }
                 }
             };
             filterContext.ExceptionHandled = true;
@@ -38,7 +43,7 @@ namespace BrewDay
         /// <summary>
         /// Given an Exception, returns all Messages taken from InnerExceptions.
         /// </summary>
-        private string[] GetAllMessages(Exception exception)
+        private List<string> GetAllMessages(Exception exception)
         {
             List<string> result = new List<string>();
 
@@ -48,7 +53,7 @@ namespace BrewDay
                 exception = exception.InnerException;
             }
 
-            return result.ToArray();
+            return result;
         }
     }
 }

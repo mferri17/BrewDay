@@ -24,14 +24,12 @@ namespace BrewDay.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Production production = db.Productions.Find(id);
             if (production == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(production);
         }
 
@@ -46,11 +44,11 @@ namespace BrewDay.Controllers
             */
             
             if (!recipeId.HasValue)
-                throw new Exception("Id non specificato.");
+                throw new MissingIdBrewDayException();
 
             Recipe recipe = db.Recipes.Find(recipeId);
             if (recipe == null)
-                throw new Exception("Non esiste una ricetta con questo Id.");
+                throw new InvalidIdBrewDayException(recipeId.Value);
 
             var ingredients = recipe.Ingredients;
             try
@@ -61,7 +59,7 @@ namespace BrewDay.Controllers
                 var pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
 
                 if (kettle == null || fermenter == null || pipe == null)
-                    throw new Exception("Uno o più strumenti richiesti non sono disponibili. É necessario possedere un bollitore, un fermentatore e un tubo della capacità adatta.");
+                    throw new InvalidOperationBrewDayException("Uno o più strumenti richiesti non sono disponibili. É necessario possedere un bollitore, un fermentatore e un tubo della capacità adatta.");
 
 
                 // Controllo che vi siano a disposizione tutti gli Ingredienti necessari e in caso positivo scalo la quantità dai rispettivi Stock
@@ -74,7 +72,7 @@ namespace BrewDay.Controllers
                     int? ownedQuantity = ingredientStocks.Select(x => x.Quantity).DefaultIfEmpty(0).Sum(); // quantità di questo ingrediente presente in magazzino
 
                     if (ownedQuantity == null || requestedQuantity > ownedQuantity)
-                        throw new Exception($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti."); // notare il $ prima della stringa ("c# string interpolation" su google)
+                        throw new InvalidOperationBrewDayException($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti."); // notare il $ prima della stringa ("c# string interpolation" su google)
 
 
                     // Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa andrà scalata da quella attuale in magazzino
@@ -102,7 +100,7 @@ namespace BrewDay.Controllers
                     }
 
                     if(demand != 0) // questo controllo è in realtà ridondante (viene controllato già prima del foreach che gli stock siano sufficienti), ma non si sa mai
-                        throw new Exception($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti.");
+                        throw new InvalidOperationBrewDayException($"Quantità di {element.Ingredient.FullName} non sufficiente in magazzino. Controllare anche che non siano scaduti.");
                 }
 
                 // Aggiornamento nel db degli Strumenti utilizzati
@@ -145,13 +143,13 @@ namespace BrewDay.Controllers
         public ActionResult Stop(int? id)
         {
             if (!id.HasValue)
-                throw new Exception("Id non specificato.");
+                throw new MissingIdBrewDayException();
 
             //Cerco la produzione
             var Production = db.Productions.Find(id);
 
             if (Production == null)
-                throw new Exception("Non esiste una produzione con questo Id.");
+                throw new InvalidIdBrewDayException(id.Value);
 
             foreach (Instrument instrument in Production.Instruments)
             {
@@ -172,8 +170,6 @@ namespace BrewDay.Controllers
         }
 
         // POST: Productions/Create
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Production production)
@@ -192,23 +188,19 @@ namespace BrewDay.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Production production = db.Productions.Find(id);
             if (production == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(production);
         }
 
         // POST: Productions/Edit/5
-        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductionId,DateStart,DateEnd,DateEndEstimated,Note")] Production production)
+        public ActionResult Edit(Production production)
         {
             if (ModelState.IsValid)
             {
@@ -223,14 +215,12 @@ namespace BrewDay.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                throw new MissingIdBrewDayException();
+
             Production production = db.Productions.Find(id);
             if (production == null)
-            {
-                return HttpNotFound();
-            }
+                throw new InvalidIdBrewDayException(id.Value);
+
             return View(production);
         }
 
