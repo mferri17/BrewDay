@@ -14,7 +14,7 @@ var parseServerDateToString = function (data) {
         var result = datetime.toLocaleDateString();
         return result;
     }
-    catch() {
+    catch (err) {
         return "";
     }
 }

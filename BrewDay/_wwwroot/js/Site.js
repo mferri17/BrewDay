@@ -23,6 +23,15 @@ $(document).ready(function () {
     // Risolve bug Firefox per jQuery UI Datepicker all'interno di un Bootstrap Modal
     $.fn.modal.Constructor.prototype.enforceFocus = function () { };
 
+    // Riempie titolo e contenuto del modale di aiuto utente
+    $(document).on("click", ".help-icon", function () {
+        var header = $(this).attr("data-header");
+        var body = $(this).attr("data-body");
+        var modal = $(this).attr("data-target");
+        $(".modal-header").html(header);
+        $(".modal-body").html(body);
+    });
+    
 });
 
 
