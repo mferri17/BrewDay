@@ -156,6 +156,32 @@ namespace BrewDay.Models.Enums
             }
         }
 
+        public ActionResult Clone(int? id, string name)
+        {
+            if (id == null)
+                throw new MissingIdBrewDayException();
+
+            Recipe recipe = db.Recipes.Find(id);
+            if (recipe == null)
+                throw new InvalidIdBrewDayException(id.Value);
+            
+            Recipe newRecipe = new Recipe()
+            {
+                Name = !string.IsNullOrEmpty(name) ? name : recipe.Name,
+                Description = recipe.Description,
+                ParentRecipeId = recipe.RecipeId,
+            };
+            db.Recipes.Add(newRecipe);
+            db.SaveChanges();
+
+            var newRecipeIngredients = recipe.Ingredients.Select(x => new RecipeIngredient() { RecipeId = newRecipe.RecipeId.Value, IngredientId = x.IngredientId, Quantity = x.Quantity });
+            newRecipe.Ingredients = new List<RecipeIngredient>(newRecipeIngredients);
+            db.Entry(newRecipe).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = newRecipe.RecipeId });
+        }
+
 
         // POST : Recipes/RemoveIngredient?recipedId & ingredientId
         public ActionResult RemoveIngredient(int recipeId, int ingredientId)

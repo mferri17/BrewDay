@@ -202,6 +202,43 @@ textarea {
 }
 
 
+/* ------------------------ Buttons ------------------------ */
+
+.btn-circle {
+    width: 49px;
+    height: 49px;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 20px;
+    line-height: 2.00;
+    border-radius: 30px;
+}
+
+.btn-circle-micro {
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    padding: 1px 0;
+    font-size: 13px;
+    line-height: 0.1;
+    border-radius: 30px;
+}
+
+.btn-circle-sm {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding: 2px 0;
+    font-size: 20px;
+    line-height: 1.65;
+    border-radius: 30px;
+}
+
+.help-icon {
+    color: #785aba;
+    font-size: 20px;
+}
+
 
 /* ------------------------ Printing directives ------------------------ */
 @media print {
