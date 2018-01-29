@@ -12,7 +12,7 @@ namespace BrewDay.Controllers
 {
     public class ProductionsController : Controller
     {
-        private BrewDayContext db = new BrewDayContext();
+        private readonly BrewDayContext db = new BrewDayContext();
 
         // GET: Productions
         public ActionResult Index()
@@ -94,7 +94,7 @@ namespace BrewDay.Controllers
                             db.Entry(stock).State = EntityState.Deleted; // la quantità di questo stock passerebbe a zero, tanto vale cancellarlo
 
                             // Questa "cancellazione" non dà problemi nel caso si verifichino eccezioni sul cicli successivi del foreach più esterno
-                            // perché in realtà settando un Entry come Deleted, essa non è ancora stata cancellata effettivamente dal db;
+                            // perché in realtà settando un Entry come Deleted, essa non è ancora stata cancellata effettivamente dal db
                             // verrà cancellata solo al prossimo SaveChanges(), che avviene alla fine del metodo, se tutto è andato bene.
                         }
                     }
@@ -161,8 +161,6 @@ namespace BrewDay.Controllers
             //Imposto la data di fine fermentazione
             Production.DateEnd = DateTime.Now;
             db.Entry(Production).State = EntityState.Modified;
-
-            //db.Productions.Remove(Production);
             db.SaveChanges();
 
             return RedirectToAction("Index");

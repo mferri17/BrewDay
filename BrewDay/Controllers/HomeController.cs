@@ -12,7 +12,7 @@ namespace BrewDay.Controllers
 {
     public class HomeController : Controller
     {
-        private BrewDayContext db = new BrewDayContext();
+        private readonly BrewDayContext db = new BrewDayContext();
 
         public ActionResult Index()
         {

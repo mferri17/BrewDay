@@ -11,7 +11,7 @@ namespace BrewDay.Controllers
 {
     public class IngredientsController : Controller
     {
-        private BrewDayContext db = new BrewDayContext();
+        private readonly BrewDayContext db = new BrewDayContext();
 
 
         public ActionResult Index()

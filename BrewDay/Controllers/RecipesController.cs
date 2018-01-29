@@ -12,12 +12,12 @@ namespace BrewDay.Models.Enums
 {
     public class RecipesController : Controller
     {
-        private BrewDayContext db = new BrewDayContext();
+        private readonly BrewDayContext db = new BrewDayContext();
 
         // GET: Recipes
         public ActionResult Index()
         {
-            var model = db.Recipes.ToList().OrderBy(x => x.FullName).ToList();
+            var model = db.Recipes.ToList().OrderBy(x => x.FullName);
             return View(model);
         }
 

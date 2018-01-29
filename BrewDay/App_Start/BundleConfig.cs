@@ -3,7 +3,7 @@ using System.Web.Optimization;
 
 namespace BrewDay
 {
-    public class BundleConfig
+    public static class BundleConfig
     {
         // For other information aboud bundles creation, see https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)

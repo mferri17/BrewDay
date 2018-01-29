@@ -35,7 +35,7 @@ var defaultValidation = function (form) {
 
     // numeri interi
     form.find(".number-int").each(function (index, element) {
-        let value = $(element).val();
+        var value = $(element).val();
         if (value != "" && !value.isIntNumber()) {
             $(element).focus().parent().addClass("has-error");
             valid = false;
@@ -44,7 +44,7 @@ var defaultValidation = function (form) {
 
     // numeri decimali
     form.find(".number-float").each(function (index, element) {
-        let value = $(element).val().replace(",", ".");
+        var value = $(element).val().replace(",", ".");
         if (value != "" && !value.isFloatNumber()) {
             $(element).focus().parent().addClass("has-error");
             valid = false;
@@ -53,10 +53,10 @@ var defaultValidation = function (form) {
 
     // date in formato dd/mm/yy
     form.find(".datepicker").each(function (index, element) {
-        let value = $(element).val();
+        var value = $(element).val();
         if (value != "")
             try {
-                parsedDate = $.datepicker.parseDate('dd/mm/yy', value);
+                $.datepicker.parseDate('dd/mm/yy', value);
             }
             catch (err) {
                 $(element).focus().parent().addClass("has-error");

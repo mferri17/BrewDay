@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BrewDay
 {
-    public class FilterConfig
+    public static class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
@@ -26,7 +26,7 @@ namespace BrewDay
             Exception exception = filterContext.Exception;
             List<string> messages = new List<string>();
             
-            if (exception is BrewDayException == false)
+            if (!(exception is BrewDayException))
                 messages.Add("Si è verificato un errore interno del server. Contattare l'amministratore per segnalare il bug.");
 
             filterContext.Result = new ViewResult()

@@ -9,12 +9,13 @@
  */
 var parseServerDateToString = function (data) {
     try {
-        let st = data.substring(0, 10)
-        let datetime = new Date(st);
+        var st = data.substring(0, 10);
+        var datetime = new Date(st);
         var result = datetime.toLocaleDateString();
+        return result;
     }
-    finally {
-        return result ? result : "";
+    catch() {
+        return "";
     }
 }
 
