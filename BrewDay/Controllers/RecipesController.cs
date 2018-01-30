@@ -169,7 +169,13 @@ namespace BrewDay.Models.Enums
             {
                 Name = !string.IsNullOrEmpty(name) ? name : recipe.Name,
                 Description = recipe.Description,
+                Note = recipe.Note,
+                FermentationTemperature = recipe.FermentationTemperature,          
                 ParentRecipeId = recipe.RecipeId,
+                FermentationTime = recipe.FermentationTime,
+                Ingredients = recipe.Ingredients,
+                ParentRecipe = db.Recipes.Find(id),
+                Productions = null,
             };
             db.Recipes.Add(newRecipe);
             db.SaveChanges();
@@ -179,7 +185,7 @@ namespace BrewDay.Models.Enums
             db.Entry(newRecipe).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Details", new { id = newRecipe.RecipeId });
+            return RedirectToAction("Edit", new { id = newRecipe.RecipeId });
         }
 
 

@@ -50,6 +50,8 @@ namespace BrewDay.Domain.Entities
         [ForeignKey("ParentRecipeId")]
         public virtual Recipe ParentRecipe { get; set; }
 
+        [Display(Name = "Produzioni")]
+        public virtual ICollection<Production> Productions { get; set; }
 
         // Util Properties and Methods
         public string FullName { get { return ParentRecipe == null ? Name : ParentRecipe.Name + " " + Name; } }
