@@ -34,6 +34,7 @@
 
 </div>
 
+
 <h2>Dettagli ricetta @Model.Name</h2>
 
 @if (TempData.ContainsKey("Message"))
@@ -44,7 +45,7 @@
 <hr />
 <dl class="dl-horizontal">
     <dt> Padre</dt>
-    <dd> @Html.DisplayFor(model => model.ParentRecipe.Name) </dd>
+    <dd> <a href="/Recipes/Details/@Model.ParentRecipeId">@(Model.ParentRecipe?.FullName)</a> @*@Html.ActionLink(Model.ParentRecipe?.Name ?? "", "Details", new { id = Model?.ParentRecipeId })*@ </dd>
 
     <dt>@Html.DisplayNameFor(model => model.Name) </dt>
     <dd>@Html.DisplayFor(model => model.Name)</dd>
@@ -61,7 +62,7 @@
 
 <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-primary pull-right">Aggiungi Ingrediente</a>
 
-<table class="table table-hover table-bordered table-striped full-width">
+<table class="table table-bordered table-striped table-hover full-width">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Ingredients)</th>
