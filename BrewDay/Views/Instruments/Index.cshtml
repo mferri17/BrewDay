@@ -5,35 +5,12 @@
     ViewBag.Page = "#nav-instruments";
 }
 
-<div class="container">
-    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
+<h2>
+    @ViewBag.Title
 
-    <!-- Modale -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Contenuto del modale-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Gestione Strumenti</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Questa pagina serve per gestire gli Strumenti necessari per la produzione della Birra.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-<h2>@ViewBag.Title</h2>
+    <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
+          data-header="Gestione Strumenti" data-body="Pagina di gestione degli Strumenti necessari per la produzione di Birra"></span>
+</h2>
 
 <div class="row col-md-12">
     <p><a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuovo Strumento</a></p>

@@ -31,21 +31,16 @@
 
                 <dt></dt>
 
-         
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <dd><input type="submit" value="Rimuovi" class="btn btn-primary margin-top-20" /></dd>
+                }
 
             </dl>
         </div>
     }
 </div>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-actions no-color">
-        <input type="submit" value="Rimuovi" class="btn btn-primary" />
-    </div>
-}
 
 
 <div class="row col-md-12">

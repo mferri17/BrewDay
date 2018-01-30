@@ -5,36 +5,13 @@
     ViewBag.Page = "#nav-ingredients";
 }
 
-<div class="container">
-    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
 
-    <!-- Modale -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+<h2>
+    @ViewBag.Title
 
-            <!-- Contenuto del modale-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Gestione Ingredienti</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Qui vengono gestiti i quattro Ingredienti di base che servono per produrre una Birra.
-
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-<h2>@ViewBag.Title</h2>
+    <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
+          data-header="Gestione Ingredienti" data-body="Pagina di gestione di tutti gli Ingredienti presenti sul mercato."></span>
+</h2>
 
 <div class="row col-md-12">
     <a href="@Url.Action("CreateOrEdit")" class="btn btn-primary pull-right">Registra nuovo Ingrediente</a>
@@ -63,7 +40,7 @@
                         <a href="@Url.Action("Details", new { id = item.IngredientId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                         <a href="@Url.Action("CreateOrEdit", new { id = item.IngredientId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
                         <a href="@Url.Action("Delete", new { id = item.IngredientId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
-                        <a href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })"><span class="glyphicon glyphicon-plus" data-toggle="tooltip" title="Aggiungimi alle Scorte!"></span> Stock</a>
+                        <a href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })"data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span> Stock</a>
                     </td>
                 </tr>
             }

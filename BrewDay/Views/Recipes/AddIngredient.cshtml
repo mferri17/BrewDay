@@ -5,35 +5,13 @@
     var prop = new { @class = "form-control" }; // oggetto anonimo C#, utile per creare oggetti senza doverne definire la classe (che si usano solitamente una sola volta, spesso in combinazione con i json)
 }
 
-<div class="container">
-    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">?</button>
+<h2>
+    @ViewBag.Title
 
-    <!-- Modale -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+    <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
+          data-header="Aggiunta Ingrediente" data-body="In questa pagina è possibile aggiungere un Ingrediente alla volta alla Ricetta selezionata"></span>
+</h2>
 
-            <!-- Contenuto del modale-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Aggiunta Ingredienti</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Scegliere l'Ingrediente desiderato, impostare la quantità necessaria ed infine aggiungerlo alla ricetta premento il pulsante blu.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-<h2>@ViewBag.Title</h2>
 <hr />
 
 <form method="post">

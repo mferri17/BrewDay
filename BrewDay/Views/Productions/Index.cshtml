@@ -5,37 +5,13 @@
     ViewBag.Page = "#nav-productions";
 }
 
-<div class="container">
-    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign" ></span></button>
+<h2>
+    Tutte le tue Produzioni
+    <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
+          data-header="Gestione Produzioni" data-body="In questa pagina è possibile visualizzare lo storico delle produzioni."></span>
 
-    <!-- Modale -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Contenuto del modale-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Gestione Produzioni</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Qui viene mostrato lo storico delle Produzioni, sia quelle avviate che quelle terminate.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ho capito!</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-
-<h2>Tutte le tue Produzioni</h2>
-
+</h2>
+    
 <br></br> <!--brutto-->
 
 <div class="row col-md-12">
@@ -62,7 +38,7 @@
                     <td class="action-column">
                         <a href="@Url.Action("Details", new { id = item.ProductionId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                         <a href="@Url.Action("Edit", new { id = item.ProductionId })"><span class="glyphicon glyphicon-pushpin"></span> Nota</a>
-                        <a href="@Url.Action("Stop", new { id = item.ProductionId })"><span class="glyphicon glyphicon-minus-sign" data-toggle="tooltip" title="Interrompi la Produzione"></span> Concludi</a>
+                        <a href="@Url.Action("Stop", new { id = item.ProductionId })" data-toggle="tooltip" title="Interrompi la Produzione" data-placement="right"><span class="glyphicon glyphicon-minus-sign" ></span> Concludi</a>
                     </td>
                 </tr>
             }

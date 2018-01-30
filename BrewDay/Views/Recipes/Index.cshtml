@@ -9,7 +9,7 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Gestione Ricette" data-body="In questa pagina è possibile creare e gestire le Ricette. Premere su 'Dettagli' per creare la propria Ricetta personalizzata."></span>
+          data-header="Gestione Ricette" data-body="In questa pagina è possibile creare e gestire le Ricette"></span>
 </h2>
 
 <div class="row col-md-12">
@@ -39,7 +39,7 @@
                     <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
                     <td>@Html.DisplayFor(modelItem => item.FermentationTime)</td>
                     <td class="action-column">
-                        <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                        <a href="@Url.Action("Details", new { id = item.RecipeId }) "data-toggle="tooltip" title="Riempi la Ricetta" data-placement="left"><span class="glyphicon glyphicon-search" ></span> Dettagli</a>
                         <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
                         <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
                     </td>
@@ -48,8 +48,6 @@
         </tbody>
     </table>
 </div>
-
-
 
 @section scripts{
     <script>
@@ -62,6 +60,12 @@
                 { "targets": "no-sort", "orderable": false },
                 { "targets": "no-search", "searchable": false },
             ]
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 }
