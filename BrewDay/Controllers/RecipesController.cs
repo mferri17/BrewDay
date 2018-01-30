@@ -173,8 +173,6 @@ namespace BrewDay.Models.Enums
                 FermentationTemperature = recipe.FermentationTemperature,          
                 ParentRecipeId = recipe.RecipeId,
                 FermentationTime = recipe.FermentationTime,
-                Ingredients = recipe.Ingredients,
-                ParentRecipe = db.Recipes.Find(id),
                 Productions = null,
             };
             db.Recipes.Add(newRecipe);
