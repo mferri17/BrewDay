@@ -39,7 +39,7 @@ namespace BrewDay.Domain.Entities
         public int Used { get; set; } = 0;
 
         //Navigation Property
-        public virtual ICollection<Production> Production { get; set; }
+        public virtual ICollection<Production> Productions { get; set; }
 
         //public int Available { get { return Quantity - Used; } }
     }

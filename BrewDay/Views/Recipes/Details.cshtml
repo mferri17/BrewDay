@@ -6,6 +6,7 @@
     ViewBag.IngredientRecipe = Model.RecipeId;
 }
 
+<!-- ----------------- TITOLO ----------------- -->
 <h2>
     Dettagli della Ricetta @Model.Name
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
@@ -16,9 +17,10 @@
 {
     <div id="message" class="alert alert-danger">@TempData["Message"]</div>
 }
-
 <hr />
-<a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-primary pull-right">Modifica</a>
+
+<!-- ----------------- DETTAGLI BASE ----------------- -->
+
 <dl class="dl-horizontal">
     <dt> Padre</dt>
     <dd> <a href="/Recipes/Details/@Model.ParentRecipeId">@(Model.ParentRecipe?.FullName)</a> @*@Html.ActionLink(Model.ParentRecipe?.Name ?? "", "Details", new { id = Model?.ParentRecipeId })*@ </dd>
@@ -36,20 +38,31 @@
     <dd> @Html.DisplayFor(model => model.FermentationTemperature) </dd>
 </dl>
 
+<div class="clearfix"></div>
+
+<a href="@Url.Action("Edit", new { id = Model.RecipeId })" class="btn btn-primary col-md-offset-2">Modifica</a>
+
+<div class="clearfix margin-bottom-30"></div>
+
+<!-- ----------------- MENU TAB ----------------- -->
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#Ingredient" aria-controls="Ingredient" role="tab" data-toggle="tab">Ingredienti</a></li>
     <li role="presentation"><a href="#Production" aria-controls="Production" role="tab" data-toggle="tab">Produzioni</a></li>
-    <li role="presentation"><a href="#Clone" aria-controls="Clone" role="tab" data-toggle="tab">Varianti</a></li>
+    <li role="presentation"><a href="#Clone" aria-controls="Clone" role="tab" data-toggle="tab">Versioni</a></li>
 </ul>
 
 
 <div class="tab-content">
+
+    <!-- ------ TAB INGREDIENTI -->
     <div role="tabpanel" class="tab-pane active" id="Ingredient">
         <table class="table table-bordered table-striped table-hover full-width">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.Ingredients)</th>
+                    <th>Tipo</th>
+                    <th>Nome</th>
                     <th>Quantità</th>
+                    <th>Descrizione</th>
                     <th></th>
                 </tr>
 
@@ -58,83 +71,108 @@
                 @foreach (var item in Model.Ingredients)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Ingredient.FullName)</td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                            <a href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })" data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span></a>
+                        <td style="width:15%;">@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
+                        <td style="width:25%;">
+                            <a href="/Ingredients/Details/@item.IngredientId">@item.Ingredient.Name</a>
+                            <a class="pull-right" href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })" data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
-                        <td>
-                            <a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })><span class="glyphicon glyphicon-trash pull-left" data-toggle="tooltip" title="Rimuovimi dalla Ricetta" data-placement="right" style="margin-left:15px"></span></a>
-                            <a href=@Url.Action("Details", "Ingredients", new {Id = item.IngredientId })><span class="glyphicon glyphicon-info-sign pull-right" data-toggle="tooltip" title="Info sull'Ingrediente" data-placement="left" style="margin-right:15px"></span></a>
+                        <td class="text-right" style="width:130px;">
+                            @item.Quantity
                         </td>
+                        <td>@item.Ingredient.Description</td>
+
+                        @if (Model.Productions.Count == 0)
+                        {
+                            <td class="action-column">
+                                <a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })>
+                                    <span class="glyphicon glyphicon-remove" style="color:#ce1f1f"> </span>
+                                    Rimuovi dalla ricetta
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                     </tr>
                 }
             </tbody>
-
         </table>
-        <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-primary media-middle">Aggiungi Ingrediente</a>
+
+        @if (Model.Productions.Count == 0)
+        {
+            <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
+        }
     </div>
 
+
+    <!-- ------ TAB PRODUZIONI -->
     <div role="tabpanel" class="tab-pane" id="Production">
-        @if (Model.Productions.FirstOrDefault() != null)
+        @if (Model.Productions.Count == 0)
         {
-        <table class="table table-bordered table-striped table-hover full-width">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateStart)</th>
-                    <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEndEstimated)</th>
-                    <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEnd)</th>
-                    <th>Quantità</th>
-                    <th></th>
-                </tr>
-
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Productions)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
-                    <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
-                    <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
-                    <td>
-                        <a href=@Url.Action("Stop", "Production", new { recipeId = Model.RecipeId, ingredientId = item.ProductionId }) data-toggle="tooltip" title="Concludi Produzione" data-placement="left"><span class="glyphicon glyphicon-minus-sign pull-left" style="margin-left:15px"></span></a>
-                        <a href=@Url.Action("Details", "Production", new { Id = item.ProductionId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right"><span class="glyphicon glyphicon-info-sign pull-right" style="margin-right:15px"></span></a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+            <h4>La ricetta Selezionata non è mai stata mandata in Produzione</h4>
         }
-        @if (Model.Productions.FirstOrDefault() == null) { 
-        <h3>La ricetta Selezionata non è mai stata mandata in Produzione</h3>
+        else
+        {
+            <table class="table table-bordered table-striped table-hover full-width">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateStart)</th>
+                        <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEndEstimated)</th>
+                        <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEnd)</th>
+                        <th>Quantità</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Productions)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
+                            <td class="action-column">
+                                <a href=@Url.Action("Stop", "Production", new { recipeId = Model.RecipeId, ingredientId = item.ProductionId }) data-toggle="tooltip" title="Concludi Produzione" data-placement="left"><span class="glyphicon glyphicon-minus-sign pull-left" style="margin-left:15px"></span></a>
+                                <a href=@Url.Action("Details", "Production", new { Id = item.ProductionId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right"><span class="glyphicon glyphicon-info-sign pull-right" style="margin-right:15px"></span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
 
-        <div class="row col-md-12">
+        <div class="row col-md-3 margin-top-20">
             <form action="/Productions/Play" class="pull-left">
                 <label>Quantità</label>
                 <input type="hidden" name="recipeId" value="@Model.RecipeId" />
-                <input type="number" name="qty" class="form-control" />
+                <div class="input-group">
+                    <input type="number" name="qty" class="form-control" required />
+                    <div class="input-group-addon"> litri </div>
+                </div>
                 <p></p>
-                <input type="submit" class="btn btn-default btn-success pull-left" value="Manda in Produzione la Ricetta" />
+                <input type="submit" class="btn btn-default btn-success pull-left" value="Clona la ricetta attuale" data-toggle="tooltip" title="Ricordati che devi avere abbastanza scorte e strumenti a disposizione" data-placement="right" />
             </form>
         </div>
     </div>
 
 
+    <!-- ------ TAB VERSIONI -->
     <div role="tabpanel" class="tab-pane" id="Clone">
 
         <div class="row col-md-12">
             <form action="/Recipes/Clone">
                 <input type="hidden" name="id" value="@Model.RecipeId" />
                 <input type="hidden" name="name" value="@Model.Name" />
-                <input type="submit" data-toggle="tooltip" title="Realizza una Variazione della Ricetta Corrente !" data-placement="left" class="btn btn-default btn-success pull-left" value="Clicca per Creare una Variante" />
+                <input type="submit" class="btn btn-default btn-success pull-left" data-toggle="tooltip" title="Clona la ricetta attuale" data-placement="right" value="Crea una versione alternativa" />
             </form>
-            </div>
         </div>
-
     </div>
 
-<a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
+</div>
+
+<div class="clearfix"></div>
+<a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alle ricette</a>
 
 
 @section scripts{

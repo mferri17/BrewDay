@@ -1,15 +1,16 @@
 ﻿@model BrewDay.DTO.ProductsAudit
 
-<h1 class="bgClip">BrewDay!</h1>
+<h1 class="col-md-12 bgClip">BrewDay!</h1>
 
 @if (Model.RunningOutStocks.FirstOrDefault() != null)
 {
-    <!-- Tabella Per gli Stock in scadenza -->
+    <!-- Tabella Per gli Stock -->
     <div class="row col-md-12">
-        <h1 class="col-md-12">Ingredienti Prossimi alla Scdenza
+        <h2>
+            Scorte quasi esaurite
             <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
                   data-header="Stocks Critici" data-body="Gli Ingredienti con il campo Quantità in verde sono prossimi alla scadenza, mentre quelli scaduti sono contraddistinti dal colore rosso"></span>
-        </h1>
+        </h2>
         <table class="table table-hover table-bordered table-striped full-width">
             <thead>
                 <tr>
@@ -27,8 +28,8 @@
                     <tr>
                         <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
                         <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
-                        <td style="color: @(item.ExpireDate > DateTime.Now ? "green" : "red")">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ExpireDate)</td>
+                        <td style="color: @(item.Quantity < 10 ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td style="color: @(item.ExpireDate < DateTime.Now.AddDays(7) ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
                         <td>@Html.DisplayFor(modelItem => item.Note)</td>
                     </tr>
                 }
@@ -41,7 +42,7 @@
 @if (Model.FinishingProduction.FirstOrDefault() != null)
 {
     <div class="row col-md-12">
-        <h1 class="col-md-12">Fermentazioni Quasi Concluse</h1>
+        <h2>Fermentazioni Quasi Concluse</h2>
         <table class="table table-hover table-bordered table-striped full-width">
             <thead>
                 <tr>

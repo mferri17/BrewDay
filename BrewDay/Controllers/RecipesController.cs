@@ -21,7 +21,7 @@ namespace BrewDay.Models.Enums
             return View(model);
         }
 
-  
+
 
         public ActionResult AddIngredient(int id)
         {
@@ -37,7 +37,17 @@ namespace BrewDay.Models.Enums
         {
             if (ModelState.IsValid)
             {
-                db.RecipeIngredients.Add(model);
+                var duplicated = db.RecipeIngredients.Find(model.RecipeId, model.IngredientId);
+
+                if (duplicated == null)
+                {
+                    db.RecipeIngredients.Add(model);
+                }
+                else
+                {
+                    duplicated.Quantity += model.Quantity;
+                    db.Entry(duplicated).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = model.RecipeId });
             }
@@ -58,7 +68,7 @@ namespace BrewDay.Models.Enums
 
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-                throw new InvalidIdBrewDayException(id.Value);
+                throw new InvalidIdBrewDayException(id.Value);ì
 
             return View(recipe);
         }
@@ -164,13 +174,13 @@ namespace BrewDay.Models.Enums
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
                 throw new InvalidIdBrewDayException(id.Value);
-            
+
             Recipe newRecipe = new Recipe()
             {
                 Name = !string.IsNullOrEmpty(name) ? name : recipe.Name,
                 Description = recipe.Description,
                 Note = recipe.Note,
-                FermentationTemperature = recipe.FermentationTemperature,          
+                FermentationTemperature = recipe.FermentationTemperature,
                 ParentRecipeId = recipe.RecipeId,
                 FermentationTime = recipe.FermentationTime,
                 Productions = null,

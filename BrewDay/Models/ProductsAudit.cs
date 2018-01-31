@@ -13,21 +13,12 @@ namespace BrewDay.DTO
 
         public ProductsAudit()
         {
-            FinishingProduction = new List<Production>();
-            RunningOutStocks = new List<Stock>();
-            double daysfornearfp = 3;
-            double daysfornearos = 10;
-            foreach (Production fp in db.Productions)
-            {
-                if (fp.DateEndEstimated > DateTime.Now && fp.DateEndEstimated < DateTime.Today.AddDays(daysfornearfp))
-                    FinishingProduction.Add(fp);
-            }
-            foreach (Stock ros in db.Stocks)
-            {
-                if (ros.ExpireDate > DateTime.Now && ros.ExpireDate < DateTime.Today.AddDays(daysfornearos))
-                    RunningOutStocks.Add(ros);
-            }
+            var tresholdFinishingProd = DateTime.Now.AddDays(7);
+            var tresholdExpireStock = DateTime.Now.AddDays(7);
+            double tresholdQtyStock = 10;
 
+            FinishingProduction = db.Productions.Where(x => x.DateEndEstimated < tresholdFinishingProd).ToList();
+            RunningOutStocks = db.Stocks.Where(x => x.ExpireDate < tresholdExpireStock || x.Quantity < tresholdQtyStock).ToList();
         }
 
         public List<Production> FinishingProduction { get; set; }

@@ -43,6 +43,7 @@ namespace BrewDay.Domain.Entities
 
 
         // Utils
+        [Display(Name = "Nome Ingrediente")]
         public string FullName { get { return Type.ToString() + " - " + Name; } }
 
     }

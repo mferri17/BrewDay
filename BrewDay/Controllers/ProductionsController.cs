@@ -34,7 +34,7 @@ namespace BrewDay.Controllers
         }
 
         // Productions/Play? qty = 50 & recipeId = 7
-        public ActionResult Play(int? recipeId, int qty)
+        public ActionResult Play(int? recipeId, int? qty)
         {
             /*
                 Per ogni ingrediente della ricetta che voglio mandare in produzione devo controllare:
@@ -42,9 +42,12 @@ namespace BrewDay.Controllers
                 - Gli ingredienti necessari NON siano scaduti
                 - Controllare che ci siano abbastanza Instrument
             */
-            
+
             if (!recipeId.HasValue)
                 throw new MissingIdBrewDayException();
+
+            if (!qty.HasValue)
+                throw new InvalidOperationBrewDayException("Devi specificare una quantità.");
 
             Recipe recipe = db.Recipes.Find(recipeId);
             if (recipe == null)
@@ -65,7 +68,7 @@ namespace BrewDay.Controllers
                 // Controllo che vi siano a disposizione tutti gli Ingredienti necessari e in caso positivo scalo la quantità dai rispettivi Stock
                 foreach (var element in ingredients)
                 {
-                    var requestedQuantity = element.Quantity * qty; // quantità richiesta per questo ingrediente
+                    var requestedQuantity = element.Quantity * qty.Value; // quantità richiesta per questo ingrediente
 
                     // le due istruzioni sotto sono equivalenti alla query: SELECT Sum(Quantity) FROM Stocks WHERE IngredientId == element.IngredientId AND ExpireDate >= DateTime.Now AND Quantity > 0
                     var ingredientStocks = db.Stocks.Where(x => x.IngredientId == element.IngredientId && x.ExpireDate >= DateTime.Now && x.Quantity > 0); // lista scorte (disponibili) per questo ingrediente
@@ -78,7 +81,7 @@ namespace BrewDay.Controllers
                     // Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa andrà scalata da quella attuale in magazzino
                     // Potrebbero verificarsi dei casi in cui un singolo Stock non è sufficiente a coprire la quantità necessaria, quindi si attinge a più Stock diversi dello stesso Ingrediente
 
-                    int demand = qty; // domanda, scalata di volta in volta
+                    int demand = qty.Value; // domanda, scalata di volta in volta
                     foreach(var stock in ingredientStocks.OrderBy(x => x.ExpireDate)) // ordinati per data di scadenza (best fit)
                     {
                         if(stock.Quantity > demand) { // lo stock soddisfa il fabbisogno dell'ingrediente
