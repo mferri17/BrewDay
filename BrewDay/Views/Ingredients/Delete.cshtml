@@ -1,0 +1,36 @@
+﻿@model BrewDay.Domain.Entities.Ingredient
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Sicuro di voler rimuovere @Model.FullName</h3>
+
+<hr />
+
+<div class="row col-md-12">
+    <dl class="dl-horizontal col-md-8">
+
+        <dt> @Html.DisplayNameFor(model => model.Type) </dt>
+        <dd> @Html.DisplayEnumLabel(Model.Type) </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Name) </dt>
+        <dd> @Model.Name </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Description) </dt>
+        <dd> @Model.Description </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Price) </dt>
+        <dd> @Html.DisplayFor(model => model.Price) </dd>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <dd><input type="submit" value="Rimuovi" class="btn btn-primary margin-top-20" /></dd>
+        }
+    </dl>
+</div>
+
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alla lista Strumenti</a>
+</div>

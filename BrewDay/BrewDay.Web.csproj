@@ -331,6 +331,7 @@
     <Content Include="Documentation\06-Conclusioni\6.3-Commenti.md" />
     <Content Include="Documentation\04-Implementazione\4.3-ClassDiagram.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Views\Ingredients\Delete.cshtml" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
