@@ -40,7 +40,6 @@ namespace BrewDay.Domain.Entities
         // Navigation Properties
         public virtual ICollection<Stock> Stocks { get; set; }
         public virtual ICollection<RecipeIngredient> Recipes { get; set; }
-        public virtual ICollection<Production> Productions { get; set; }
 
 
         // Utils

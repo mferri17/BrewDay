@@ -28,29 +28,29 @@
     </dl>
 </div>
 
-@if (Model.Productions.Count() > 0)
+@if (Model.Recipes.Count() > 0)
 {
     <h3>Questo ingrediente è presente nelle seguenti Produzioni</h3>
 
     <table class="table table-bordered table-striped table-hover full-width">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateStart)</th>
-                <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEndEstimated)</th>
-                <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEnd)</th>
+                <th>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Recipe.FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Recipe.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Recipe.Note)</th>
                 <th></th>
             </tr>
 
         </thead>
         <tbody>
-            @foreach (var item in Model.Productions)
+            @foreach (var item in Model.Recipes)
             {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
-                <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
-                <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
+                <td>@Html.DisplayFor(modelItem => item.Recipe.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Recipe.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Recipe.Note)</td>
                 <td class="action-column">
-                    <a href=@Url.Action("Details", "Production", new { Id = item.ProductionId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right">
+                    <a href=@Url.Action("Details", "Production", new { Id = item.RecipeId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right">
                         <span class="glyphicon glyphicon-search"></span>
                         Mostra Dettagli
                     </a>
@@ -59,6 +59,10 @@
             }
         </tbody>
     </table>
+}
+else
+{
+    <h1>mi sa che passa 0</h1>
 }
 
 <div class="row col-md-12">
