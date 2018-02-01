@@ -36,7 +36,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                     <td>@Html.DisplayFor(modelItem => item.Used)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Capacity) litri</td>
+                    <td>@Html.DisplayFor(modelItem => item.Capacity) <span class="pull-right" style="">litri</span></td>
                     <td>@Html.DisplayFor(modelItem => item.Description)</td>
                     <td class="action-column">
                         <a href="@Url.Action("Details", new { id = item.InstrumentId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>

@@ -68,7 +68,7 @@ namespace BrewDay.Models.Enums
 
             Recipe recipe = db.Recipes.Find(id);
             if (recipe == null)
-                throw new InvalidIdBrewDayException(id.Value);ì
+                throw new InvalidIdBrewDayException(id.Value);
 
             return View(recipe);
         }

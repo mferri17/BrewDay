@@ -74,6 +74,8 @@ namespace BrewDay.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (instrument.Used > instrument.Quantity)
+                    throw new InvalidOperationBrewDayException("non puoi inserire una quantità inferiore a quella attualmente in uso");
                 db.Entry(instrument).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,6 +90,8 @@ namespace BrewDay.Controllers
                 throw new MissingIdBrewDayException();
 
             Instrument instrument = db.Instruments.Find(id);
+            if(instrument.Used > 0)
+                throw new InvalidOperationBrewDayException("non puoi eliminare uno strumento ancora impegnato in una produzione");
             if (instrument == null)
                 throw new InvalidIdBrewDayException(id.Value);
 

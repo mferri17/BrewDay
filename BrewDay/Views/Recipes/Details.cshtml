@@ -56,53 +56,51 @@
 
     <!-- ------ TAB INGREDIENTI -->
     <div role="tabpanel" class="tab-pane active" id="Ingredient">
-        <table class="table table-bordered table-striped table-hover full-width">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Nome</th>
-                    <th>Quantità</th>
-                    <th>Descrizione</th>
-                    <th></th>
-                </tr>
-
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Ingredients)
-                {
+        @if (Model.Ingredients.Count() > 0)
+        {
+            <table class="table table-bordered table-striped table-hover full-width">
+                <thead>
                     <tr>
-                        <td style="width:15%;">@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
-                        <td style="width:25%;">
-                            <a href="/Ingredients/Details/@item.IngredientId">@item.Ingredient.Name</a>
-                            <a class="pull-right" href="@Url.Action("Create", "Stocks", new {ingredientId = item.IngredientId })" data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span></a>
-                        </td>
-                        <td class="text-right" style="width:130px;">
-                            @item.Quantity
-                        </td>
-                        <td>@item.Ingredient.Description</td>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>Quantità</th>
+                        <th>Descrizione</th>
+                        <th></th>
+                    </tr>
 
-                        @if (Model.Productions.Count == 0)
-                        {
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Ingredients)
+                    {
+                        <tr>
+                            <td style="width:15%;">@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
+                            <td style="width:25%;">
+                                <a href="/Ingredients/Details/@item.IngredientId">@item.Ingredient.Name</a>
+                                <a class="pull-right" href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })"
+                                   data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span></a>
+                            </td>
+                            <td class="text-right" style="width:130px;">
+                                @item.Quantity
+                            </td>
+                            <td>@item.Ingredient.Description</td>
                             <td class="action-column">
                                 <a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })>
                                     <span class="glyphicon glyphicon-remove" style="color:#ce1f1f"> </span>
                                     Rimuovi dalla ricetta
                                 </a>
                             </td>
-                        }
-                        else
-                        {
-                            <td></td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        @if (Model.Productions.Count == 0)
-        {
-            <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
+        else
+        {
+            <h4>La ricetta Selezionata non ha Ingredienti</h4>
+        }
+
+        <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
+
     </div>
 
 
@@ -120,7 +118,6 @@
                         <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateStart)</th>
                         <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEndEstimated)</th>
                         <th>@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEnd)</th>
-                        <th>Quantità</th>
                         <th></th>
                     </tr>
 
@@ -133,8 +130,10 @@
                             <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
                             <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
                             <td class="action-column">
-                                <a href=@Url.Action("Stop", "Production", new { recipeId = Model.RecipeId, ingredientId = item.ProductionId }) data-toggle="tooltip" title="Concludi Produzione" data-placement="left"><span class="glyphicon glyphicon-minus-sign pull-left" style="margin-left:15px"></span></a>
-                                <a href=@Url.Action("Details", "Production", new { Id = item.ProductionId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right"><span class="glyphicon glyphicon-info-sign pull-right" style="margin-right:15px"></span></a>
+                                <a href=@Url.Action("Details", "Production", new { Id = item.ProductionId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    Mostra Dettagli
+                                </a>
                             </td>
                         </tr>
                     }

@@ -13,7 +13,7 @@ namespace BrewDay.DTO
 
         public ProductsAudit()
         {
-            var tresholdFinishingProd = DateTime.Now.AddDays(7);
+            var tresholdFinishingProd = DateTime.Now.AddDays(2);
             var tresholdExpireStock = DateTime.Now.AddDays(7);
             double tresholdQtyStock = 10;
 

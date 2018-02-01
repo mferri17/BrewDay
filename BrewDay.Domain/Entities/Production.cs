@@ -31,6 +31,8 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Nota")]
         public string Note { get; set; }
 
+        //public ICollection<Ingredient> Ingredients { get; set; }
+
 
         // Navigation Properties
         public virtual ICollection<Instrument> Instruments { get; set; }
