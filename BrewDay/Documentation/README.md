@@ -8,5 +8,4 @@ passo passo ogni scelta che ha portato alla realizzazione del nostro prodotto.
 BrewDay non è sicuramente un'opera fatta e finita, come qualsiasi software 
 potrebbe essere migliorata molto e arricchita con nuove funzionalità. 
 Ci riteniamo tuttavia soddisfatti di quanto abbiamo fatto fin'ora e 
-siamo lieti di condividere il nostro operato, nella speranza che possa piacerti.
-
+siamo lieti di condividere il nostro operato, nella speranza che possa piacerti. 😀
