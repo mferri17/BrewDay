@@ -4,7 +4,7 @@
 <h1 class="bgClip">BrewDay!</h1>
 
 
-@if (Model.RunningOutStocks.FirstOrDefault() != null)
+@if (Model.RunningOutStocks.Count != 0)
 {
     <!-- Tabella per gli Stock -->
     <div class="row col-md-12">
@@ -20,7 +20,7 @@
 
 
 <!-- Tabella per le Produzioni vicine al termine  -->
-@if (Model.FinishingProduction.FirstOrDefault() != null)
+@if (Model.FinishingProduction.Count != 0)
 {
     <div class="row col-md-12">
         <h2>Fermentazioni quasi concluse</h2>

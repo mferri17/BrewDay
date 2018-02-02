@@ -33,3 +33,11 @@ using System.Runtime.InteropServices;
 // utilizzando l'asterisco (*) come illustrato di seguito:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// 1.0.0
+// 1.0.1 bugfix
+// 1.0.2 bugfix
+// 1.1.0 nuova feature
+// 1.1.1 bugfix
+// 1.1.2 bugfix
+// 2.0.0 introdotto funzionalità o gruppo di funzionalità molto importanti e "stravolgenti"

@@ -28,6 +28,7 @@ namespace BrewDay
                 "~/_wwwroot/vendor/jquery-ui/jquery-ui.js",
                 "~/_wwwroot/vendor/jquery-ui/external/datepicker-it.js",
                 "~/_wwwroot/vendor/bootstrap/js/bootstrap.js",
+                "~/_wwwroot/vendor/bootstrap-confirmation/bootstrap-confirmation.js",
                 "~/_wwwroot/vendor/respond/respond.js",
                 "~/_wwwroot/vendor/datatables/datatables.js"));
 

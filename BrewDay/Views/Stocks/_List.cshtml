@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BrewDay.Domain.Entities.Stock>
 
 
-<table class="table table-hover table-bordered table-striped full-width">
+<table class="table data-table table-hover table-bordered table-striped">
     <thead>
         <tr>
             <th style="min-width: 100px;"> @Html.DisplayNameFor(model => model.Ingredient.Type) </th>
@@ -18,8 +18,8 @@
             <tr>
                 <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
                 <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
-                <td style="color: @(item.Quantity < 10 ? "red" : "inherit")"><span class="pull-right">@Html.DisplayFor(modelItem => item.Quantity) grammi</span></td>
-                <td style="color: @(item.ExpireDate < DateTime.Now.AddDays(7) ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
+                <td style="color: @(item.RunningOut ? "red" : "inherit")"><span class="pull-right">@Html.DisplayFor(modelItem => item.Quantity) grammi</span></td>
+                <td style="color: @(item.Expiring ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
                 <td class="action-column">
                     <a href="@Url.Action("Details", new { id = item.StockId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>

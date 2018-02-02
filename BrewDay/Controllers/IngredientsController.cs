@@ -33,22 +33,9 @@ namespace BrewDay.Controllers
 
             return View(element);
         }
+        
 
-        // GET: Recipes/Delete/5
         public ActionResult Delete(int? id)
-        {
-            if (id == null)
-                throw new MissingIdBrewDayException();
-
-            Ingredient Ingredient = db.Ingredients.Find(id);
-            if (Ingredient == null)
-                throw new InvalidIdBrewDayException(id.Value);
-
-            return View(Ingredient);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int? id)
         {
             if (id == null)
                 throw new MissingIdBrewDayException();
@@ -72,7 +59,6 @@ namespace BrewDay.Controllers
             return RedirectToAction("Index");
         }
         
-
         public ActionResult CreateOrEdit(int? id)
         {
             // find by Id the element to edit, if exists
