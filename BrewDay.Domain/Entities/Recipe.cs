@@ -58,10 +58,11 @@ namespace BrewDay.Domain.Entities
 
 
 
-        // Util Properties and Methods
-
+        // Utils
         [Display(Name = "Ricetta")]
         public string FullName { get { return ParentRecipe == null ? Name : ParentRecipe.Name + " " + Name; } }
+
+        public bool HasProductions { get { return Productions.Count > 0; } }
 
     }
 }

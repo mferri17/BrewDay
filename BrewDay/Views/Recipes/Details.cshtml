@@ -8,7 +8,8 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Configuratore di Ricette" data-body="Gestisci in un'unica pagina l'intero ciclo di vita della tua Ricetta!"></span>
+          data-header="Configuratore di Ricette" data-body="Gestisci in un'unica pagina l'intero ciclo di vita della tua Ricetta! 
+          Onde evitare che tu perda lo storico delle Produzioni, è IMPOSSIBILE modificare gli ingredienti di una Ricetta che possiede Produzioni. A questo scopo, crea una versione alternativa."></span>
     @if (Model.Productions.Count == 0 && Model.Versions.Count == 0)
     {
         <a href="@Url.Action("Delete", new { id = Model.RecipeId })" class="pull-right"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
@@ -88,10 +89,13 @@
                             <td class="text-right"> @item.Quantity grammi / litro </td>
                             <td>@item.Ingredient.Description</td>
                             <td class="action-column">
-                                <a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })>
-                                    <span class="glyphicon glyphicon-remove" style="color:#ce1f1f"> </span>
-                                    Rimuovi dalla ricetta
-                                </a>
+                                @if (!Model.HasProductions)
+                                {
+                                    <a href=@Url.Action("RemoveIngredient", new { recipeId = Model.RecipeId, ingredientId = item.IngredientId })>
+                                        <span class="glyphicon glyphicon-remove" style="color:#ce1f1f"> </span>
+                                        Rimuovi dalla ricetta
+                                    </a>
+                                }
                             </td>
                         </tr>
                     }
@@ -102,7 +106,14 @@
         {
             <h4>Per questa Ricetta non sono ancora stati specificati degli Ingredienti</h4>
         }
-        <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
+
+        @if (!Model.HasProductions)
+        {
+            <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
+        }
+        else{
+            <div> Non puoi aggiungere un Ingrediente a questa Ricetta perché perderesti lo storico Produzioni. Puoi <a href="/Recipes/Clone/@Model.RecipeId">creare una versione alternativa</a>. </div>
+        }
     </div>
 
 
@@ -129,7 +140,7 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
-                            <td style="color:@(item.Terminated ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
+                            <td style="color:@(item.Completed ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
                             <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
                             <td>@Html.DisplayFor(modelItem => item.Note)</td>
                             <td class="action-column">

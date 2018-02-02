@@ -9,7 +9,8 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Elenco Ricette" data-body="Qui hai un elenco di tutte le tue Ricette. Se vuoi aggiungere un Ingrediente a una di queste, devi andare nella sua pagina di dettaglio."></span>
+          data-header="Elenco Ricette" data-body="Qui hai un elenco di tutte le tue Ricette. 
+                Onde evitare che tu perda lo storico delle Produzioni, NON É POSSIBILE aggiungere ingredienti o cancellare Ricette che già possiedono delle Produzioni."></span>
 </h2>
 
 <div class="row col-md-12">
@@ -38,8 +39,11 @@
                     <td class="action-column">
                         <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                         <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                        <a href="@Url.Action("AddIngredient", new { id = item.RecipeId })"><span class="glyphicon glyphicon-plus"></span> Ingredienti</a>
-                        <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
+                        @if (!item.HasProductions)
+                        {
+                            <a href="@Url.Action("AddIngredient", new { id = item.RecipeId })"><span class="glyphicon glyphicon-plus"></span> Ingredienti</a>
+                            <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
+                        }
                     </td>
                 </tr>
             }

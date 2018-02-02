@@ -167,6 +167,8 @@ namespace BrewDay.Models.Enums
             var recipe = db.Recipes.Find(id.Value);
             if (recipe == null)
                 throw new InvalidIdBrewDayException(id.Value);
+            if (recipe.HasProductions)
+                throw new InvalidOperationBrewDayException("Non è possibile aggiungere Ingredienti a una Ricetta che già possiede Produzioni.");
 
             ViewBag.RecipeId = id;
             ViewBag.RecipeFullName = recipe.FullName;
@@ -181,6 +183,10 @@ namespace BrewDay.Models.Enums
         {
             if (ModelState.IsValid)
             {
+                var recipe = db.Recipes.Find(model.RecipeId);
+                if (recipe.HasProductions)
+                    throw new InvalidOperationBrewDayException("Non è possibile aggiungere Ingredienti a una Ricetta che già possiede Produzioni.");
+
                 var duplicated = db.RecipeIngredients.Find(model.RecipeId, model.IngredientId);
 
                 if (duplicated == null)

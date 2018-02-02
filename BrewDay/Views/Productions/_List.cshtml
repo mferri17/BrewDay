@@ -17,7 +17,7 @@
             <tr>
                 <td><a href="/Recipes/Details/@item.RecipeId">@item.Recipe.FullName</a></td>
                 <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
-                <td style="color:@(item.Terminated ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
+                <td style="color:@(item.Completed ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
                 <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
                 <td class="action-column">
