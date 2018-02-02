@@ -1,7 +1,7 @@
 ﻿@model BrewDay.Domain.Entities.Ingredient
 
 @{
-    ViewBag.Title = Model == null ? "Registra ingrediente" : "Modifica " + Model.Name;
+    ViewBag.Title = Model == null ? "Registra ingrediente" : "Modifica " + Model.FullName;
     ViewBag.Page = "#nav-ingredients";
 }
 
@@ -17,13 +17,20 @@
         <!-- Hidden fields are used to store information that must remain unchanged -->
         @Html.HiddenFor(model => model.IngredientId)
 
-        <div class="form-group required">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+        @if (Model == null)
+        {
+            <div class="form-group required">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Type)
+        }
 
         <div class="form-group required">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })

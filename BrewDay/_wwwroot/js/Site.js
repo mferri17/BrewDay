@@ -5,10 +5,24 @@ $(document).ready(function () {
 
     // Sostituisce le virgole con i punti (sul keypress) per tutti gli elementi che hanno classe "number-float"
     $(document).on("keypress", ".number-float", replacePointWithComma);
-    
+
+    // Inizializza tutte le tabelle che hanno classe datatable
+    $(".data-table").DataTable({
+        language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
+        stateSave: true,
+        responsive: true,
+        colReorder: true,
+        columnDefs: [
+            { "targets": "no-sort", "orderable": false },
+            { "targets": "no-search", "searchable": false },
+        ]
+    });
+
+    // Inizializza tooltip per i suggerimenti utente
+    $('[data-toggle="tooltip"]').tooltip();
 
     // Aggiunge datepicker di jQuery UI a tutti gli input che hanno classe "datepicker"
-    $(document).on("focus", ".datepicker:not([readonly])", function () {
+    $(document).on("focus", ".datepicker:not([readonly])", function (event) {
         if ($(this).hasClass("hasDatepicker") === false) {
             $(this).datepicker({
                 showOtherMonths: true,
@@ -24,7 +38,7 @@ $(document).ready(function () {
     $.fn.modal.Constructor.prototype.enforceFocus = function () { };
 
     // Riempie titolo e contenuto del modale di aiuto utente
-    $(document).on("click", ".help-icon", function () {
+    $(document).on("click", ".help-icon", function (event) {
         var header = $(this).attr("data-header");
         var body = $(this).attr("data-body");
         var modal = $(this).attr("data-target");

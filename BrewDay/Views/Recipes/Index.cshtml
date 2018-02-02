@@ -9,22 +9,21 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Gestione Ricette" data-body="In questa pagina è possibile creare e gestire le Ricette"></span>
+          data-header="Elenco Ricette" data-body="Qui hai un elenco di tutte le tue Ricette. Se vuoi aggiungere un Ingrediente a una di queste, devi andare nella sua pagina di dettaglio."></span>
 </h2>
 
 <div class="row col-md-12">
-    <p><a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuova Ricetta</a></p>
+    <a href="@Url.Action("Create")" class="btn btn-primary pull-right">Registra nuova Ricetta</a>
 </div>
+
 <div class="row col-md-12">
-    <table class="table table-hover table-bordered table-striped full-width">
+    <table class="table data-table table-hover table-bordered table-striped">
         <thead>
             <tr>
-                <th>Ricetta Padre</th>
-                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th style="min-width:120px;"> @Html.DisplayNameFor(model => model.ParentRecipe) </th>
+                <th> @Html.DisplayNameFor(model => model.Name) </th>
                 <th> @Html.DisplayNameFor(model => model.Description) </th>
-                <th> @Html.DisplayNameFor(model => model.Note)</th>
-                <th> @Html.DisplayNameFor(model => model.FermentationTemperature)</th>
-                <th> @Html.DisplayNameFor(model => model.FermentationTime)</th>
+                <th style="width:100px;"> @Html.DisplayNameFor(model => model.FermentationTime) </th>
                 <th class="no-sort no-search"> </th>
             </tr>
         </thead>
@@ -32,40 +31,18 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ParentRecipe.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FermentationTemperature)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FermentationTime)</td>
+                    <td><a href="/Recipes/Details/@item.ParentRecipeId">@(item.ParentRecipe?.Name ?? "")</a></td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td class="text-right">@item.FermentationTime giorni</td>
                     <td class="action-column">
-                        <a href="@Url.Action("Details", new { id = item.RecipeId }) "data-toggle="tooltip" title="Riempi la Ricetta" data-placement="left"><span class="glyphicon glyphicon-search" ></span> Dettagli</a>
+                        <a href="@Url.Action("Details", new { id = item.RecipeId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                         <a href="@Url.Action("Edit", new { id = item.RecipeId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                        <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                        <a href="@Url.Action("AddIngredient", new { id = item.RecipeId })"><span class="glyphicon glyphicon-plus"></span> Ingredienti</a>
+                        <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-@section scripts{
-    <script>
-        $(".table").DataTable({
-            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
-            stateSave: true,
-            responsive: true,
-            colReorder: true,
-            columnDefs: [
-                { "targets": "no-sort", "orderable": false },
-                { "targets": "no-search", "searchable": false },
-            ]
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
-}

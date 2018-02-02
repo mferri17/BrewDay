@@ -207,7 +207,7 @@ namespace BrewDay.Controllers
             {
                 db.Entry(production).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = production.ProductionId });
             }
             return View(production);
         }

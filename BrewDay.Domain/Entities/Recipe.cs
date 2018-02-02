@@ -29,17 +29,17 @@ namespace BrewDay.Domain.Entities
         public string Description { get; set; }
 
         [StringLength(1024)]
-        [Display(Name = "Nota")]
+        [Display(Name = "Note")]
         public string Note { get; set; }
 
-        [Display(Name = "Temp di fermentazione")]
+        [Display(Name = "Temp ferm.")]
         public double? FermentationTemperature { get; set; }
 
         //[Display(Name = "Id ricetta padre")]
         public int? ParentRecipeId { get; set; }
 
         [Required]
-        [Display(Name="Giorni fermentazione")]
+        [Display(Name="Durata")]
         [Range(0, Int32.MaxValue)] // valore minimo e max
         public int FermentationTime { get; set; }
 
@@ -49,6 +49,7 @@ namespace BrewDay.Domain.Entities
         public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
 
         [ForeignKey("ParentRecipeId")] // obbligatorio specificarlo perché essendo una self relationship altrimenti Entity Framework non lo capisce
+        [Display(Name = "Ricetta Padre")]
         public virtual Recipe ParentRecipe { get; set; }
         [ForeignKey("ParentRecipeId")]
         public virtual ICollection<Recipe> Versions { get; set; }
@@ -59,7 +60,7 @@ namespace BrewDay.Domain.Entities
 
         // Util Properties and Methods
 
-        [Display(Name = "Nome Ricetta")]
+        [Display(Name = "Ricetta")]
         public string FullName { get { return ParentRecipe == null ? Name : ParentRecipe.Name + " " + Name; } }
 
     }

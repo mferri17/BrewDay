@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BrewDay.Domain.Entities.Production>
+
+<table class="table data-table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="min-width:200px;"> @Html.DisplayNameFor(model => model.Recipe.FullName)</th>
+            <th style="min-width:100px;"> @Html.DisplayNameFor(model => model.DateStart)</th>
+            <th style="min-width:100px;"> @Html.DisplayNameFor(model => model.DateEndEstimated)</th>
+            <th style="min-width:100px;"> @Html.DisplayNameFor(model => model.DateEnd)</th>
+            <th> @Html.DisplayNameFor(model => model.Note)</th>
+            <th class="no-sort no-search"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a href="/Recipes/Details/@item.RecipeId">@item.Recipe.FullName</a></td>
+                <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
+                <td style="color:@(item.Terminated ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
+                <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
+                <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                <td class="action-column">
+                    <a href="@Url.Action("Details", new { id = item.ProductionId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                    <a href="@Url.Action("Edit", new { id = item.ProductionId })"><span class="glyphicon glyphicon-pushpin"></span> Nota</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

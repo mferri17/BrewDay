@@ -1,11 +1,11 @@
 ﻿@model BrewDay.Domain.Entities.Stock
 
 @{
-    ViewBag.Title = "Crea";
+    ViewBag.Title = "Aggiungi Scorta";
     ViewBag.Page = "#nav-stocks";
 }
 
-<h2>Crea una nuova Scorta</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
@@ -36,8 +36,8 @@
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="input-group">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                     <div class="input-group-addon"> grammi </div>
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
             </div>

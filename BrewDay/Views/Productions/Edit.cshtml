@@ -16,14 +16,15 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.ProductionId)
+    @Html.HiddenFor(model => model.RecipeId)
     @Html.HiddenFor(model => model.DateStart)
     @Html.HiddenFor(model => model.DateEnd)
     @Html.HiddenFor(model => model.DateEndEstimated)
 
     <div class="form-group">
         @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="col-md-6">
+            @Html.TextAreaFor(model => model.Note, new { @rows = 5, @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
         </div>
     </div>

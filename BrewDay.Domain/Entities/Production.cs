@@ -23,7 +23,7 @@ namespace BrewDay.Domain.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DateEnd { get; set; }
 
-        [Display(Name = "Data Fine Stimata")]
+        [Display(Name = "Fine Stimata")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEndEstimated { get; set; }
 
@@ -35,6 +35,11 @@ namespace BrewDay.Domain.Entities
         // Navigation Properties
         public virtual ICollection<Instrument> Instruments { get; set; }
         public virtual Recipe Recipe { get; set; }
+
+
+        // Utils
+        public bool Running => DateEnd == null;
+        public bool Terminated => !Running;
 
     }
 }

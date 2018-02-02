@@ -1,86 +1,29 @@
 ﻿@model BrewDay.DTO.ProductsAudit
 
-<h1 class="col-md-12 bgClip">BrewDay!</h1>
+
+<h1 class="bgClip">BrewDay!</h1>
+
 
 @if (Model.RunningOutStocks.FirstOrDefault() != null)
 {
-    <!-- Tabella Per gli Stock -->
+    <!-- Tabella per gli Stock -->
     <div class="row col-md-12">
         <h2>
-            Scorte quasi esaurite
+            Dai un'occhiata a queste scorte!
             <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-                  data-header="Stocks Critici" data-body="Gli Ingredienti con il campo Quantità in verde sono prossimi alla scadenza, mentre quelli scaduti sono contraddistinti dal colore rosso"></span>
+                  data-header="Scorte in esaurimento" data-body="In questa tabella vengono evidenziati in rosso gli elementi per cui è necessario prestare attenzione.
+                  La data di scadenza è da considerarsi tale se la scorta scade entro la settimana (o è già scaduta). La quantità d'ingrediente viene invece evidenziata in rosso qualora sia inferiore a 10 grammi."></span>
         </h2>
-        <table class="table table-hover table-bordered table-striped full-width">
-            <thead>
-                <tr>
-                    <th> @Html.DisplayNameFor(model => model.RunningOutStocks.FirstOrDefault().Ingredient.Type) </th>
-                    <th> @Html.DisplayNameFor(model => model.RunningOutStocks.FirstOrDefault().Ingredient.Name) </th>
-                    <th> @Html.DisplayNameFor(model => model.RunningOutStocks.FirstOrDefault().Quantity) </th>
-                    <th> @Html.DisplayNameFor(model => model.RunningOutStocks.FirstOrDefault().ExpireDate) </th>
-                    <th> @Html.DisplayNameFor(model => model.RunningOutStocks.FirstOrDefault().Note) </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @foreach (var item in Model.RunningOutStocks)
-                    {
-                    <tr>
-                        <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
-                        <td style="color: @(item.Quantity < 10 ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                        <td style="color: @(item.ExpireDate < DateTime.Now.AddDays(7) ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
-    }
-
-<!-- Tabella Per le Produzioni vicine al termine  -->
-@if (Model.FinishingProduction.FirstOrDefault() != null)
-{
-    <div class="row col-md-12">
-        <h2>Fermentazioni Quasi Concluse</h2>
-        <table class="table table-hover table-bordered table-striped full-width">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.FinishingProduction.FirstOrDefault().Recipe.FullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.FinishingProduction.FirstOrDefault().DateStart)</th>
-                    <th>@Html.DisplayNameFor(model => model.FinishingProduction.FirstOrDefault().DateEndEstimated)</th>
-                    <th> @Html.DisplayNameFor(model => model.FinishingProduction.FirstOrDefault().DateEnd)</th>
-                    <th> @Html.DisplayNameFor(model => model.FinishingProduction.FirstOrDefault().Note)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.FinishingProduction)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Recipe.FullName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        @Html.Partial("~/Views/Stocks/_List.cshtml", Model.RunningOutStocks)
     </div>
 }
 
-@section scripts{
-    <script>
-        $(".table").DataTable({
-            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
-            stateSave: true,
-            responsive: true,
-            colReorder: true,
-            columnDefs: [
-                { "targets": "no-sort", "orderable": false },
-                { "targets": "no-search", "searchable": false },
-            ]
-        });
-    </script>
-}
 
+<!-- Tabella per le Produzioni vicine al termine  -->
+@if (Model.FinishingProduction.FirstOrDefault() != null)
+{
+    <div class="row col-md-12">
+        <h2>Fermentazioni quasi concluse</h2>
+        @Html.Partial("~/Views/Productions/_List", Model.FinishingProduction)
+    </div>
+}

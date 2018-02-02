@@ -18,7 +18,7 @@
 </div>
 
 <div class="row col-md-12">
-    <table class="table table-hover table-bordered table-striped full-width">
+    <table class="table data-table table-hover table-bordered table-striped">
         <thead>
             <tr>
                 <th> @Html.DisplayNameFor(model => model.Type) </th>
@@ -47,26 +47,3 @@
         </tbody>
     </table>
 </div>
-
-@section scripts{
-    <script>
-        $(".table").DataTable({
-            language: { url: "/_wwwroot/vendor/datatables/Italian.json" },
-            stateSave: true,
-            responsive: true,
-            colReorder: true,
-            columnDefs: [
-                //{ "targets": [5], "orderable": false },
-                { "targets": "no-sort", "orderable": false },
-                { "targets": "no-search", "searchable": false },
-            ]
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
-
-}

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="shortcut icon" href="~/favicon.ico" />
@@ -9,7 +10,9 @@
     <link href="~/_wwwroot/vendor/bootstrap/css/navbar-colors/bootstrap-navbar-purple.css" rel="stylesheet">
     @Styles.Render("~/bundles/css")
 </head>
+
 <body>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,19 +25,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li id="nav-home">@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li id="nav-recipes">@Html.ActionLink("Ricette", "Index", "Recipes")</li>
                     <li id="nav-productions">@Html.ActionLink("Le tue Produzioni", "Index", "Productions")</li>
                     <li id="nav-ingredients">@Html.ActionLink("Ingredienti", "Index", "Ingredients")</li>
                     <li id="nav-stocks">@Html.ActionLink("Le tue Scorte", "Index", "Stocks")</li>
                     <li id="nav-instruments">@Html.ActionLink("I tuoi Strumenti", "Index", "Instruments")</li>
                     <li id="nav-about">@Html.ActionLink("Chi siamo", "About", "Home")</li>
-                    @*<li>@Html.ActionLink("Contatti", "Contact", "Home")</li>*@
                 </ul>
             </div>
         </div>
     </nav>
-
 
     <div class="container">
         <!-- QUI VENGONO INIETTATE LE VIEW -->
@@ -43,7 +43,8 @@
         <div class="clearfix"></div>
         <hr />
         <footer>
-            <p>&copy; 2018 | <a href="https://www.linkedin.com/in/marco-ferri-ita/" target="_blank">Ferri Marco</a>, Ghezzi Simone & Marconi Paolo</p>
+            <p class="pull-left">&copy; 2018 | <a href="https://www.linkedin.com/in/marco-ferri-ita/" target="_blank">Ferri Marco</a>, Ghezzi Simone & Marconi Paolo</p>
+            <p class="pull-right"><a href="https://mferri17.gitbooks.io/brewday-documentazione/" target="_blank">Vedi la documentazione ufficiale di BrewDay</a></p>
         </footer>
     </div>
 

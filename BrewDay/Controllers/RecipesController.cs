@@ -21,45 +21,6 @@ namespace BrewDay.Models.Enums
             return View(model);
         }
 
-
-
-        public ActionResult AddIngredient(int id)
-        {
-            ViewBag.RecipeId = id;
-            ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName");
-
-            return View();
-        }
-
-        // POST: Recipes/AddIngredient
-        [HttpPost]
-        public ActionResult AddIngredient(RecipeIngredient model)
-        {
-            if (ModelState.IsValid)
-            {
-                var duplicated = db.RecipeIngredients.Find(model.RecipeId, model.IngredientId);
-
-                if (duplicated == null)
-                {
-                    db.RecipeIngredients.Add(model);
-                }
-                else
-                {
-                    duplicated.Quantity += model.Quantity;
-                    db.Entry(duplicated).State = EntityState.Modified;
-                }
-                db.SaveChanges();
-                return RedirectToAction("Details", new { id = model.RecipeId });
-            }
-            else
-            {
-                ViewBag.RecipeId = model.RecipeId;
-                ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "FullName");
-
-                return View(model);
-            }
-        }
-
         // GET: Recipes/Details/5
         public ActionResult Details(int? id)
         {
@@ -125,7 +86,7 @@ namespace BrewDay.Models.Enums
             {
                 db.Entry(recipe).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = recipe.RecipeId });
             }
 
             var allowedParents = db.Recipes.Where(x => x.RecipeId != recipe.RecipeId && !x.ParentRecipeId.HasValue);
@@ -152,18 +113,18 @@ namespace BrewDay.Models.Enums
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                Recipe recipe = db.Recipes.Find(id);
-                db.Recipes.Remove(recipe);
-                // OCIO! Bisogna modificare il database : se si tenta di eliminare una ricetta padre senza aver cancellato le figlie si solleva un'eccezione!
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede versioni alternative della stessa. Cancellare prima le versioni.");
-            }
+            Recipe recipe = db.Recipes.Find(id);
+
+            if (recipe.Productions.Count > 0)
+                throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede delle Produzioni (in corso o non). Cancellare prima le Produzioni.");
+            if (recipe.Versions.Count > 0)
+                throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede versioni alternative della stessa. Cancellare prima le Versioni.");
+
+
+            db.Recipes.Remove(recipe);
+            // OCIO! Bisogna modificare il database : se si tenta di eliminare una ricetta padre senza aver cancellato le figlie si solleva un'eccezione!
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Clone(int? id, string name)
@@ -196,6 +157,52 @@ namespace BrewDay.Models.Enums
             return RedirectToAction("Edit", new { id = newRecipe.RecipeId });
         }
 
+
+
+        public ActionResult AddIngredient(int? id)
+        {
+            if (!id.HasValue)
+                throw new MissingIdBrewDayException();
+
+            var recipe = db.Recipes.Find(id.Value);
+            if (recipe == null)
+                throw new InvalidIdBrewDayException(id.Value);
+
+            ViewBag.RecipeId = id;
+            ViewBag.RecipeFullName = recipe.FullName;
+            ViewBag.Ingredients = new SelectList(db.Ingredients, "IngredientId", "FullName");
+
+            return View();
+        }
+
+        // POST: Recipes/AddIngredient
+        [HttpPost]
+        public ActionResult AddIngredient(RecipeIngredient model)
+        {
+            if (ModelState.IsValid)
+            {
+                var duplicated = db.RecipeIngredients.Find(model.RecipeId, model.IngredientId);
+
+                if (duplicated == null)
+                {
+                    db.RecipeIngredients.Add(model);
+                }
+                else
+                {
+                    duplicated.Quantity += model.Quantity;
+                    db.Entry(duplicated).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = model.RecipeId });
+            }
+            else
+            {
+                ViewBag.RecipeId = model.RecipeId;
+                ViewBag.IngredientId = new SelectList(db.Ingredients, "IngredientId", "FullName");
+
+                return View(model);
+            }
+        }
 
         // POST : Recipes/RemoveIngredient?recipedId & ingredientId
         public ActionResult RemoveIngredient(int recipeId, int ingredientId)

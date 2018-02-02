@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BrewDay.Domain.Entities.Stock>
+
+
+<table class="table table-hover table-bordered table-striped full-width">
+    <thead>
+        <tr>
+            <th style="min-width: 100px;"> @Html.DisplayNameFor(model => model.Ingredient.Type) </th>
+            <th style="min-width: 150px;"> @Html.DisplayNameFor(model => model.Ingredient.Name) </th>
+            <th style="min-width: 100px;"> @Html.DisplayNameFor(model => model.Quantity) </th>
+            <th style="min-width: 80px;"> @Html.DisplayNameFor(model => model.ExpireDate) </th>
+            <th style="min-width: 200px;"> @Html.DisplayNameFor(model => model.Note) </th>
+            <th class="no-sort no-search"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ingredient.Name)</td>
+                <td style="color: @(item.Quantity < 10 ? "red" : "inherit")"><span class="pull-right">@Html.DisplayFor(modelItem => item.Quantity) grammi</span></td>
+                <td style="color: @(item.ExpireDate < DateTime.Now.AddDays(7) ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                <td class="action-column">
+                    <a href="@Url.Action("Details", new { id = item.StockId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                    <a href="@Url.Action("Edit", new { id = item.StockId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
+                    <a href="@Url.Action("Delete", new { id = item.StockId })"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

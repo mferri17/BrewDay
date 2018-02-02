@@ -11,6 +11,9 @@
 <div class="row col-md-12">
     <dl class="dl-horizontal col-md-8">
 
+        <dt>@Html.DisplayNameFor(model => model.Type)</dt>
+        <dd>@Html.DisplayEnumLabel(Model.Type)</dd>
+
         <dt>@Html.DisplayNameFor(model => model.Name)</dt>
         <dd>@Html.DisplayFor(model => model.Name)</dd>
 
@@ -22,9 +25,6 @@
 
         <dt>@Html.DisplayNameFor(model => model.Description)</dt>
         <dd>@Html.DisplayFor(model => model.Description)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Type)</dt>
-        <dd>@Html.DisplayEnumLabel(Model.Type)</dd>
 
         <dt></dt>
         <dd><a href="@Url.Action("Edit", new { id = Model.InstrumentId })" class="btn btn-primary margin-top-20">Modifica</a></dd>

@@ -5,42 +5,42 @@
     ViewBag.Page = "#nav-productions";
 }
 
-<h2>Dettagli della produzione</h2>
+<h2>
+    Dettagli della produzione
+</h2>
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="col-md-4 dl-horizontal">
+        <dt>Stato</dt>
+        <dd style="color: @(Model.Running ? "green" : "red"))">@(Model.Running ? "In corso" : "Terminata") </dd>
 
         <dt>@Html.DisplayNameFor(model => model.Recipe.FullName)</dt>
-        <dd>@Html.DisplayFor(model => model.Recipe.FullName)</dd>
+        <dd><a href="/Recipes/Details/@Model.RecipeId">@Model.Recipe.FullName</a></dd>
 
         <dt>@Html.DisplayNameFor(model => model.DateStart)</dt>
         <dd>@Html.DisplayFor(model => model.DateStart)</dd>
 
+        <dt>@Html.DisplayNameFor(model => model.DateEndEstimated)</dt>
+        <dd  style="color:@(Model.Terminated ? "lightgrey" : "inherit")">@Html.DisplayFor(model => model.DateEndEstimated)</dd>
+
         <dt>@Html.DisplayNameFor(model => model.DateEnd)</dt>
         <dd>@Html.DisplayFor(model => model.DateEnd)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.DateEndEstimated)</dt>
-        <dd>@Html.DisplayFor(model => model.DateEndEstimated)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Note)</dt>
         <dd>@Html.DisplayFor(model => model.Note)</dd>
 
         <dt></dt>
-
-        <br />
-        <dd><a href="@Url.Action("Edit", new { id = Model.ProductionId })" class="btn btn-default pull-left btn-primary">Modifica</a> </dd>
-        <br />
-        <dd>
-            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )" class="btn btn-default pull-left btn-danger">Termina la produzione</a>
-        </dd>
-
+        <dd> <a href="@Url.Action("Edit", new { id = Model.ProductionId })" class="btn btn-default btn-primary margin-top-20">Modifica note</a> </dd>
     </dl>
-</div>
-<p>
-    <div class="row col-md-12">
-        <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna indietro</a>
+    <div class="col-md-4 margin-top-50">
+        @if (Model.DateEnd == null)
+        {
+            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )" class="btn btn-default btn-danger pull-right">Termina la produzione</a>
+        }
     </div>
+</div>
 
-    
-</p>
+<div class="row col-md-12">
+    <a href="@Url.Action("Index")" class="btn btn-default pull-right">Torna alle produzioni</a>
+</div>

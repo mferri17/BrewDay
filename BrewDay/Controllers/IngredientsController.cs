@@ -59,6 +59,9 @@ namespace BrewDay.Controllers
             if (element == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
+            if(element.Recipes.Count > 0)
+                throw new InvalidOperationBrewDayException("Non puoi cancellare un Ingrediente che viene usato in qualche Ricetta.");
+
             // deletes element from the context (marks it as "deleted")
             db.Ingredients.Remove(element);
 

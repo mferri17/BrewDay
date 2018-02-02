@@ -8,7 +8,7 @@
 <h2>Dettagli</h2>
 <hr />
 
-<div class="row col-md-12">
+<div class="row col-md-12 margin-bottom-30">
     <dl class="dl-horizontal col-md-8">
 
         <dt> @Html.DisplayNameFor(model => model.Type) </dt>
@@ -28,9 +28,10 @@
     </dl>
 </div>
 
-@if (Model.Recipes.Count() > 0)
+
+@if (Model.Recipes.Count > 0)
 {
-    <h3>Questo ingrediente è presente nelle seguenti Produzioni</h3>
+    <h3>Questo ingrediente è presente nelle seguenti Ricette</h3>
 
     <table class="table table-bordered table-striped table-hover full-width">
         <thead>
@@ -40,7 +41,6 @@
                 <th>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Recipe.Note)</th>
                 <th></th>
             </tr>
-
         </thead>
         <tbody>
             @foreach (var item in Model.Recipes)
@@ -62,7 +62,7 @@
 }
 else
 {
-    <h1>mi sa che passa 0</h1>
+    <h4>Ingrediente mai usato in alcuna Ricetta</h4>
 }
 
 <div class="row col-md-12">

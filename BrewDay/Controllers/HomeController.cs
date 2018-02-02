@@ -12,8 +12,6 @@ namespace BrewDay.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BrewDayContext db = new BrewDayContext();
-
         public ActionResult Index()
         {
             return View(new ProductsAudit());

@@ -1,17 +1,15 @@
 ﻿@model BrewDay.Domain.Entities.RecipeIngredient
 
 @{
-    ViewBag.Title = "Tutti gli Ingredienti";
+    ViewBag.Title = "Aggiungi ingrediente alla ricetta " + ViewBag.RecipeFullName;
     var prop = new { @class = "form-control" }; // oggetto anonimo C#, utile per creare oggetti senza doverne definire la classe (che si usano solitamente una sola volta, spesso in combinazione con i json)
 }
 
 <h2>
     @ViewBag.Title
-
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
           data-header="Aggiunta Ingrediente" data-body="In questa pagina è possibile aggiungere un Ingrediente alla volta alla Ricetta selezionata"></span>
 </h2>
-
 <hr />
 
 <form method="post">
@@ -25,16 +23,14 @@
     <div class="form-group col-md-3">
         <label>Quantità</label>
         <div class="input-group">
-            @Html.EditorFor(m => m.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.Quantity, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
             <div class="input-group-addon"> grammi / litro </div>
         </div>
         @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group col-md-12">
-        <input type="submit" class="btn btn-primary" value="Aggiungi un nuovo Ingrediente alla Ricetta" />
+        <input type="submit" class="btn btn-primary" value="Aggiungi Ingrediente alla Ricetta" />
     </div>
-
-
 </form>
 

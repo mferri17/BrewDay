@@ -1,6 +1,5 @@
 ﻿/* ------------------------ Titolo Iniziale ------------------------ */
 
-
 .bgClip {
     background: url('http://7xhqfps15y-flywheel.netdna-ssl.com/wp-content/uploads/2017/06/SudsWorthSipping_July2017.jpg');
     background-repeat: repeat-x;
@@ -17,7 +16,7 @@
     margin: 0;
     animation: BackgroundAnimated 15s linear infinite;
 }
-@media (max-width:700px) {
+@media (max-width:770px) {
     .bgClip {
         font-size: 120px;
     }
@@ -25,6 +24,11 @@
 @media (max-width:500px) {
     .bgClip {
         font-size: 90px;
+    }
+}
+@media (max-width:390px) {
+    .bgClip {
+        font-size: 50px;
     }
 }
 
@@ -146,6 +150,10 @@ hr {
 
 
 /* ------------------------ Tables ------------------------ */
+
+.table{
+    width: 100%;
+}
 
 td > .glyphicon {
     color: #333;
