@@ -21,6 +21,17 @@ $(document).ready(function () {
     // Inizializza tooltip per i suggerimenti utente
     $('[data-toggle="tooltip"]').tooltip();
 
+
+    // Inizializza bootstrap confirmation per le conferme eliminazioni
+    $('[data-toggle=confirmation]').confirmation({
+        //btnOkClass: 'btn btn-sm btn-success',
+        //btnCancelClass: 'btn btn-sm btn-danger'
+        //popout: true,
+        //singleton: false,
+        btnOkLabel: "Certo!",
+        btnCancelLabel: "Nope",
+    });
+
     // Aggiunge datepicker di jQuery UI a tutti gli input che hanno classe "datepicker"
     $(document).on("focus", ".datepicker:not([readonly])", function (event) {
         if ($(this).hasClass("hasDatepicker") === false) {

@@ -38,5 +38,10 @@ namespace BrewDay.Domain.Entities
         // Navigation Properties
         [Display(Name = "Ingrediente")]
         public virtual Ingredient Ingredient { get; set; }
+
+
+        // Utils
+        public bool RunningOut { get { return Quantity < 10; } }
+        public bool Expiring { get { return ExpireDate < DateTime.Now.AddDays(2); } }
     }
 }

@@ -147,6 +147,10 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="_wwwroot\vendor\bootstrap-confirmation\bootstrap-confirmation.js" />
+    <Content Include="_wwwroot\vendor\bootstrap-confirmation\bootstrap-confirmation.min.js" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="_wwwroot\vendor\datatables\datatables.min.css" />
     <Content Include="_wwwroot\vendor\datatables\datatables.min.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\external\datepicker-it.js" />
@@ -331,9 +335,10 @@
     <Content Include="Documentation\06-Conclusioni\6.3-Commenti.md" />
     <Content Include="Documentation\04-Implementazione\4.3-ClassDiagram.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <Content Include="Views\Ingredients\Delete.cshtml" />
     <Content Include="Views\Stocks\_List.cshtml" />
     <Content Include="Views\Productions\_List.cshtml" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />
