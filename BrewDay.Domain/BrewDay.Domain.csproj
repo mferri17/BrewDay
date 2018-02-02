@@ -54,6 +54,7 @@
     <Compile Include="Entities\Recipe.cs" />
     <Compile Include="Entities\RecipeIngredient.cs" />
     <Compile Include="Entities\Stock.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
     <Compile Include="Enums\IngredientType.cs" />
     <Compile Include="Enums\InstrumentType.cs" />
     <Compile Include="Migrations\Configuration.cs" />
