@@ -2,9 +2,9 @@
 
 * [Benvenuto](README.md)
 * [Introduzione](01-Introduzione/1.0-Introduzione.md)
-  * [Chi siamo](01-Introduzione/1.1-Team.md)
-  * [SCORE Project](01-Introduzione/1.2-Progetto.md)
-  * [Installazione del software](01-Introduzione/1.3-Installazione.md)
+  * [Il progetto](01-Introduzione/1.1-Progetto.md)
+  * [Chi siamo](01-Introduzione/1.2-Team.md)
+  * [Offri il tuo contributo](01-Introduzione/1.3-Installazione.md)
 
 * [Analisi](02-Analisi/2.0-Analisi.md)
   * [Requisiti](02-Analisi/2.1-Requisiti.md)
@@ -29,7 +29,7 @@
 
 * [SonarQube](05-SonarQube/5.0-SonarQube.md)
   * [Installazione](05-SonarQube/5.1-InstallazioneSonar.md)
-  * [Risultato Analisi](05-SonarQube/5.2-AnalisiSonar.md)
+  * [Analisi](05-SonarQube/5.2-AnalisiSonar.md)
 
 * [Conclusioni](06-Conclusioni/6.0-Conclusioni.md)
   * [Problemi riscontrati](06-Conclusioni/6.1-Problemi.md)
