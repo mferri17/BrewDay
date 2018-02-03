@@ -22,7 +22,7 @@
         <dd>@Html.DisplayFor(model => model.DateStart)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.DateEndEstimated)</dt>
-        <dd  style="color:@(Model.Terminated ? "lightgrey" : "inherit")">@Html.DisplayFor(model => model.DateEndEstimated)</dd>
+        <dd  style="color:@(Model.Completed ? "lightgrey" : "inherit")">@Html.DisplayFor(model => model.DateEndEstimated)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.DateEnd)</dt>
         <dd>@Html.DisplayFor(model => model.DateEnd)</dd>
@@ -36,7 +36,7 @@
     <div class="col-md-4 margin-top-50">
         @if (Model.DateEnd == null)
         {
-            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )" class="btn btn-default btn-danger pull-right">Termina la produzione</a>
+            <a href="@Url.Action("Stop", new { id = Model.ProductionId } )" data-toggle="confirmation" data-title="Sei sicuro?" class="btn btn-default btn-danger pull-right">Termina la produzione</a>
         }
     </div>
 </div>

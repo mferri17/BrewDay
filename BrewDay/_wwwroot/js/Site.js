@@ -29,7 +29,7 @@ $(document).ready(function () {
         //popout: true,
         //singleton: false,
         btnOkLabel: "Certo!",
-        btnCancelLabel: "Nope",
+        btnCancelLabel: "No",
     });
 
     // Aggiunge datepicker di jQuery UI a tutti gli input che hanno classe "datepicker"

@@ -95,7 +95,9 @@ namespace BrewDay.Models.Enums
             return View(recipe);
         }
 
-        // GET: Recipes/Delete/5
+
+
+        // POST: Recipes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,25 +107,18 @@ namespace BrewDay.Models.Enums
             if (recipe == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
-            return View(recipe);
-        }
-
-        // POST: Recipes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Recipe recipe = db.Recipes.Find(id);
-
-            if (recipe.Productions.Count > 0)
+            if (recipe.Productions.Count > 0 )
                 throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede delle Produzioni (in corso o non). Cancellare prima le Produzioni.");
             if (recipe.Versions.Count > 0)
                 throw new InvalidOperationBrewDayException("Non è possibile cancellare una Ricetta che possiede versioni alternative della stessa. Cancellare prima le Versioni.");
 
-
+            // deletes element from the context (marks it as "deleted")
             db.Recipes.Remove(recipe);
-            // OCIO! Bisogna modificare il database : se si tenta di eliminare una ricetta padre senza aver cancellato le figlie si solleva un'eccezione!
+
+            // takes changes from context and makes it real on the database
             db.SaveChanges();
+
+            // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
 

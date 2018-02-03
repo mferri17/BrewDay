@@ -42,7 +42,7 @@
                         @if (!item.HasProductions)
                         {
                             <a href="@Url.Action("AddIngredient", new { id = item.RecipeId })"><span class="glyphicon glyphicon-plus"></span> Ingredienti</a>
-                            <a href="@Url.Action("Delete", new { id = item.RecipeId })"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
+                            <a href="@Url.Action("Delete", new { id = item.RecipeId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
                         }
                     </td>
                 </tr>

@@ -212,27 +212,36 @@ namespace BrewDay.Controllers
             return View(production);
         }
 
-        // GET: Productions/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
                 throw new MissingIdBrewDayException();
 
             Production production = db.Productions.Find(id);
+
             if (production == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
-            return View(production);
-        }
 
-        // POST: Productions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Production production = db.Productions.Find(id);
+            // sets the used instrument as no more used only if the production is still running
+            if (production.Running)
+            {
+                foreach (Instrument inst in production.Instruments)
+                {
+                    inst.Used--;
+                    db.Entry(inst).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+
+            // deletes element from the context (marks it as "deleted")
             db.Productions.Remove(production);
+
+            // takes changes from context and makes it real on the database
             db.SaveChanges();
+
+            // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
 

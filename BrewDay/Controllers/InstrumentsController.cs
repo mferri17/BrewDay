@@ -83,29 +83,27 @@ namespace BrewDay.Controllers
             return View(instrument);
         }
 
-        // GET: Instruments/Delete/5
+        // POST: Instruments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
                 throw new MissingIdBrewDayException();
 
             Instrument instrument = db.Instruments.Find(id);
+
             if (instrument == null)
                 throw new InvalidIdBrewDayException(id.Value);
+
             if (instrument.Used > 0)
                 throw new InvalidOperationBrewDayException("Non puoi eliminare uno strumento ancora impegnato in una produzione!");
 
-            return View(instrument);
-        }
-
-        // POST: Instruments/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-            Instrument instrument = db.Instruments.Find(id);
+            // deletes element from the context (marks it as "deleted")
             db.Instruments.Remove(instrument);
+
+            // takes changes from context and makes it real on the database
             db.SaveChanges();
+
+            // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
 

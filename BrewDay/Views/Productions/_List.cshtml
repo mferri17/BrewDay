@@ -23,6 +23,7 @@
                 <td class="action-column">
                     <a href="@Url.Action("Details", new { id = item.ProductionId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                     <a href="@Url.Action("Edit", new { id = item.ProductionId })"><span class="glyphicon glyphicon-pushpin"></span> Nota</a>
+                    <a href="@Url.Action("Delete", new { id = item.ProductionId })" data-toggle="confirmation" data-title="Sei sicuro?" ><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
         }

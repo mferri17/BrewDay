@@ -94,27 +94,25 @@ namespace BrewDay.Controllers
             return View(stock);
         }
 
-        // GET: Stocks/Delete/5
+
+        // POST: Stocks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
                 throw new MissingIdBrewDayException();
 
             Stock stock = db.Stocks.Find(id);
+
             if (stock == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
-            return View(stock);
-        }
-
-        // POST: Stocks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Stock stock = db.Stocks.Find(id);
+            // deletes element from the context (marks it as "deleted")
             db.Stocks.Remove(stock);
+
+            // takes changes from context and makes it real on the database
             db.SaveChanges();
+
+            // if everything's ok, redirect to the index
             return RedirectToAction("Index");
         }
 

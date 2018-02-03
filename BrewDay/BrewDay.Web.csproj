@@ -285,12 +285,10 @@
     <Content Include="Views\Ingredients\Index.cshtml" />
     <Content Include="Views\Ingredients\CreateOrEdit.cshtml" />
     <Content Include="Views\Instruments\Create.cshtml" />
-    <Content Include="Views\Instruments\Delete.cshtml" />
     <Content Include="Views\Instruments\Details.cshtml" />
     <Content Include="Views\Instruments\Edit.cshtml" />
     <Content Include="Views\Instruments\Index.cshtml" />
     <Content Include="Views\Stocks\Create.cshtml" />
-    <Content Include="Views\Stocks\Delete.cshtml" />
     <Content Include="Views\Stocks\Details.cshtml" />
     <Content Include="Views\Stocks\Edit.cshtml" />
     <Content Include="Views\Stocks\Index.cshtml" />
@@ -299,7 +297,6 @@
     <Content Include="Views\Productions\Index.cshtml" />
     <Content Include="_wwwroot\vendor\datatables\Italian.json" />
     <Content Include="Views\Recipes\Create.cshtml" />
-    <Content Include="Views\Recipes\Delete.cshtml" />
     <Content Include="Views\Recipes\Details.cshtml" />
     <Content Include="Views\Recipes\Edit.cshtml" />
     <Content Include="Views\Recipes\Index.cshtml" />
