@@ -19,10 +19,9 @@
   * [Diagrammi di Stato](03-Progettazione/3.4-StateDiagram.md)
 
 * [Implementazione](04-Implementazione/4.0-Implementazione.md)
-  * [Pattern Architetturali](04-Implementazione/4.1.0-ArchitecturalPatterns.md)
+  * [Pattern](04-Implementazione/4.1.0-ArchitecturalPatterns.md)
     * [MVC](04-Implementazione/4.1.2-ModelViewController.md)
     * [Entity Framework](04-Implementazione/4.1.2-EntityFramework.md)
-  * [Pattern GoF](04-Implementazione/4.2-DesignPatterns.md)
   * [Diagramma delle Classi](04-Implementazione/4.3-ClassDiagram.md)
   * [Diagrammi di Sequenza](04-Implementazione/4.4-SequenceDiagram.md)
   * [Altre scelte](04-Implementazione/4.5-AltreScelte.md)
