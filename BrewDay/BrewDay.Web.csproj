@@ -331,6 +331,7 @@
     <Content Include="Documentation\06-Conclusioni\6.3-Commenti.md" />
     <Content Include="Documentation\04-Implementazione\4.3-ClassDiagram.md" />
     <Content Include="Documentation\04-Implementazione\4.1.1-ModelViewController.md" />
+    <Content Include="Documentation\04-Implementazione\4.3.2-PackageDiagram.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Views\Stocks\_List.cshtml" />
     <Content Include="Views\Productions\_List.cshtml" />
