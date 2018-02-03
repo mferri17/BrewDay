@@ -62,7 +62,7 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Ricetta")]
         public string FullName { get { return ParentRecipe == null ? Name : ParentRecipe.Name + " " + Name; } }
 
-        public bool HasProductions { get { return Productions != null ? Productions.Count > 0 : false; } }
+        public bool HasProductions { get { return Productions != null && Productions.Count > 0; } }
 
     }
 }

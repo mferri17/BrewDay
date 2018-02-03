@@ -35,11 +35,7 @@ namespace BrewDay.Domain
             get
             {
                 if (BrewDayContext_instance == null)
-                {                    
-                        if (BrewDayContext_instance == null)
-                        BrewDayContext_instance = new BrewDayContext();
-                   
-                }
+                        BrewDayContext_instance = new BrewDayContext();                   
                 return BrewDayContext_instance;
             }
         }
