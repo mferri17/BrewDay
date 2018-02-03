@@ -9,7 +9,7 @@
   * [Requisiti](02-Analisi/2.1-Requisiti.md)
   * [Gantt](02-Analisi/2.2-Gantt.md)
 * [Progettazione](03-Progettazione/3.0-Progettazione.md)
-  * Casi d'uso
+  * [Casi d'uso](03-Progettazione/casi-duso.md)
     * [Diagramma](03-Progettazione/3.1.1-UseCaseDiagram.md)
     * [Descrizione](03-Progettazione/3.1.2-UseCaseDescription.md)
   * [Diagramma di Dominio](03-Progettazione/3.2-DomainDiagram.md)
