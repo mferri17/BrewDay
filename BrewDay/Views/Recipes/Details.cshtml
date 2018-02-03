@@ -155,16 +155,15 @@
             </table>
         }
 
-        <div class="row col-md-3">
+        <div class="row col-md-4">
             <form action="/Productions/Play" class="pull-left">
-                <label>Quantità</label>
                 <input type="hidden" name="recipeId" value="@Model.RecipeId" />
                 <div class="input-group">
-                    <input type="number" name="qty" class="form-control" autocomplete="off" required />
-                    <div class="input-group-addon"> litri di birra </div>
+                    <input placeholder="Quantità di birra da produrre" type="number" name="qty" class="form-control" autocomplete="off" required />
+                    <div class="input-group-addon"> litri </div>
                 </div>
                 <input type="submit" class="btn btn-success margin-top-10" value="Manda in produzione"
-                       data-toggle="tooltip" title="Ricordati che devi avere abbastanza scorte e strumenti a disposizione" data-placement="right" />
+                       data-toggle="tooltip" title="Ricordati che devi avere abbastanza scorte e strumenti (1 tubo, 1 fermentatore, 1 bollitore) a disposizione" data-placement="right" />
             </form>
         </div>
     </div>
@@ -175,7 +174,7 @@
 
         @if (Model.Versions.Count == 0)
         {
-            <h4>Questa Ricetta non possiede ancora nessuna versione alternativa.</h4>
+            <h4>Questa Ricetta non possiede ancora nessuna versione alternativa</h4>
         }
         else
         {

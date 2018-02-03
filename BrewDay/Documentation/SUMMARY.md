@@ -4,7 +4,7 @@
 * [Introduzione](01-Introduzione/1.0-Introduzione.md)
   * [Il progetto](01-Introduzione/1.1-Progetto.md)
   * [Chi siamo](01-Introduzione/1.2-Team.md)
-  * [Offri il tuo contributo](01-Introduzione/1.3-Installazione.md)
+  * [Contribuisci](01-Introduzione/1.3-Installazione.md)
 
 * [Analisi](02-Analisi/2.0-Analisi.md)
   * [Requisiti](02-Analisi/2.1-Requisiti.md)
