@@ -318,7 +318,6 @@
     <Content Include="Documentation\03-Progettazione\3.0-Progettazione.md" />
     <Content Include="Documentation\04-Implementazione\4.0-Implementazione.md" />
     <Content Include="Documentation\04-Implementazione\4.1.0-ArchitecturalPatterns.md" />
-    <Content Include="Documentation\04-Implementazione\4.1.2-ModelViewController.md" />
     <Content Include="Documentation\04-Implementazione\4.1.2-EntityFramework.md" />
     <Content Include="Documentation\04-Implementazione\4.2-DesignPatterns.md" />
     <Content Include="Documentation\04-Implementazione\4.4-SequenceDiagram.md" />
@@ -331,6 +330,7 @@
     <Content Include="Documentation\06-Conclusioni\6.2-SviluppiFuturi.md" />
     <Content Include="Documentation\06-Conclusioni\6.3-Commenti.md" />
     <Content Include="Documentation\04-Implementazione\4.3-ClassDiagram.md" />
+    <Content Include="Documentation\04-Implementazione\4.1.1-ModelViewController.md" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Views\Stocks\_List.cshtml" />
     <Content Include="Views\Productions\_List.cshtml" />

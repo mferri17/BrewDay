@@ -16,7 +16,7 @@ namespace BrewDay.Domain
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
         
 
-        private BrewDayContext() : base("name=BrewDayContext")
+        public BrewDayContext() : base("name=BrewDayContext")
         {
              
         }

@@ -9,7 +9,7 @@
   * [Requisiti](02-Analisi/2.1-Requisiti.md)
   * [Gantt](02-Analisi/2.2-Gantt.md)
 * [Progettazione](03-Progettazione/3.0-Progettazione.md)
-  * [Casi d'uso](03-Progettazione/casi-duso.md)
+  * Casi d'uso
     * [Diagramma](03-Progettazione/3.1.1-UseCaseDiagram.md)
     * [Descrizione](03-Progettazione/3.1.2-UseCaseDescription.md)
   * [Diagramma di Dominio](03-Progettazione/3.2-DomainDiagram.md)
@@ -17,7 +17,7 @@
   * [Diagrammi di Stato](03-Progettazione/3.4-StateDiagram.md)
 * [Implementazione](04-Implementazione/4.0-Implementazione.md)
   * [Pattern](04-Implementazione/4.1.0-ArchitecturalPatterns.md)
-    * [MVC](04-Implementazione/4.1.2-ModelViewController.md)
+    * [.NET MVC](04-Implementazione/4.1.1-ModelViewController.md)
     * [Entity Framework](04-Implementazione/4.1.2-EntityFramework.md)
   * [Diagramma delle Classi](04-Implementazione/4.3-ClassDiagram.md)
   * [Diagrammi di Sequenza](04-Implementazione/4.4-SequenceDiagram.md)
