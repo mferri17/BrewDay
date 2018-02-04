@@ -4,7 +4,7 @@
     background: url('http://7xhqfps15y-flywheel.netdna-ssl.com/wp-content/uploads/2017/06/SudsWorthSipping_July2017.jpg');
     background-repeat: repeat-x;
     background-position: 0 20%;
-    font-size: 200px;
+    font-size: 180px;
     text-align: center;
     font-family: Centaur;
     color: transparent;
@@ -63,10 +63,17 @@
     }
 }
 
+.home-subtitle {
+    text-align: center;
+    color: #ecaf37;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px #333;
+}
 
 
 /* ------------------------ General ------------------------ */
-
 body {
     padding-top: 50px;
     padding-bottom: 100px;

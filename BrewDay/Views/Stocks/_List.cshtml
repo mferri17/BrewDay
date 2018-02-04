@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<BrewDay.Domain.Entities.Stock>
 
-
 <table class="table data-table table-hover table-bordered table-striped">
     <thead>
         <tr>
@@ -22,9 +21,9 @@
                 <td style="color: @(item.Expiring ? "red" : "inherit")">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
                 <td class="action-column">
-                    <a href="@Url.Action("Details", new { id = item.StockId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
-                    <a href="@Url.Action("Edit", new { id = item.StockId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                    <a href="@Url.Action("Delete", new { id = item.StockId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                    <a href="@Url.Action("Details", "Stocks", new { id = item.StockId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                    <a href="@Url.Action("Edit", "Stocks", new { id = item.StockId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
+                    <a href="@Url.Action("Delete", "Stocks", new { id = item.StockId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
                 </td>
             </tr>
         }

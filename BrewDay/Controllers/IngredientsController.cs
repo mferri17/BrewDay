@@ -26,8 +26,7 @@ namespace BrewDay.Controllers
                 throw new MissingIdBrewDayException();
             
             Ingredient element = db.Ingredients.Find(id);
-
-            // check if exists and element with the specified Id
+            
             if (element == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
@@ -41,62 +40,60 @@ namespace BrewDay.Controllers
                 throw new MissingIdBrewDayException();
 
             Ingredient element = db.Ingredients.Find(id);
-
-            // check if exists and element with the specified Id
+            
             if (element == null)
                 throw new InvalidIdBrewDayException(id.Value);
 
             if(element.Recipes.Count > 0)
                 throw new InvalidOperationBrewDayException("Non puoi cancellare un Ingrediente che viene usato in qualche Ricetta.");
 
-            // deletes element from the context (marks it as "deleted")
+            // cancella un elemento dal contesto (lo marchia come "cancellato")
             db.Ingredients.Remove(element);
 
-            // takes changes from context and makes it real on the database
+            // prende i cambiamenti dal contesto e li apporta sull'effettivo database
             db.SaveChanges();
 
-            // if everything's ok, redirect to the index
+            // se tutto è ok, redirect all'index
             return RedirectToAction("Index");
         }
         
         public ActionResult CreateOrEdit(int? id)
         {
-            // find by Id the element to edit, if exists
             Ingredient model = db.Ingredients.Find(id);
-
-            // model can be valorized or even null
+            
+            // model può essere sia valorizzato che null
             return View("CreateOrEdit", model);
         }
 
         [HttpPost]
         public ActionResult CreateOrEdit(Ingredient model)
         {
-            // check if all properties of the received model are valid
+            // controlla che tutte le proprietà del model siano valide, pescando dai tipi e dalle [DataAnnotation] della classe Ingredient
             if (ModelState.IsValid)
             {
-                // id null or zero means model is new (not exist yet in db), so it has to be created
+                // se l'Id è null o uguale a 0, significa che l'elemento non esiste nel datagbase e bisogna crearlo
                 if (!model.IngredientId.HasValue || model.IngredientId == 0)
                 {
-                    // add model to context and mark it as "added"
+                    // aggiunge model al contesto (lo marchia come "aggiunto")
                     db.Ingredients.Add(model);
                 }
                 // valid id means model already exists in db, so it just has to be updated 
                 else
                 {
-                    // mark this model as "modified" on the context
+                    // marchio il model come "modificato" all'interno del contesto
                     db.Entry(model).State = EntityState.Modified;
                 }
 
-                // takes changes from context and makes it real on the database
+                // prende i cambiamenti dal contesto e li apporta sull'effettivo database
                 db.SaveChanges();
 
-                // if everything's ok, redirect to the index
+                // se tutto è ok, redirect alla details
                 return RedirectToAction("Details", new { id = model.IngredientId });
             }
-            // if model is not valid...
+            // se il modello non è valido...
             else
             {
-                // ... returns the same view again, with prefilled field (model previously received)
+                // ... ritorno la medesima view con i campi precompilati del model ricevuto
                 return View("CreateOrEdit", model);
             }
         }

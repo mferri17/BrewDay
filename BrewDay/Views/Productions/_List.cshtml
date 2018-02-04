@@ -21,9 +21,9 @@
                 <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
                 <td class="action-column">
-                    <a href="@Url.Action("Details", new { id = item.ProductionId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
-                    <a href="@Url.Action("Edit", new { id = item.ProductionId })"><span class="glyphicon glyphicon-pushpin"></span> Note</a>
-                    <a href="@Url.Action("Delete", new { id = item.ProductionId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span></a>
+                    <a href="@Url.Action("Details", "Productions", new { id = item.ProductionId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
+                    <a href="@Url.Action("Edit", "Productions", new { id = item.ProductionId })"><span class="glyphicon glyphicon-pushpin"></span> Note</a>
+                    <a href="@Url.Action("Delete", "Productions", new { id = item.ProductionId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span></a>
                 </td>
             </tr>
         }
