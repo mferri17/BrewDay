@@ -9,7 +9,7 @@
   * [Requisiti](02-Analisi/2.1-Requisiti.md)
   * [Gantt](02-Analisi/2.2-Gantt.md)
 * [Progettazione](03-Progettazione/3.0-Progettazione.md)
-  * [Casi d'uso](03-Progettazione/casi-duso.md)
+  * Casi d'uso
     * [Diagramma](03-Progettazione/3.1.1-UseCaseDiagram.md)
     * [Descrizione](03-Progettazione/3.1.2-UseCaseDescription.md)
   * [Diagramma di Dominio](03-Progettazione/3.2-DomainDiagram.md)
@@ -27,7 +27,6 @@
   * [Installazione](05-SonarQube/5.1-InstallazioneSonar.md)
   * [Analisi](05-SonarQube/5.2-AnalisiSonar.md)
 * [Conclusioni](06-Conclusioni/6.0-Conclusioni.md)
-  * [Problemi riscontrati](06-Conclusioni/6.1-Problemi.md)
   * [Sviluppi futuri](06-Conclusioni/6.2-SviluppiFuturi.md)
   * [Commenti personali](06-Conclusioni/6.3-Commenti.md)
 

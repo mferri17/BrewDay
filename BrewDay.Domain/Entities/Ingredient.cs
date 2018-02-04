@@ -46,5 +46,7 @@ namespace BrewDay.Domain.Entities
         [Display(Name = "Nome Ingrediente")]
         public string FullName { get { return Type.DisplayEnum() + " - " + Name; } }
 
+        public bool HasRecipes { get { return Recipes != null && Recipes.Count > 0; } }
+        public bool HasStocks { get { return Stocks != null && Stocks.Count > 0; } }
     }
 }

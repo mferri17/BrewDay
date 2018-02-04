@@ -68,8 +68,8 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th style="min-width:80px;">Tipo</th>
-                        <th style="min-width:150px;">Nome</th>
+                        <th style="min-width:15%;">Tipo</th>
+                        <th style="min-width:25%;">Nome</th>
                         <th style="width:200px;">Quantità</th>
                         <th>Descrizione</th>
                         <th></th>
@@ -80,13 +80,13 @@
                     @foreach (var item in Model.Ingredients)
                     {
                         <tr>
-                            <td style="width:15%;">@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
-                            <td style="width:25%;">
+                            <td>@Html.DisplayEnumLabel(item.Ingredient.Type)</td>
+                            <td>
                                 <a href="/Ingredients/Details/@item.IngredientId" data-toggle="tooltip" title="Vedi dettagli Ingrediente" data-placement="right">@item.Ingredient.Name</a>
                                 <a class="pull-right" href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })" target="_blank"
                                    data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="top"><span class="glyphicon glyphicon-plus"></span></a>
                             </td>
-                            <td class="text-right"> @item.Quantity grammi / litro </td>
+                            <td class="text-right" style="white-space:nowrap;"> @item.Quantity grammi / litro </td>
                             <td>@item.Ingredient.Description</td>
                             <td class="action-column">
                                 @if (!Model.HasProductions)

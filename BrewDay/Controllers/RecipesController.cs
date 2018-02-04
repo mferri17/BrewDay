@@ -17,7 +17,7 @@ namespace BrewDay.Models.Enums
         // GET: Recipes
         public ActionResult Index()
         {
-            var model = db.Recipes.ToList().OrderBy(x => x.FullName);
+            var model = db.Recipes.ToList();
             return View(model);
         }
 

@@ -18,7 +18,7 @@
 
         <div class="form-group required">
             @Html.LabelFor(model => model.Ingredient, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 @if (ViewBag.IngReadonly != null && ViewBag.IngReadonly) // If we try to create a new Stock starting from an existing Ingredient
                 {
                     @Html.DropDownList("IngredientId", (SelectList)ViewBag.Ingredients, new { @class = "form-control", @disabled = "" })
@@ -34,7 +34,7 @@
 
         <div class="form-group required">
             @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <div class="input-group">
                     <div class="input-group-addon"> grammi </div>
                     @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
@@ -45,7 +45,7 @@
 
         <div class="form-group required">
             @Html.LabelFor(model => model.ExpireDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <div class="input-group">
                     <div class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </div>
                     @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
@@ -56,14 +56,14 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-6">
                 @Html.TextAreaFor(model => model.Note, new { @class = "form-control", @rows = 4 })
                 @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-6">
                 <input type="submit" value="Crea" class="btn btn-primary" />
             </div>
         </div>

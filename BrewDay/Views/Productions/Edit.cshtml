@@ -1,11 +1,11 @@
 ﻿@model BrewDay.Domain.Entities.Production
 
 @{
-    ViewBag.Title = "Modifca";
+    ViewBag.Title = "Modifica produzione " + Model.FullName;
     ViewBag.Page = "#nav-productions";
 }
 
-<h2>Modifica la nota associata</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
@@ -19,7 +19,17 @@
     @Html.HiddenFor(model => model.RecipeId)
     @Html.HiddenFor(model => model.DateStart)
     @Html.HiddenFor(model => model.DateEnd)
-    @Html.HiddenFor(model => model.DateEndEstimated)
+
+    <div class="form-group required">
+        @Html.LabelFor(model => model.DateEndEstimated, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </div>
+                @Html.EditorFor(model => model.DateEndEstimated, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.DateEndEstimated, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -28,6 +38,7 @@
             @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
         </div>
     </div>
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

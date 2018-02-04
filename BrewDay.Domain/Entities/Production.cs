@@ -38,6 +38,9 @@ namespace BrewDay.Domain.Entities
 
 
         // Utils
+
+        public string FullName => $"{Recipe.FullName} del {DateStart.ToShortDateString()}";
+
         public bool Running => DateEnd == null;
         public bool AlmostFinished => DateEndEstimated < DateTime.Now.AddDays(2);
         public bool Completed => !Running;

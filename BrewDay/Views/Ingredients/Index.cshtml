@@ -10,7 +10,7 @@
     @ViewBag.Title
 
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Gestione Ingredienti" data-body="Pagina di gestione di tutti gli Ingredienti presenti sul mercato."></span>
+          data-header="Gestione Ingredienti" data-body="Pagina di gestione di tutti gli Ingredienti presenti sul mercato. Non è possobile cancellare un Ingrediente che sia già stato utilizzato in qualche Ricetta o di cui si possiedano Scorte in magazzino."></span>
 </h2>
 
 <div class="row col-md-12">
@@ -39,8 +39,11 @@
                     <td class="action-column">
                         <a href="@Url.Action("Details", new { id = item.IngredientId })"><span class="glyphicon glyphicon-search"></span> Dettagli</a>
                         <a href="@Url.Action("CreateOrEdit", new { id = item.IngredientId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-                        <a href="@Url.Action("Delete", new { id = item.IngredientId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
                         <a href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })" data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span> Stock</a>
+                        @if (!item.HasRecipes && !item.HasStocks)
+                        {
+                            <a href="@Url.Action("Delete", new { id = item.IngredientId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                        }
                     </td>
                 </tr>
             }

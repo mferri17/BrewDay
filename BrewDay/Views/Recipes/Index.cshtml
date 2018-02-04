@@ -9,7 +9,7 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Elenco Ricette" data-body="Qui hai un elenco di tutte le tue Ricette. 
+          data-header="Elenco Ricette" data-body="Qui hai un elenco di tutte le tue Ricette.
                 Onde evitare che tu perda lo storico delle Produzioni, NON É POSSIBILE aggiungere ingredienti o cancellare Ricette che già possiedono delle Produzioni."></span>
 </h2>
 
@@ -33,7 +33,7 @@
             {
                 <tr>
                     <td><a href="/Recipes/Details/@item.ParentRecipeId">@(item.ParentRecipe?.Name ?? "")</a></td>
-                    <td>@item.Name</td>
+                    <td><a href="/Recipes/Details/@item.RecipeId">@item.Name</a></td>
                     <td>@item.Description</td>
                     <td class="text-right">@item.FermentationTime giorni</td>
                     <td class="action-column">

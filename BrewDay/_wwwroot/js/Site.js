@@ -27,7 +27,6 @@ $(document).ready(function () {
         //btnOkClass: 'btn btn-sm btn-success',
         //btnCancelClass: 'btn btn-sm btn-danger'
         //popout: true,
-        //singleton: false,
         btnOkLabel: "Certo!",
         btnCancelLabel: "No",
     });
