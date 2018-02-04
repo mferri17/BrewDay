@@ -6,6 +6,6 @@ Quanto sviluppato è disponibile pubblicamente all'indirizzo http://brewday.offi
 
 ## Cosa c'è nella scatola
 Il software è realizzato con architettura Microsoft .NET MVC 5  
-É possibile reperire maggiori informazioni all'interno della [documentazione ufficiale](https://mferri17.gitbooks.io/brewday-documentazione/), prevalentemente incentrata sull'aspetto di analisi e progettazione del software.
+É possibile reperire maggiori informazioni all'interno della [documentazione ufficiale](https://www.gitbook.com/book/mferri17/brewday-documentazione/details), prevalentemente incentrata sull'aspetto di analisi e progettazione del software.
 
 É possibile trovare l'analisi di qualità del software, eseguita con SonarQube, all'indirizzo SonarCloud https://sonarcloud.io/dashboard?id=BrewDay
