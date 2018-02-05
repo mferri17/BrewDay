@@ -24,6 +24,7 @@ namespace BrewDay.Domain.Entities
         public int IngredientId { get; set; }
 
         [Display(Name = "Quantità")]
+        [Range(0, Int32.MaxValue)]
         public int Quantity { get; set; }
 
         [Display(Name = "Scadenza")]
@@ -42,6 +43,6 @@ namespace BrewDay.Domain.Entities
 
         // Utils
         public bool RunningOut { get { return Quantity < 10; } }
-        public bool Expiring { get { return ExpireDate < DateTime.Now.AddDays(2); } }
+        public bool Expiring { get { return ExpireDate < DateTime.Now.AddDays(7); } }
     }
 }

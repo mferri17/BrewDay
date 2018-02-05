@@ -8,11 +8,11 @@
 <h2>
     @ViewBag.Title
     <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
-          data-header="Configuratore di Ricette" data-body="Gestisci in un'unica pagina l'intero ciclo di vita della tua Ricetta! 
+          data-header="Configuratore di Ricette" data-body="Gestisci in un'unica pagina l'intero ciclo di vita della tua Ricetta!
           Onde evitare che tu perda lo storico delle Produzioni, è IMPOSSIBILE modificare gli ingredienti di una Ricetta che possiede Produzioni. A questo scopo, crea una versione alternativa."></span>
     @if (Model.Productions.Count == 0 && Model.Versions.Count == 0)
     {
-        <a href="@Url.Action("Delete", new { id = Model.RecipeId })" class="pull-right"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
+        <a href="@Url.Action("Delete", new { id = Model.RecipeId })" class="btn btn-danger pull-right" data-toggle="confirmation" data-placement="bottom">Elimina</a>
     }
 </h2>
 
@@ -111,7 +111,8 @@
         {
             <a href="@Url.Action("AddIngredient", new { id = Model.RecipeId })" class="btn btn-success">Aggiungi Ingrediente</a>
         }
-        else{
+        else
+        {
             <div> Non puoi aggiungere un Ingrediente a questa Ricetta perché perderesti lo storico Produzioni. Puoi <a href="/Recipes/Clone/@Model.RecipeId">creare una versione alternativa</a>. </div>
         }
     </div>
@@ -131,6 +132,7 @@
                         <th> @Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateStart)</th>
                         <th> @Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEndEstimated)</th>
                         <th> @Html.DisplayNameFor(model => model.Productions.FirstOrDefault().DateEnd)</th>
+                        <th> @Html.DisplayNameFor(model => model.Productions.FirstOrDefault().Quantity)</th>
                         <th style="min-width:250px;">@Html.DisplayNameFor(model => model.Productions.FirstOrDefault().Note)</th>
                         <th></th>
                     </tr>
@@ -142,6 +144,7 @@
                             <td>@Html.DisplayFor(modelItem => item.DateStart)</td>
                             <td style="color:@(item.Completed ? "lightgrey" : "inherit" )">@Html.DisplayFor(modelItem => item.DateEndEstimated)</td>
                             <td>@Html.DisplayFor(modelItem => item.DateEnd)</td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.Quantity) litri</td>
                             <td>@Html.DisplayFor(modelItem => item.Note)</td>
                             <td class="action-column">
                                 <a href=@Url.Action("Details", "Productions", new { Id = item.ProductionId })>

@@ -19,6 +19,7 @@
     @Html.HiddenFor(model => model.RecipeId)
     @Html.HiddenFor(model => model.DateStart)
     @Html.HiddenFor(model => model.DateEnd)
+    @Html.HiddenFor(model => model.Quantity)
 
     <div class="form-group required">
         @Html.LabelFor(model => model.DateEndEstimated, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -1,20 +1,22 @@
 ﻿@model BrewDay.DTO.ProductsAudit
 
+<div class="col-md-offset-2 col-md-8">
+    <h1 class="bgClip">BrewDay!</h1>
+    <h2 class="home-subtitle"> <strong>Semplice e intuitivo per la tua BIRRA</strong></h2>
+</div>
 
-<h1 class="bgClip">BrewDay!</h1>
-@*<h3 class="home-subtitle">PER UNA BIRRA MIGLIORE</h3>*@
-
+<div class="text-center"><a class="btn btn-primary wsibt-btn" href="@Url.Action("WhatShouldIBrewToday", "Home")">What Should I Brew Today?</a></div>
 
 @if (Model.RunningOutStocks.Count != 0)
 {
     <!-- Tabella per gli Stock -->
-    <div class="row col-md-12">
-        <h2>
-            Dai un'occhiata a queste scorte!
+    <div class="col-md-6">
+        <h4>
+            <strong>Dai un'occhiata a queste scorte!</strong>
             <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
                   data-header="Scorte in esaurimento" data-body="In questa tabella vengono evidenziati in rosso gli elementi per cui è necessario prestare attenzione.
                   La data di scadenza è da considerarsi tale se la scorta scade entro la settimana (o è già scaduta). La quantità d'ingrediente viene invece evidenziata in rosso qualora sia inferiore a 10 grammi."></span>
-        </h2>
+        </h4>
         @Html.Partial("~/Views/Stocks/_List.cshtml", Model.RunningOutStocks)
     </div>
 }
@@ -23,8 +25,12 @@
 <!-- Tabella per le Produzioni vicine al termine  -->
 @if (Model.FinishingProduction.Count != 0)
 {
-    <div class="row col-md-12">
-        <h2>Fermentazioni quasi concluse</h2>
+    <div class="col-md-6">
+        <h4>
+            <strong>Produzioni quasi ultimate</strong>
+            <span class="help-icon glyphicon glyphicon-question-sign cursor-pointer" data-toggle="modal" data-target="#help-modal"
+                  data-header="Produzioni quasi concluse" data-body="Qui puoi vedere molto velocemente quali sono le Produzioni che stanno per raggiungere la data di fine stimata ed in particolare quelle che sono in programma di terminare entro 2 giorni."></span>
+        </h4>
         @Html.Partial("~/Views/Productions/_List.cshtml", Model.FinishingProduction)
     </div>
 }

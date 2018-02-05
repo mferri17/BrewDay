@@ -42,7 +42,7 @@
                         <a href="@Url.Action("Create", "Stocks", new { ingredientId = item.IngredientId })" data-toggle="tooltip" title="Aggiungimi alle Scorte" data-placement="right"><span class="glyphicon glyphicon-plus"></span> Stock</a>
                         @if (!item.HasRecipes && !item.HasStocks)
                         {
-                            <a href="@Url.Action("Delete", new { id = item.IngredientId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span></a>
+                            <a href="@Url.Action("Delete", new { id = item.IngredientId })" data-toggle="confirmation"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span></a>
                         }
                     </td>
                 </tr>

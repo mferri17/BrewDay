@@ -21,6 +21,7 @@
     <table class="table data-table table-hover table-bordered table-striped">
         <thead>
             <tr>
+                <th style="width:10px;"> Id </th>
                 <th style="min-width:120px;"> @Html.DisplayNameFor(model => model.ParentRecipe) </th>
                 <th> @Html.DisplayNameFor(model => model.Name) </th>
                 <th> @Html.DisplayNameFor(model => model.Description) </th>
@@ -32,6 +33,7 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@item.RecipeId</td>
                     <td><a href="/Recipes/Details/@item.ParentRecipeId">@(item.ParentRecipe?.Name ?? "")</a></td>
                     <td><a href="/Recipes/Details/@item.RecipeId">@item.Name</a></td>
                     <td>@item.Description</td>
@@ -42,7 +44,7 @@
                         @if (!item.HasProductions)
                         {
                             <a href="@Url.Action("AddIngredient", new { id = item.RecipeId })"><span class="glyphicon glyphicon-plus"></span> Ingredienti</a>
-                            <a href="@Url.Action("Delete", new { id = item.RecipeId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
+                            <a href="@Url.Action("Delete", new { id = item.RecipeId })" data-toggle="confirmation"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Elimina"></span> </a>
                         }
                     </td>
                 </tr>

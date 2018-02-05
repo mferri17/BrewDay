@@ -81,7 +81,7 @@ namespace BrewDay.Controllers
                     // Mandando in produzione la Ricetta, la quantità di ogni ingrediente necessario per la stessa andrà scalata da quella attuale in magazzino
                     // Potrebbero verificarsi dei casi in cui un singolo Stock non è sufficiente a coprire la quantità necessaria, quindi si attinge a più Stock diversi dello stesso Ingrediente
 
-                    int demand = qty.Value; // domanda, scalata di volta in volta
+                    int demand = requestedQuantity; // domanda, scalata di volta in volta
                     foreach(var stock in ingredientStocks.OrderBy(x => x.ExpireDate)) // ordinati per data di scadenza (best fit)
                     {
                         if(stock.Quantity > demand) { // lo stock soddisfa il fabbisogno dell'ingrediente
@@ -121,6 +121,7 @@ namespace BrewDay.Controllers
                     DateStart = DateTime.Now,
                     DateEnd = null,
                     DateEndEstimated = DateTime.Now.AddDays(recipe.FermentationTime),
+                    Quantity = qty.Value,
                     Note = recipe.Note,
                     Instruments = usedIntruments,
                 };

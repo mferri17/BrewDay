@@ -50,7 +50,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Recipe.Description)</td>
                 <td>@Html.DisplayFor(modelItem => item.Recipe.Note)</td>
                 <td class="action-column">
-                    <a href=@Url.Action("Details", "Production", new { Id = item.RecipeId }) data-toggle="tooltip" title="Info sulla Produzione" data-placement="right">
+                    <a href=@Url.Action("Details", "Recipes", new { Id = item.RecipeId })>
                         <span class="glyphicon glyphicon-search"></span>
                         Mostra Dettagli
                     </a>

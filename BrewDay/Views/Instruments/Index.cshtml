@@ -44,7 +44,7 @@
                         <a href="@Url.Action("Edit", new { id = item.InstrumentId })"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
                         @if (item.Used == 0)
                         {
-                            <a href="@Url.Action("Delete", new { id = item.InstrumentId })" data-toggle="confirmation" data-title="Sei sicuro?"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
+                            <a href="@Url.Action("Delete", new { id = item.InstrumentId })" data-toggle="confirmation"><span class="glyphicon glyphicon-trash"></span> Elimina</a>
                         }
                     </td>
                 </tr>

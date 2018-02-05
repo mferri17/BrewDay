@@ -22,10 +22,13 @@
         <dd>@Html.DisplayFor(model => model.DateStart)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.DateEndEstimated)</dt>
-        <dd  style="color:@(Model.Completed ? "lightgrey" : "inherit")">@Html.DisplayFor(model => model.DateEndEstimated)</dd>
+        <dd style="color:@(Model.Completed ? "lightgrey" : "inherit")">@Html.DisplayFor(model => model.DateEndEstimated)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.DateEnd)</dt>
         <dd>@Html.DisplayFor(model => model.DateEnd)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Quantity)</dt>
+        <dd>@Html.DisplayFor(model => model.Quantity)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Note)</dt>
         <dd>@Html.DisplayFor(model => model.Note)</dd>

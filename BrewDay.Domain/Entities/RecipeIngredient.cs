@@ -19,6 +19,7 @@ namespace BrewDay.Domain.Entities
         public int IngredientId { get; set; }
 
         [Display(Name ="Quantità")]
+        [Range(1, Double.MaxValue)]
         public int Quantity { get; set; }
 
 

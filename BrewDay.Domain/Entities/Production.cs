@@ -27,6 +27,10 @@ namespace BrewDay.Domain.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateEndEstimated { get; set; }
 
+        [Display(Name = "Quantità")]
+        [Range(1, Int32.MaxValue)]
+        public int Quantity { get; set; }
+
         [StringLength(1024)]
         [Display(Name = "Nota")]
         public string Note { get; set; }
@@ -42,7 +46,7 @@ namespace BrewDay.Domain.Entities
         public string FullName => $"{Recipe.FullName} del {DateStart.ToShortDateString()}";
 
         public bool Running => DateEnd == null;
-        public bool AlmostFinished => DateEndEstimated < DateTime.Now.AddDays(2);
+        public bool AlmostFinished => DateEnd == null && DateEndEstimated < DateTime.Now.AddDays(2);
         public bool Completed => !Running;
 
     }

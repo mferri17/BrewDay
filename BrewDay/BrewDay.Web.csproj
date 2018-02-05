@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Helpers\HtmlHelperExtension.cs" />
     <Compile Include="Models\ProductsAudit.cs" />
+    <Compile Include="Models\WhatShouldIBrewToday.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +338,7 @@
     <Content Include="Views\Productions\_List.cshtml" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="_wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Views\Home\WhatShouldIBrewToday.cshtml" />
     <None Include="_wwwroot\vendor\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="_wwwroot\vendor\jquery-ui\AUTHORS.txt" />
     <Content Include="_wwwroot\vendor\jquery-ui\images\ui-icons_444444_256x240.png" />

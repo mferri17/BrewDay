@@ -40,13 +40,14 @@
         <!-- QUI VENGONO INIETTATE LE VIEW -->
         @RenderBody()
 
-        <div class="clearfix"></div>
+        <div class="clearfix margin-bottom-50"></div>
         <hr />
         <footer>
             <p class="pull-left">&copy; 2018 | <a href="https://www.linkedin.com/in/marco-ferri-ita/" target="_blank">Ferri Marco</a>, Ghezzi Simone & Marconi Paolo</p>
             <p class="pull-right"><a href="https://mferri17.gitbooks.io/brewday-documentazione/" target="_blank">Vedi la documentazione ufficiale di BrewDay</a></p>
         </footer>
     </div>
+
 
     <!-- Modale aiuto -->
     <div class="modal fade" id="help-modal" role="dialog">
@@ -66,17 +67,17 @@
         </div>
     </div>
 
+
     @Scripts.Render("~/bundles/vendor/js")
     @Scripts.Render("~/bundles/js")
 
+
     <script>
         $(document).ready(function () {
-
             //Evidenzia la voce corretta della navbar
             $(".navbar-collapse").removeClass("active");
             $("@ViewBag.Page").addClass("active");
             $("@ViewBag.SubPage").addClass("active");
-
         });
     </script>
     @RenderSection("scripts", required: false)

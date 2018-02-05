@@ -17,7 +17,7 @@ namespace BrewDay.DTO
             var tresholdExpireStock = DateTime.Now.AddDays(7);
             double tresholdQtyStock = 10;
 
-            FinishingProduction = db.Productions.Where(x => x.DateEndEstimated < tresholdFinishingProd).ToList();
+            FinishingProduction = db.Productions.Where(x => x.DateEnd == null && x.DateEndEstimated < tresholdFinishingProd).ToList();
             RunningOutStocks = db.Stocks.Where(x => x.ExpireDate < tresholdExpireStock || x.Quantity < tresholdQtyStock).ToList();
         }
 
