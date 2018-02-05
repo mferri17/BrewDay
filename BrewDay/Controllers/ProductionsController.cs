@@ -57,9 +57,9 @@ namespace BrewDay.Controllers
             try
             {
                 // Prima di selezionare i seguenti strumenti si ordina per capacità in modo da selezionare quello che spreca meno capacità (best fit)
-                var kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
-                var fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
-                var pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0 && x.Capacity > qty).OrderBy(x => x.Capacity).FirstOrDefault();
+                var kettle = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Kettle && (x.Quantity - x.Used) > 0 && x.Capacity >= qty).OrderBy(x => x.Capacity).FirstOrDefault();
+                var fermenter = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Fermenter && (x.Quantity - x.Used) > 0 && x.Capacity >= qty).OrderBy(x => x.Capacity).FirstOrDefault();
+                var pipe = db.Instruments.Where(x => x.Type == Domain.Enums.InstrumentType.Pipe && (x.Quantity - x.Used) > 0 && x.Capacity >= qty).OrderBy(x => x.Capacity).FirstOrDefault();
 
                 if (kettle == null || fermenter == null || pipe == null)
                     throw new InvalidOperationBrewDayException("Uno o più strumenti richiesti non sono disponibili. É necessario possedere un bollitore, un fermentatore e un tubo della capacità adatta.");

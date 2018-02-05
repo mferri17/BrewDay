@@ -18,5 +18,7 @@ namespace BrewDay.DTO
         public Recipe Recipe { get; set; }
         public int? Quantity { get; set; }
 
+
+        public bool Valid { get { return Recipe != null && Quantity.HasValue; } }
     }
 }

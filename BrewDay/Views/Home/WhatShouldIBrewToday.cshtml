@@ -1,21 +1,40 @@
 ﻿@model BrewDay.DTO.WhatShouldIBrewToday
 
-@{
-    ViewBag.Title = "What Should I Brew Today?";
-}
 
-<h2>@ViewBag.Title</h2>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">What Should I Brew Today?</h4>
+</div>
 
-<div class="row col-md-12">
-    @if (Model != null)
+<div class="modal-body">
+    <p>
+        Abbiamo fatto alcuni calcoli basandoci su Scorte e Strumenti a disposizione e supponendo di voler fare un'unica Produzione,
+        che utilizzi solamente uno Strumento per tipo (un fermentatore, un bollitore e un tubo). <br /> Tale Produzione vuola massimizzare la quantità di Birra 
+        che viene prodotta "giornalmente" (cioè la quantità di birra prodotta fratto i giorni impiegati a farlo).
+    </p>
+    @if (Model != null && Model.Valid)
     {
-        <p> Abbiamo fatto alcuni calcoli basate sulle tue scorte e i tuoi strumenti e ti suggeriamo di produrre <br /> </p>
-        <h4> @Model.Quantity litri di <a href="/Recipes/Details/@Model.Recipe.RecipeId">@Model.Recipe.FullName</a> </h4>
+        <div class="alert alert-success">
+            Ti suggeriamo di produrre @Model.Quantity litro/i di <a href="/Recipes/Details/@Model.Recipe.RecipeId">@Model.Recipe.FullName</a>,
+            per una durata totale di @Model.Recipe.FermentationTime giorni e quindi una produzione giornaliera di @((double)Model.Quantity / Model.Recipe.FermentationTime).
+        </div>
     }
     else
     {
-        <p> Purtroppo non c'è alcuna Ricetta che tu possa produrre con le attuali Scorte e Strumenti, ci dispiace. </p>
+        <div class="alert alert-danger">
+            Purtroppo non c'è alcuna Ricetta che tu possa produrre attualmente, ci dispiace. <br />
+            <strong>@ViewBag.Message</strong>
+        </div>
     }
+</div>
+
+
+<div class="modal-footer">
+    @if (Model != null && Model.Valid)
+    {
+        <a class="btn btn-success" href="@Url.Action("Play", "Productions", new { recipeId = Model.Recipe.RecipeId, qty = Model.Quantity })">Manda in Produzione</a>
+    }
+    <button type="button" class="btn" data-dismiss="modal">Annulla</button>
 </div>
 
 

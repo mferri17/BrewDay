@@ -5,11 +5,17 @@
     <h2 class="home-subtitle"> <strong>Semplice e intuitivo per la tua BIRRA</strong></h2>
 </div>
 
-<div class="text-center"><a class="btn btn-primary wsibt-btn" href="@Url.Action("WhatShouldIBrewToday", "Home")">What Should I Brew Today?</a></div>
+<!-- Bottone per aprire il modale di What Should I Brew Today -->
+<div class="text-center">
+    <a class="btn btn-primary wsibt-btn" data-toggle="modal" data-target="#homepage-modal" href="@Url.Action("WhatShouldIBrewToday", "Home")">
+        What Should I Brew Today?
+    </a>
+</div>
 
+
+<!-- Tabella per gli Stock -->
 @if (Model.RunningOutStocks.Count != 0)
 {
-    <!-- Tabella per gli Stock -->
     <div class="col-md-6">
         <h4>
             <strong>Dai un'occhiata a queste scorte!</strong>
@@ -33,4 +39,27 @@
         </h4>
         @Html.Partial("~/Views/Productions/_List.cshtml", Model.FinishingProduction)
     </div>
+}
+
+
+
+<!-- Modale -->
+<div id="homepage-modal" class="modal margin-top-50" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin: 10px auto !important;">
+            <!-- Qua verrà iniettato il contenuto richiesto al server dal bottone (riga 10) -->
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        // Resetta contenuto del modale alla sua chiusura
+        // Senza questo event listener il modale rimane pieno e Bootstrap non fa alcuna nuova richiesta al server
+        $("#homepage-modal").on("hidden.bs.modal", function () {
+            $('.modal-content').empty();
+            $('#homepage-modal').removeData('bs.modal');
+        });
+    </script>
 }
